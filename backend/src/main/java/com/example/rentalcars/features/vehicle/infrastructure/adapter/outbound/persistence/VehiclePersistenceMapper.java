@@ -8,8 +8,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDateTime.class})
 public interface VehiclePersistenceMapper {
 
     @Mapping(target = "licensePlate", source = "licensePlate.value")

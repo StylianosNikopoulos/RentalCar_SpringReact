@@ -1,42 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import vehicleService from '../services/vehicleService'; 
-import toast from 'react-hot-toast'; 
+import 'react-datepicker/dist/react-datepicker.css';
+import vehicleService from '../services/vehicleService';
+import toast from 'react-hot-toast';
 import { useLang } from '../context/LangContext';
 import { translations } from '../i18n/translations';
 import '../assets/styles/home.css';
 
 const Home = () => {
-    
+    const { lang } = useLang();
+    const t = translations[lang].home;
+    const navigate = useNavigate();
+    const [vehicles, setVehicles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const homeRef = useRef(null);
+
     useEffect(() => {
         document.title = 'RentalCar | Home';
     }, []);
 
-    const { lang } = useLang();
-    const t = translations[lang].home;
+    useEffect(() => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const elements = homeRef.current?.querySelectorAll('[data-reveal]');
 
-    const [vehicles, setVehicles] = useState([]);
-    const [loading, setLoading] = useState(true);
-    
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    
-    const navigate = useNavigate(); 
+        if (!elements?.length || reducedMotion) {
+            elements?.forEach((element) => element.classList.add('is-visible'));
+            return undefined;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.14 }
+        );
+
+        elements.forEach((element) => observer.observe(element));
+        return () => observer.disconnect();
+    }, [loading]);
 
     useEffect(() => {
         const fetchVehicles = async () => {
             try {
                 const data = await vehicleService.getAllVehicles();
-                const vehiclesArray = data.content || [];
-                setVehicles(vehiclesArray.slice(0, 3));
+                setVehicles((data.content || []).slice(0, 3));
             } catch (error) {
-                console.error("Error fetching vehicles", error);
+                console.error('Error fetching vehicles', error);
             } finally {
                 setLoading(false);
             }
         };
+
         fetchVehicles();
     }, []);
 
@@ -53,40 +75,52 @@ const Home = () => {
             return;
         }
 
-        const sDate = formatDateForSearch(startDate);
-        const eDate = formatDateForSearch(endDate);
-
-        navigate(`/vehicles?start=${sDate}&end=${eDate}`);
+        navigate(`/vehicles?start=${formatDateForSearch(startDate)}&end=${formatDateForSearch(endDate)}`);
     };
 
     return (
-        <div className="home-page">
-            <header className="hero">
-                <div className="hero-content">
-                    <span className="hero-badge">{t.heroBadge}</span>
+        <main className="home-page" ref={homeRef}>
+            <section className="home-hero">
+                <div className="home-shell">
+                    <div className="home-hero-copy">
+                        <span className="home-eyebrow hero-enter hero-enter-1"><i className="fas fa-circle"></i> {t.heroEyebrow}</span>
+                        <h1 className="hero-enter hero-enter-2">{t.heroTitle}</h1>
+                        <p className="hero-enter hero-enter-3">{t.heroDesc}</p>
+                        <div className="home-hero-proof hero-enter hero-enter-4">
+                            <span><i className="fas fa-shield-alt"></i> {t.secureBooking}</span>
+                        </div>
+                    </div>
 
-                    <h1>
-                        {t.heroTitle1} <br/>
-                        <span className="text-outline">{t.heroTitle2}</span>
-                    </h1>
-
-                    <p>{t.heroDesc}</p>
-                    
-                    <div className="search-widget-v2">
-                        <div className="search-field">
-                            <i className="fas fa-map-marker-alt field-icon"></i>
-                            <div className="field-inputs">
-                                <label>{t.locationLabel}</label>
-                                <input type="text" value={t.locationValue} readOnly aria-label={t.locationLabel} />
+                        <aside className="home-booking-card hero-enter hero-enter-card" aria-label={t.availabilitySearchLabel}>
+                        <div className="booking-card-heading">
+                            <div>
+                                <span>{t.bookingCardTitle}</span>
+                                <small>{t.bookingCardDesc}</small>
                             </div>
+                            <i className="fas fa-car-side"></i>
                         </div>
 
-                        <div className="search-field">
-                            <i className="far fa-calendar-alt field-icon"></i>
-                            <div className="field-inputs date-field-inputs">
-                                <label>{t.timelineLabel}</label>
+                        <div className="booking-search-field location-field">
+                            <i className="fas fa-map-marker-alt"></i>
+                            <label>
+                                <span>{t.locationLabel}</span>
+                                <input
+                                    type="text"
+                                    value={t.locationValue}
+                                    readOnly
+                                    tabIndex={-1}
+                                    aria-label={t.locationLabel}
+                                    aria-readonly="true"
+                                />
+                            </label>
+                        </div>
+
+                        <div className="booking-search-field">
+                            <i className="far fa-calendar-alt"></i>
+                            <label>
+                                <span>{t.timelineLabel}</span>
                                 <DatePicker
-                                    selectsRange={true}
+                                    selectsRange
                                     startDate={startDate}
                                     endDate={endDate}
                                     onChange={(update) => {
@@ -95,132 +129,83 @@ const Home = () => {
                                         setEndDate(end);
                                     }}
                                     minDate={new Date()}
-                                    isClearable={true}
+                                    isClearable
                                     placeholderText={t.placeholderDate}
-                                    className="custom-home-datepicker"
+                                    className="home-datepicker"
                                     dateFormat="dd MMM yyyy"
                                     popperPlacement="bottom-start"
                                     aria-label={t.timelineLabel}
                                 />
-                            </div>
+                            </label>
                         </div>
 
-                        <button className="search-btn-v2" onClick={handleSearch}>
-                            {t.searchBtn} <i className="fas fa-arrow-right"></i>
+                        <button type="button" className="booking-search-button" onClick={handleSearch}>
+                            {t.searchBtn}<i className="fas fa-arrow-right"></i>
                         </button>
-                    </div>
-
-                    <div className="hero-trust-row" aria-label={t.trustLabel}>
-                        <span><i className="fas fa-shield-alt"></i> {t.secureCheckout}</span>
-                        <span><i className="fas fa-calendar-check"></i> {t.liveAvailability}</span>
-                        <span><i className="fas fa-clock"></i> {t.freeCancellation}</span>
-                    </div>
+                        <p className="booking-card-note"><i className="fas fa-check"></i> {t.noHiddenFees}</p>
+                    </aside>
                 </div>
-            </header>
+            </section>
 
-            {/* FEATURED VEHICLES SECTION */}
-            <section className="featured-fleet-section">
-                <div className="section-header-v2">
-                    <h2>{t.featuredTitle}</h2>
-                    <p>{t.featuredDesc}</p>
+            <section className="home-reassurance" aria-label={t.trustLabel}>
+                <div className="home-shell reassurance-grid" data-reveal>
+                    <div><i className="fas fa-calendar-check"></i><span><strong>{t.reassuranceLiveTitle}</strong>{t.reassuranceLiveDesc}</span></div>
+                    <div><i className="fas fa-credit-card"></i><span><strong>{t.reassurancePricingTitle}</strong>{t.reassurancePricingDesc}</span></div>
+                    <div><i className="fas fa-headset"></i><span><strong>{t.reassuranceSupportTitle}</strong>{t.reassuranceSupportDesc}</span></div>
                 </div>
+            </section>
 
-                {loading ? (
-                    <div className="loader-container">
-                        <div className="loader"></div>
-                        <span className="loader-text">{t.fetching}</span>
+            <section className="home-fleet-section">
+                <div className="home-shell">
+                    <div className="home-section-heading" data-reveal>
+                        <div>
+                            <span className="home-eyebrow">{t.availableNow}</span>
+                            <h2>{t.featuredTitle}</h2>
+                            <p>{t.featuredDesc}</p>
+                        </div>
+                        <button type="button" className="home-text-link" onClick={() => navigate('/vehicles')}>{t.viewAllVehicles} <i className="fas fa-arrow-right"></i></button>
                     </div>
-                ) : (
-                    <div className="home-vehicle-grid">
-                        {vehicles.map(car => (
-                            <div key={car.id} className="home-vehicle-card" onClick={() => navigate(`/vehicle/${car.id}`)}>
-                                <div className="home-car-img-wrapper">
-                                    <img 
-                                        src={car.images && car.images.length > 0 ? car.images[0].url : 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070'} 
-                                        alt={`${car.brand} ${car.model}`} 
-                                    />
-                                    {car.category && <span className="home-car-tag">{car.category}</span>}
-                                </div>
 
-                                <div className="home-car-info">
-                                    <h3>{car.brand} <span>{car.model}</span></h3>
-
-                                    <div className="home-car-specs-row">
-                                        <span><i className="fas fa-gas-pump"></i> {car.fuelType}</span>
-                                        <span><i className="fas fa-calendar-alt"></i> {car.year}</span>
+                    {loading ? (
+                        <div className="home-loader"><span></span><p>{t.fetching}</p></div>
+                    ) : (
+                        <div className="home-vehicle-grid">
+                            {vehicles.map((car, index) => (
+                                <article key={car.id} className="home-vehicle-card" data-reveal style={{ transitionDelay: `${index * 100}ms` }} onClick={() => navigate(`/vehicle/${car.id}`)}>
+                                    <div className="home-car-image">
+                                        <img src={car.images?.find((image) => image.isMain)?.url || car.images?.[0]?.url || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070'} alt={`${car.brand} ${car.model}`} />
+                                         <span>{car.category || t.premiumCollection}</span>
                                     </div>
-
-                                    <div className="home-car-price-row">
-                                        <div className="home-price">
-                                            <strong>€{car.dailyPrice}</strong>
-                                            <span>/ {t.day}</span>
+                                    <div className="home-car-body">
+                                        <div className="home-car-title"><h3>{car.brand} {car.model}</h3><small>{car.year}</small></div>
+                                         <div className="home-car-specs"><span><i className="fas fa-gas-pump"></i>{car.fuelType}</span><span><i className="fas fa-shield-alt"></i>{t.protected}</span></div>
+                                        <div className="home-car-footer">
+                                             <div><small>{t.from}</small><strong>€{car.dailyPrice}</strong><span>/ {t.day}</span></div>
+                                            <button type="button" aria-label={`${t.viewDetails} ${car.brand} ${car.model}`}><i className="fas fa-arrow-right"></i></button>
                                         </div>
-
-                                        <button className="home-view-deal-btn">
-                                            {t.viewDetails}
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </section>
-
-            {/* WHY US FEATURES SECTION */}
-            <section className="features-section">
-                <div className="section-header-v2">
-                    <h2>{t.whyUsTitle}</h2>
-                    <p>{t.whyUsDesc}</p>
-                </div>
-
-                <div className="features-grid">
-                    <div className="feature-card">
-                        <div className="feature-icon">
-                            <i className="fas fa-road"></i>
+                                </article>
+                            ))}
                         </div>
-                        <h3>{t.feat2Title}</h3>
-                        <p>{t.feat2Desc}</p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">
-                            <i className="fas fa-headset"></i>
-                        </div>
-                        <h3>{t.feat3Title}</h3>
-                        <p>{t.feat3Desc}</p>
-                    </div>
+                    )}
                 </div>
             </section>
 
-            <section className="booking-steps-section">
-                <div className="booking-steps-intro">
-                    <span>{t.bookingStepsLabel}</span>
-                    <h2>{t.bookingStepsTitle}</h2>
-                    <p>{t.bookingStepsDesc}</p>
-                </div>
-                <div className="booking-steps-grid">
-                    <article className="booking-step-card">
-                        <span className="step-number">01</span>
-                        <i className="far fa-calendar-alt"></i>
-                        <h3>{t.bookingStep1Title}</h3>
-                        <p>{t.bookingStep1Desc}</p>
-                    </article>
-                    <article className="booking-step-card">
-                        <span className="step-number">02</span>
-                        <i className="fas fa-car-side"></i>
-                        <h3>{t.bookingStep2Title}</h3>
-                        <p>{t.bookingStep2Desc}</p>
-                    </article>
-                    <article className="booking-step-card">
-                        <span className="step-number">03</span>
-                        <i className="fas fa-credit-card"></i>
-                        <h3>{t.bookingStep3Title}</h3>
-                        <p>{t.bookingStep3Desc}</p>
-                    </article>
+            <section className="home-steps-section">
+                <div className="home-shell home-steps-layout">
+                    <div className="home-steps-intro" data-reveal>
+                        <span className="home-eyebrow">{t.straightforwardRental}</span>
+                        <h2>{t.bookingStepsTitle}</h2>
+                        <p>{t.bookingStepsDesc}</p>
+                    </div>
+                    <div className="home-steps-grid">
+                        <article data-reveal><span>01</span><i className="far fa-calendar-alt"></i><h3>{t.bookingStep1Title}</h3><p>{t.bookingStep1Desc}</p></article>
+                        <article data-reveal style={{ transitionDelay: '100ms' }}><span>02</span><i className="fas fa-car-side"></i><h3>{t.bookingStep2Title}</h3><p>{t.bookingStep2Desc}</p></article>
+                        <article data-reveal style={{ transitionDelay: '200ms' }}><span>03</span><i className="fas fa-credit-card"></i><h3>{t.bookingStep3Title}</h3><p>{t.bookingStep3Desc}</p></article>
+                    </div>
                 </div>
             </section>
-        </div>
+        </main>
     );
 };
 
