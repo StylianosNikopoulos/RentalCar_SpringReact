@@ -10,7 +10,7 @@ import org.mapstruct.MappingTarget;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDateTime.class})
 public interface VehiclePersistenceMapper {
 
     @Mapping(target = "licensePlate", source = "licensePlate.value")
@@ -19,8 +19,6 @@ public interface VehiclePersistenceMapper {
 
     @Mapping(target = "id", expression = "java(domain.getId())")
     @Mapping(target = "vehicle", ignore = true)
-    @Mapping(target = "createdAt", expression = "java(domain.getCreatedAt() != null ? domain.getCreatedAt() : LocalDateTime.now())")
-    @Mapping(target = "updatedAt", expression = "java(domain.getUpdatedAt())")
     VehicleImageJpaEntity toImageEntity(VehicleImage domain);
 
     @AfterMapping
