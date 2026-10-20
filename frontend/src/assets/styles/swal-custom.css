@@ -1,102 +1,44 @@
-/* Overlay Base */
 .swal-fix-overlay {
+    align-items: center !important;
+    background: rgba(7, 10, 14, 0.72) !important;
+    display: flex !important;
+    height: 100vh !important;
+    justify-content: center !important;
+    left: 0 !important;
     position: fixed !important;
     top: 0 !important;
-    left: 0 !important;
     width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.8) !important; 
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     z-index: 9999 !important;
 }
 
-/* Popup Container */
 .swal-custom-popup {
-    background: #151515 !important;
-    border: 1px solid #333 !important;
-    border-radius: 0px !important;
-    width: 90% !important;
-    max-width: 400px !important;
-    padding: 2rem !important;
+    background: #181d27 !important;
+    border: 1px solid rgba(255, 255, 255, 0.13) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38) !important;
+    box-sizing: border-box !important;
+    font-family: 'DM Sans', sans-serif !important;
+    max-width: 420px !important;
+    padding: 1.6rem !important;
+    width: calc(100% - 2rem) !important;
 }
 
-/* Popup Title */
-.swal-custom-title {
-    color: #fff !important;
-    font-size: 1.4rem !important;
-    font-weight: 900 !important;
-    text-transform: uppercase;
-}
+.swal-custom-title { color: #f6f7f9 !important; font-family: 'Manrope', sans-serif !important; font-size: 1.15rem !important; font-weight: 800 !important; letter-spacing: -0.035em !important; margin: 0 !important; }
+.swal-custom-html { color: #9fa9b7 !important; font-family: 'DM Sans', sans-serif !important; font-size: 0.84rem !important; line-height: 1.6 !important; margin: 0.7rem 0 1.35rem !important; }
+.swal-custom-actions { display: flex !important; gap: 0.65rem !important; margin: 0 !important; width: 100% !important; }
+.swal-btn { border: 1px solid transparent !important; border-radius: 7px !important; box-shadow: none !important; cursor: pointer !important; flex: 1 !important; font-family: 'DM Sans', sans-serif !important; font-size: 0.7rem !important; font-weight: 800 !important; min-height: 42px !important; padding: 0.65rem 0.8rem !important; text-transform: uppercase !important; transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important; }
+.swal-btn-confirm { background: #f05a28 !important; color: #ffffff !important; }
+.swal-btn-confirm:hover { background: #d9491a !important; transform: translateY(-2px); }
+.swal-btn-cancel { background: transparent !important; border-color: rgba(255, 255, 255, 0.16) !important; color: #d4dbe2 !important; }
+.swal-btn-cancel:hover { background: rgba(255, 255, 255, 0.07) !important; transform: translateY(-2px); }
+.swal-btn:active { transform: translateY(0) !important; }
+.swal-btn:focus-visible { outline: 3px solid rgba(240, 90, 40, 0.35) !important; outline-offset: 3px !important; }
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) { overflow: hidden !important; }
 
-/* Popup Message */
-.swal-custom-html {
-    color: #888 !important;
-    margin: 1rem 0 2rem 0 !important;
-}
+:root[data-theme='light'] .swal-custom-popup { background: #ffffff !important; border-color: rgba(23, 32, 42, 0.12) !important; box-shadow: 0 24px 70px rgba(31, 41, 55, 0.18) !important; }
+:root[data-theme='light'] .swal-custom-title { color: #17202a !important; }
+:root[data-theme='light'] .swal-custom-html { color: #65717d !important; }
+:root[data-theme='light'] .swal-btn-cancel { background: #f2f5f7 !important; border-color: rgba(23, 32, 42, 0.13) !important; color: #34404c !important; }
+:root[data-theme='light'] .swal-btn-cancel:hover { background: #e8edf1 !important; }
 
-/* Actions Container */
-.swal-custom-actions {
-    display: flex !important;
-    gap: 10px !important;
-    width: 100% !important;
-}
-
-/* Base Button */
-.swal-btn {
-    flex: 1;
-    padding: 12px !important;
-    font-weight: 800 !important;
-    text-transform: uppercase;
-    border: none !important;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Confirm Button */
-.swal-btn-confirm {
-    background: #ff4d00 !important;
-    color: #ffffff !important;
-}
-
-.swal-btn-confirm:hover {
-    background: #ff6a26 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 77, 0, 0.35);
-}
-
-/* Cancel Button */
-.swal-btn-cancel {
-    background: #333333 !important;
-    color: #ffffff !important;
-}
-
-.swal-btn-cancel:hover {
-    background: #4a4a4a !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.swal-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
-}
-
-.swal-btn:focus-visible {
-    outline: 3px solid rgba(255, 120, 70, 0.55);
-    outline-offset: 3px;
-}
-
-/* Lock Scroll */
-body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
-    overflow: hidden !important;
-}
-
-/* Mobile Media */
-@media (max-width: 480px) {
-    /* Mobile Actions */
-    .swal-custom-actions {
-        flex-direction: column !important;
-    }
-}
+@media (max-width: 480px) { .swal-custom-actions { flex-direction: column !important; } .swal-btn { width: 100% !important; } }

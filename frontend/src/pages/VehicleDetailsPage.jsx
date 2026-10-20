@@ -11,12 +11,6 @@ import toast from 'react-hot-toast';
 import { useLang } from '../context/LangContext';
 import { translations } from '../i18n/translations';
 import '../assets/styles/details.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard, Thumbs } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/thumbs';
 
 const VehicleDetailsPage = () => {
 
@@ -36,8 +30,8 @@ const VehicleDetailsPage = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [acceptedTerms, setAcceptedTerms] = useState(false);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [isActionPending, setIsActionPending] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -74,6 +68,10 @@ const VehicleDetailsPage = () => {
         },
         enabled: !isActionPending
     });
+
+    useEffect(() => {
+        setActiveImageIndex(0);
+    }, [id]);
 
     const bookingMutation = useMutation({
         mutationFn: (bookingData) => reservationService.createReservation(bookingData),
@@ -191,42 +189,29 @@ const VehicleDetailsPage = () => {
             <div className="details-grid-v2">
                 <div className="vehicle-info-main">
                     <div className="vehicle-gallery-wrapper">
-                        <Swiper
-                            navigation={true}
-                            pagination={{ clickable: true }}
-                            mousewheel={true}
-                            keyboard={true}
-                            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-                            modules={[Navigation, Pagination, Mousewheel, Keyboard, Thumbs]}
-                            className="main-vehicle-swiper"
-                            grabCursor={true}
-                        >
-                            {allImages.map((img, index) => (
-                                <SwiperSlide key={index}>
-                                    <img src={img.url} alt={`${vehicle.brand} ${index + 1}`} className="swiper-vehicle-img" />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        <div className="main-vehicle-swiper">
+                            <img
+                                src={allImages[activeImageIndex]?.url}
+                                alt={`${vehicle.brand} ${activeImageIndex + 1}`}
+                                className="swiper-vehicle-img"
+                            />
+                            {allImages.length > 1 && (
+                                <div className="gallery-thumbnails">
+                                    {allImages.map((img, index) => (
+                                        <button
+                                            type="button"
+                                            key={img.url || index}
+                                            className={index === activeImageIndex ? 'gallery-thumbnail is-active' : 'gallery-thumbnail'}
+                                            onClick={() => setActiveImageIndex(index)}
+                                            aria-label={`Show image ${index + 1}`}
+                                        >
+                                            <img src={img.url} alt="" />
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
 
-                        {allImages.length > 1 && (
-                            <Swiper
-                                onSwiper={setThumbsSwiper}
-                                spaceBetween={12}
-                                slidesPerView={4}
-                                freeMode={true}
-                                watchSlidesProgress={true}
-                                modules={[Navigation, Thumbs]}
-                                className="thumbs-vehicle-swiper"
-                            >
-                                {allImages.map((img, index) => (
-                                    <SwiperSlide key={index}>
-                                        <div className="thumb-img-box">
-                                            <img src={img.url} alt={`Thumbnail ${index + 1}`} />
-                                        </div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        )}
                     </div>
 
                     <div className="real-car-features">

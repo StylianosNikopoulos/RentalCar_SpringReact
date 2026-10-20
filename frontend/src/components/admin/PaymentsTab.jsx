@@ -76,10 +76,10 @@ const PaymentsTab = () => {
         const successRate = Math.round((counts.COMPLETED / total) * 100);
 
         const chart = [
-            { name: 'Completed', value: counts.COMPLETED, color: '#10B981' },
-            { name: 'Pending', value: counts.PENDING, color: '#F59E0B' },
-            { name: 'Failed', value: counts.FAILED, color: '#EF4444' },
-            { name: 'Refunded', value: counts.REFUNDED, color: '#6B7280' },
+            { name: t.completed, value: counts.COMPLETED, color: '#10B981' },
+            { name: t.paymentAwaiting, value: counts.PENDING, color: '#F59E0B' },
+            { name: t.failed, value: counts.FAILED, color: '#EF4444' },
+            { name: t.refunded, value: counts.REFUNDED, color: '#6B7280' },
         ].filter(item => item.value > 0);
 
         return { counts, totalRevenue, successRate, chart, totalCount: currentPayments.length };
@@ -89,10 +89,10 @@ const PaymentsTab = () => {
         mutationFn: (stripePaymentId) => paymentService.refundPayment(stripePaymentId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['admin-payments'] });
-            toast.success(t.toastRefundSuccess || 'Refund processed successfully');
+            toast.success(t.toastRefundSuccess);
         },
         onError: (error) => {
-            const errorMessage = error.response?.data?.message || t.toastOpFailed || 'Refund failed';
+            const errorMessage = error.response?.data?.message || t.toastOpFailed;
             toast.error(errorMessage);
         }
     });
@@ -100,15 +100,15 @@ const PaymentsTab = () => {
     const confirmRefund = (payment) => {
         const amountVal = payment.amount?.amount !== undefined ? payment.amount.amount : payment.amount;
         Swal.fire({
-            title: t.swalRefundTitle || 'Process Refund?',
-            text: `${t.swalRefundText || 'Are you sure you want to refund this payment?'} (€${amountVal})`,
+            title: t.swalRefundTitle,
+            text: `${t.swalRefundText} (€${amountVal})`,
             icon: 'warning',
             iconColor: '#ff4d00',
             background: isLight ? '#ffffff' : '#151515',
             color: isLight ? '#1f2937' : '#ffffff',
             showCancelButton: true,
-            confirmButtonText: t.swalYes || 'Yes, Refund',
-            cancelButtonText: t.swalNo || 'Cancel',
+            confirmButtonText: t.swalYes,
+            cancelButtonText: t.swalNo,
             buttonsStyling: false,
             customClass: {
                 container: 'swal-fix-overlay',
@@ -169,7 +169,7 @@ const PaymentsTab = () => {
                     <div className="financial-card-content">
                         <div className="financial-header">
                             <div>
-                                <span className={`kpi-title ${textThemeClass}`}>Total Revenue</span>
+                                <span className={`kpi-title ${textThemeClass}`}>{t.totalRevenue}</span>
                                 <h2 className={`kpi-value-main ${textThemeClass}`}>
                                     €{statsData.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                 </h2>
@@ -181,13 +181,13 @@ const PaymentsTab = () => {
 
                         <div className="mini-metrics-grid">
                             <div className={`mini-metric-pill success ${bgThemeClass}`}>
-                                <span className={`label ${textThemeClass}`}>Success Rate</span>
+                                <span className={`label ${textThemeClass}`}>{t.successRate}</span>
                                 <strong className="val-success">{statsData.successRate}%</strong>
                             </div>
 
                             <div className={`mini-metric-pill pending ${bgThemeClass}`}>
-                                <span className={`label ${textThemeClass}`}>Pending</span>
-                                <strong className="val-pending">{statsData.counts.PENDING} transactions</strong>
+                                <span className={`label ${textThemeClass}`}>{t.paymentAwaiting}</span>
+                                    <strong className="val-pending">{statsData.counts.PENDING} {t.transactions}</strong>
                             </div>
                         </div>
                     </div>
@@ -197,27 +197,27 @@ const PaymentsTab = () => {
                     <div className="breakdown-card-content flex-row">
                         <div className="breakdown-info">
                             <span className={`kpi-title ${textThemeClass}`} style={{ display: 'block', marginBottom: '12px' }}>
-                                Status Breakdown
+                                {t.statusBreakdown}
                             </span>
                             
                             <div className="status-pills-list">
                                 <div className={`status-pill-item ${bgThemeClass}`}>
                                     <span className={`status-pill-label ${textThemeClass}`}>
-                                        <span className="status-dot completed"></span> Completed
+                                        <span className="status-dot completed"></span> {t.completed}
                                     </span>
                                     <strong style={{ color: '#10B981' }}>{statsData.counts.COMPLETED}</strong>
                                 </div>
 
                                 <div className={`status-pill-item ${bgThemeClass}`}>
                                     <span className={`status-pill-label ${textThemeClass}`}>
-                                        <span className="status-dot failed"></span> Failed
+                                        <span className="status-dot failed"></span> {t.failed}
                                     </span>
                                     <strong style={{ color: '#EF4444' }}>{statsData.counts.FAILED}</strong>
                                 </div>
 
                                 <div className={`status-pill-item ${bgThemeClass}`}>
                                     <span className={`status-pill-label ${textThemeClass}`}>
-                                        <span className="status-dot refunded"></span> Refunded
+                                        <span className="status-dot refunded"></span> {t.refunded}
                                     </span>
                                     <strong style={{ color: '#6B7280' }}>{statsData.counts.REFUNDED}</strong>
                                 </div>
@@ -263,7 +263,7 @@ const PaymentsTab = () => {
                             )}
                             <div className="chart-center-overlay">
                                 <span className={`count-text ${textThemeClass}`}>{statsData.totalCount}</span>
-                                <span className={`sub-text ${textThemeClass}`}>Total</span>
+                                <span className={`sub-text ${textThemeClass}`}>{t.total}</span>
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@ const PaymentsTab = () => {
                     <div className="search-input-wrapper">
                         <input
                             type="text"
-                            placeholder={t.searchEmail || 'Search by Email...'}
+                            placeholder={t.searchEmail}
                             value={emailSearch}
                             onChange={handleSearchChange}
                             className="admin-filter-input"
@@ -289,7 +289,7 @@ const PaymentsTab = () => {
                     <div className="filter-select-wrapper">
                         <i className="fas fa-filter select-lead-icon"></i>
                         <select value={statusFilter} onChange={handleStatusChange} className="admin-filter-select">
-                            <option value="">{t.allStatuses || 'All Statuses'}</option>
+                            <option value="">{t.allStatuses}</option>
                             <option value="COMPLETED">COMPLETED</option>
                             <option value="PENDING">PENDING</option>
                             <option value="REFUNDED">REFUNDED</option>
@@ -301,10 +301,10 @@ const PaymentsTab = () => {
                     <div className="filter-select-wrapper">
                         <i className="fas fa-sort select-lead-icon"></i>
                         <select value={sortBy} onChange={handleSortChange} className="admin-filter-select">
-                            <option value="created_at,desc">{t.sortNewest || 'Date: Newest'}</option>
-                            <option value="created_at,asc">{t.sortOldest || 'Date: Oldest'}</option>
-                            <option value="amount,desc">{t.sortAmountHigh || 'Amount: High to Low'}</option>
-                            <option value="amount,asc">{t.sortAmountLow || 'Amount: Low to High'}</option>
+                            <option value="created_at,desc">{t.sortNewest}</option>
+                            <option value="created_at,asc">{t.sortOldest}</option>
+                            <option value="amount,desc">{t.sortAmountHigh}</option>
+                            <option value="amount,asc">{t.sortAmountLow}</option>
                         </select>
                     </div>
                 </div>
@@ -314,7 +314,7 @@ const PaymentsTab = () => {
                 <div className="loader-container" style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <div className="loader"></div>
                     <span style={{ color: isLight ? '#64748b' : '#94a3b8', fontSize: '0.8rem', fontWeight: '800', letterSpacing: '2px', marginTop: '15px' }}>
-                        {t.fetchingPayments || 'FETCHING PAYMENTS...'}
+                        {t.fetchingPayments}
                     </span>
                 </div>
             ) : (
@@ -322,10 +322,10 @@ const PaymentsTab = () => {
                     <table className="admin-table">
                         <thead>
                             <tr>
-                                <th>{t.tableEmail || 'Email'}</th>
-                                <th>{t.tableAmount || 'Amount'}</th>
-                                <th>{t.tableStatus || 'Status'}</th>
-                                <th>{t.tableActions || 'Actions'}</th>
+                                <th>{t.tableEmail}</th>
+                                <th>{t.tableAmount}</th>
+                                <th>{t.tableStatus}</th>
+                                <th>{t.tableActions}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -373,7 +373,7 @@ const PaymentsTab = () => {
                                                             gap: '5px' 
                                                         }}
                                                     >
-                                                        <i className="fas fa-receipt"></i> {t.btnReceipt || 'Receipt'}
+                                                        <i className="fas fa-receipt"></i> {t.btnReceipt}
                                                     </a>
                                                 )}
 
@@ -382,7 +382,7 @@ const PaymentsTab = () => {
                                                         className="btn-status-toggle btn-oos" 
                                                         onClick={() => confirmRefund(payment)}
                                                     >
-                                                        <i className="fas fa-undo"></i> {t.btnRefund || 'Refund'}
+                                                         <i className="fas fa-undo"></i> {t.btnRefund}
                                                     </button>
                                                 )}
                                             </td>
@@ -392,7 +392,7 @@ const PaymentsTab = () => {
                             ) : (
                                 <tr>
                                     <td colSpan="4" style={{ textAlign: 'center', padding: '20px', color: isLight ? '#64748b' : '#94a3b8' }}>
-                                        {t.noPaymentsFound || 'No payments found'}
+                                         {t.noPaymentsFound}
                                     </td>
                                 </tr>
                             )}
@@ -411,7 +411,7 @@ const PaymentsTab = () => {
                 <div className="modal-overlay details-modal-overlay" onClick={() => setSelectedPaymentDate(null)}>
                     <div className="admin-modal reservation-details-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-heading-row">
-                            <h3>{t.paymentDetails || 'Payment Details'}</h3>
+                            <h3>{t.paymentDetails}</h3>
                             <button className="modal-close-btn" onClick={() => setSelectedPaymentDate(null)}>
                                 ×
                             </button>
@@ -420,7 +420,7 @@ const PaymentsTab = () => {
                             <div>
                                 <span style={{ fontSize: '0.9rem', color: isLight ? '#64748b' : '#94a3b8', display: 'block', marginBottom: '8px' }}>
                                     <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
-                                    {t.tableDate || 'Date & Time'}
+                                    {t.tableDate}
                                 </span>
                                 <strong style={{ fontSize: '1.2rem', color: isLight ? '#0f172a' : '#ffffff' }}>{selectedPaymentDate}</strong>
                             </div>

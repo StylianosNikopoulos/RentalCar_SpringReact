@@ -81,13 +81,22 @@ const VehicleModal = ({ vehicleToEdit, onClose }) => {
     };
 
     const uploadToCloudinary = async (file) => {
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+        if (!cloudName || !uploadPreset || cloudName.startsWith('your_') || uploadPreset.startsWith('your_')) {
+            throw new Error('Cloudinary is not configured. Set VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET.');
+        }
+
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET); 
-        const response = await fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        formData.append('upload_preset', uploadPreset);
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
             method: 'POST', body: formData
         });
-        if (!response.ok) throw new Error("Upload failed");
+        if (!response.ok) {
+            const errorBody = await response.text();
+            throw new Error(`Cloudinary upload failed (${response.status}): ${errorBody}`);
+        }
         const data = await response.json();
         return data.secure_url;
     };

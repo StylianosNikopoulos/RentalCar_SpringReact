@@ -84,6 +84,7 @@ const VehiclesPage = () => {
     const currentItems = responseData.content || [];
     const totalPages = responseData.page?.totalPages || 1;
     const totalResults = responseData.page?.totalElements ?? currentItems.length;
+    const hasActiveFilters = Boolean(brand || fuelType || minPrice || maxPrice || searchTerm);
 
     const brandOptions = useMemo(() => {
         return [...new Set([...(brandsResponseData.content || []).map((car) => car.brand), brand]
@@ -164,6 +165,14 @@ const VehiclesPage = () => {
                             onChange={handleSearch}
                         />
                     </div>
+                    {hasActiveFilters && (
+                        <div className="active-filter-chips" aria-label={t.activeFilters}>
+                            {searchTerm && <button type="button" onClick={() => updateFiltersInUrl({ search: '' })}>{t.searchLabel}: {searchTerm} <i className="fas fa-times" /></button>}
+                            {brand && <button type="button" onClick={() => updateFiltersInUrl({ brand: '' })}>{brand} <i className="fas fa-times" /></button>}
+                            {fuelType && <button type="button" onClick={() => updateFiltersInUrl({ fuelType: '' })}>{fuelType === 'PETROL' ? t.fuelPetrol : fuelType === 'DIESEL' ? t.fuelDiesel : fuelType === 'HYBRID' ? t.fuelHybrid : t.fuelElectric} <i className="fas fa-times" /></button>}
+                            {(minPrice || maxPrice) && <button type="button" onClick={() => updateFiltersInUrl({ minPrice: '', maxPrice: '' })}>€{minPrice || '0'} - €{maxPrice || '∞'} <i className="fas fa-times" /></button>}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -204,12 +213,12 @@ const VehiclesPage = () => {
                     </div>
 
                     <section className="filter-section">
-                        <h3>{t.brandTitle}</h3>
-                        <label className="filter-option"><input type="radio" name="brand" checked={!brand} onChange={() => updateFiltersInUrl({ brand: '' })} /><span>{t.allBrands}</span></label>
+                        <label className="filter-control-label" htmlFor="vehicle-brand">{t.brandTitle}</label>
+                        <select id="vehicle-brand" className="filter-control" value={brand} onChange={(event) => updateFiltersInUrl({ brand: event.target.value })}>
+                            <option value="">{t.allBrands}</option>
+                            {brandOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+                        </select>
                         {isBrandsLoading && <small>{t.fetching}</small>}
-                        {brandOptions.map((option) => (
-                            <label className="filter-option" key={option}><input type="radio" name="brand" checked={brand === option} onChange={() => updateFiltersInUrl({ brand: option })} /><span>{option}</span></label>
-                        ))}
                     </section>
 
                     <section className="filter-section">

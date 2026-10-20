@@ -45,17 +45,17 @@ const UsersTab = () => {
             toast.success(t.toastUserDeleted);
             if (currentUsers.length === 1 && userPage > 1) setUserPage(prev => prev - 1);
         },
-        onError: () => toast.error(t.toastUserDelErr || 'Failed to delete user')
+        onError: () => toast.error(t.toastUserDelErr)
     });
 
     const refreshTokenMutation = useMutation({
         mutationFn: (userId) => authService.refreshUserTokenByUserId(userId),
         onSuccess: () => {
-            toast.success(t.toastTokenRefreshed || 'Token refreshed successfully!');
+            toast.success(t.toastTokenRefreshed);
             queryClient.invalidateQueries({ queryKey: ['admin-users'] });
         },
         onError: (error) => {
-            const msg = error.response?.data?.message || 'Failed to refresh token';
+            const msg = error.response?.data?.message || t.toastOpFailed;
             toast.error(msg);
         }
     });
@@ -130,10 +130,10 @@ const UsersTab = () => {
                                                         className="status-btn refresh-btn" 
                                                         onClick={() => handleRefreshUserToken(user)}
                                                         disabled={refreshTokenMutation.isPending}
-                                                        title="Refresh Token"
+                                                         title={t.btnRefresh}
                                                     >
                                                         <i className={`fas fa-sync-alt ${refreshTokenMutation.isPending ? 'fa-spin' : ''}`}></i>
-                                                        Refresh
+                                                         {t.btnRefresh}
                                                     </button>
                                                 )}
 
@@ -145,7 +145,7 @@ const UsersTab = () => {
                                                 
                                                 {isDeleted && (
                                                     <span className="status-badge status-oos">
-                                                        {t.badgeDeleted || 'DELETED'}
+                                                         {t.badgeDeleted}
                                                     </span>
                                                 )}
                                             </div>

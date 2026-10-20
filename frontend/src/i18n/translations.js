@@ -16,6 +16,25 @@ export const translations = {
     },
     home: {
       heroBadge: "Premium Car Rental Service",
+      heroEyebrow: "Better car rental, from booking to pickup",
+      heroTitle: "Go where the day takes you.",
+      secureBooking: "Secure online booking",
+      availabilitySearchLabel: "Vehicle availability search",
+      noHiddenFees: "No hidden fees. Free cancellation before pickup.",
+      bookingCardTitle: "Book your vehicle",
+      bookingCardDesc: "Choose your trip dates to see live availability.",
+      reassuranceLiveTitle: "Live availability",
+      reassuranceLiveDesc: "Book vehicles that are ready for your dates.",
+      reassurancePricingTitle: "Clear pricing",
+      reassurancePricingDesc: "Know the cost before you continue to checkout.",
+      reassuranceSupportTitle: "Here when needed",
+      reassuranceSupportDesc: "Support throughout your rental, day or night.",
+      availableNow: "Available to reserve now",
+      viewAllVehicles: "View all vehicles",
+      premiumCollection: "Premium collection",
+      protected: "Protected",
+      from: "From",
+      straightforwardRental: "A straightforward rental",
       heroTitle1: "Luxury",
       heroTitle2: "Car Rentals",
       heroDesc: "Discover premium vehicles and enjoy a seamless rental experience designed for comfort, reliability, and convenience.",
@@ -321,6 +340,8 @@ export const translations = {
       pluralVehicles: "vehicles",
       found: "found",
       filtersTitle: "Filters",
+      activeFilters: "Active filters",
+      searchLabel: "Search",
       sortBy: "Sort by",
       findCarSub: "Find your car",
       brandTitle: "Car brand",
@@ -339,7 +360,8 @@ export const translations = {
       sidebarTitle: "Admin Panel",
       tabVehicles: "Vehicles",
       tabUsers: "Users",
-      tabReservations: "Reservations",
+       tabReservations: "Reservations",
+       tabPayments: "Payments",
       addVehicle: "+ Add Vehicle",
       updateVehicle: "Update Vehicle",
       fetchingVehicles: "FETCHING VEHICLES...",
@@ -435,7 +457,35 @@ export const translations = {
       toastVehRetErr: "Error processing return",
       toastVehUpdated: "Vehicle updated",
       toastVehCreated: "Vehicle created",
-      toastOpFailed: "Operation failed"
+       toastOpFailed: "Operation failed"
+       ,searchEmail: "Search by email..."
+       ,allStatuses: "All statuses"
+       ,sortNewest: "Date: Newest"
+       ,sortOldest: "Date: Oldest"
+       ,sortAmountHigh: "Amount: High to Low"
+       ,sortAmountLow: "Amount: Low to High"
+       ,fetchingPayments: "FETCHING PAYMENTS..."
+       ,noPaymentsFound: "No payments found"
+       ,paymentDetails: "Payment details"
+       ,tableDate: "Date & time"
+       ,btnReceipt: "Receipt"
+       ,btnRefund: "Refund"
+       ,toastRefundSuccess: "Refund processed successfully"
+       ,swalRefundTitle: "Process refund?"
+       ,swalRefundText: "Are you sure you want to refund this payment?"
+       ,totalRevenue: "Total revenue"
+       ,successRate: "Success rate"
+       ,transactions: "transactions"
+       ,statusBreakdown: "Status breakdown"
+       ,completed: "Completed"
+       ,failed: "Failed"
+       ,refunded: "Refunded"
+       ,total: "Total"
+       ,payments: "payments"
+       ,badgeDeleted: "DELETED"
+       ,toastTokenRefreshed: "Token refreshed successfully"
+       ,btnRefresh: "Refresh"
+       ,btnSaving: "Saving..."
     },
     cookieConsent: {
       title: "Cookies & Privacy",
@@ -473,6 +523,25 @@ export const translations = {
     },
     home: {
       heroBadge: "Premium Υπηρεσίες Ενοικίασης",
+      heroEyebrow: "Καλύτερη ενοικίαση αυτοκινήτου, από την κράτηση έως την παραλαβή",
+      heroTitle: "Πηγαίνετε εκεί που σας οδηγεί η μέρα.",
+      secureBooking: "Ασφαλής online κράτηση",
+      availabilitySearchLabel: "Αναζήτηση διαθεσιμότητας οχημάτων",
+      noHiddenFees: "Χωρίς κρυφές χρεώσεις. Δωρεάν ακύρωση πριν την παραλαβή.",
+      bookingCardTitle: "Κλείστε το όχημά σας",
+      bookingCardDesc: "Επιλέξτε τις ημερομηνίες του ταξιδιού σας για να δείτε τη ζωντανή διαθεσιμότητα.",
+      reassuranceLiveTitle: "Ζωντανή διαθεσιμότητα",
+      reassuranceLiveDesc: "Κλείστε οχήματα που είναι διαθέσιμα για τις ημερομηνίες σας.",
+      reassurancePricingTitle: "Διαφανής τιμολόγηση",
+      reassurancePricingDesc: "Γνωρίζετε το κόστος πριν προχωρήσετε στην πληρωμή.",
+      reassuranceSupportTitle: "Υποστήριξη όταν τη χρειάζεστε",
+      reassuranceSupportDesc: "Υποστήριξη σε όλη τη διάρκεια της ενοικίασης, ημέρα ή νύχτα.",
+      availableNow: "Διαθέσιμα για κράτηση τώρα",
+      viewAllVehicles: "Δείτε όλα τα οχήματα",
+      premiumCollection: "Premium συλλογή",
+      protected: "Προστατευμένο",
+      from: "Από",
+      straightforwardRental: "Μια απλή ενοικίαση",
       heroTitle1: "Πολυτελείς",
       heroTitle2: "Ενοικιάσεις",
       heroDesc: "Ανακαλύψτε κορυφαία οχήματα και απολαύστε μια απρόσκοπτη εμπειρία ενοικίασης σχεδιαμένη για άνεση και αξιοπιστία.",
@@ -672,7 +741,7 @@ export const translations = {
     terms: {
       titleMain: "Όροι &",
       titleSub: "Προϋποθέσεις",
-      subtitle: "Σύμβαση Μίσθωσης &amp; Πολιτική Προστασίας Δεδομένων",
+      subtitle: "Σύμβαση Μίσθωσης & Πολιτική Προστασίας Δεδομένων",
       sec1Title: "1. Προστασία Δεδομένων (GDPR)",
       sec1Desc: "Δεσμευόμαστε για την προστασία των προσωπικών σας δεδομένων σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR). Συλλέγουμε μόνο τις πληροφορίες που είναι απαραίτητες για την παροχή των υπηρεσιών ενοικίασης αυτοκινήτων, συμπεριλαμβανομένου του ονόματος, της διεύθυνσης email και των στοιχείων έγκυρης άδειας οδήγησης.",
       sec1Bullet1Title: "Νομική Βάση:",
@@ -685,7 +754,7 @@ export const translations = {
       sec1Bullet4Text: "Έχετε το δικαίωμα πρόσβασης, ενημέρωσης ή αιτήματος διαγραφής των προσωπικών σας δεδομένων ανά πάσα στιγμή.",
       sec2Title: "2. Προϋποθέσεις Ενοικίασης",
       sec2Desc: "Για την ενοικίαση οχήματος, οι πελάτες πρέπει να είναι τουλάχιστον 21 ετών και να κατέχουν έγκυρη άδεια οδήγησης για τουλάχιστον δύο έτη. Ενδέχεται να απαιτηθεί πρόσθετος έλεγχος ανάλογα με την κατηγορία του οχήματος.",
-      sec3Title: "3. Πολιτική Κρατήσεων &amp; Ακυρώσεων",
+      sec3Title: "3. Πολιτική Κρατήσεων & Ακυρώσεων",
       sec3Desc: "Οι κρατήσεις μπορούν να ακυρωθούν έως και 24 ώρες πριν από την προγραμματισμένη ώρα παραλαβής για πλήρη επιστροφή χρημάτων. Οι εκπρόθεσμες ακυρώσεις ενδέχεται να υπόκεινται σε χρεώσεις ανάλογα με τους όρους της κράτησης.",
       sec4Title: "4. Υπηρεσίες Τρίτων",
       sec4Desc: "Η πλατφόρμα ενδέχεται να χρησιμοποιεί υπηρεσίες τρίτων, όπως παρόχους επεξεργασίας πληρωμών (π.χ. Stripe), για την ασφαλή ολοκλήρωση των συναλλαγών. Αυτοί οι πάροχοι επεξεργάζονται δεδομένα σύμφωνα με τις δικές τους πολιτικές απορρήτου."
@@ -778,6 +847,8 @@ export const translations = {
       pluralVehicles: "οχήματα",
       found: "βρέθηκαν",
       filtersTitle: "Φίλτρα",
+      activeFilters: "Ενεργά φίλτρα",
+      searchLabel: "Αναζήτηση",
       sortBy: "Ταξινόμηση κατά",
       findCarSub: "Βρείτε το όχημά σας",
       brandTitle: "Μάρκα οχήματος",
@@ -796,7 +867,8 @@ export const translations = {
       sidebarTitle: "Πάνελ Διαχειριστή",
       tabVehicles: "Οχήματα",
       tabUsers: "Χρήστες",
-      tabReservations: "Κρατήσεις",
+       tabReservations: "Κρατήσεις",
+       tabPayments: "Πληρωμές",
       addVehicle: "+ Προσθήκη Οχήματος",
       updateVehicle: "Ενημέρωση Οχήματος",
       fetchingVehicles: "Ανάκτηση οχημάτων...",
@@ -892,7 +964,35 @@ export const translations = {
       toastVehRetErr: "Σφάλμα κατά την επεξεργασία επιστροφής",
       toastVehUpdated: "Το όχημα ενημερώθηκε",
       toastVehCreated: "Το όχημα δημιουργήθηκε",
-      toastOpFailed: "Η ενέργεια απέτυχε"
+       toastOpFailed: "Η ενέργεια απέτυχε",
+       searchEmail: "Αναζήτηση με email...",
+       allStatuses: "Όλες οι καταστάσεις",
+       sortNewest: "Ημερομηνία: Νεότερες",
+       sortOldest: "Ημερομηνία: Παλαιότερες",
+       sortAmountHigh: "Ποσό: Υψηλότερο προς χαμηλότερο",
+       sortAmountLow: "Ποσό: Χαμηλότερο προς υψηλότερο",
+       fetchingPayments: "Ανάκτηση πληρωμών...",
+       noPaymentsFound: "Δεν βρέθηκαν πληρωμές",
+       paymentDetails: "Λεπτομέρειες πληρωμής",
+       tableDate: "Ημερομηνία και ώρα",
+       btnReceipt: "Απόδειξη",
+       btnRefund: "Επιστροφή χρημάτων",
+       toastRefundSuccess: "Η επιστροφή χρημάτων ολοκληρώθηκε",
+       swalRefundTitle: "Επεξεργασία επιστροφής χρημάτων;",
+       swalRefundText: "Είστε σίγουροι ότι θέλετε να επιστρέψετε αυτή την πληρωμή;",
+       totalRevenue: "Συνολικά έσοδα",
+       successRate: "Ποσοστό επιτυχίας",
+       transactions: "συναλλαγές",
+       statusBreakdown: "Ανάλυση κατάστασης",
+       completed: "Ολοκληρωμένες",
+       failed: "Αποτυχημένες",
+       refunded: "Επιστροφές",
+       total: "Σύνολο",
+       payments: "πληρωμές",
+       badgeDeleted: "ΔΙΑΓΡΑΜΜΕΝΟΣ",
+       toastTokenRefreshed: "Το token ανανεώθηκε με επιτυχία",
+       btnRefresh: "Ανανέωση",
+       btnSaving: "Αποθήκευση..."
     },
     cookieConsent: {
       title: "Cookies & Ιδιωτικότητα",

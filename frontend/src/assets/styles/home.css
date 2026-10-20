@@ -1,848 +1,268 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;800;900&display=swap');
-
-:root {
-    --primary: #ff4d00; 
-    --primary-hover: #ff6a26;
-    --primary-glow: rgba(255, 77, 0, 0.45);
-    --bg-dark: #050507;
-    --card-bg: #0c0d10;
-    --card-hover: #12141a;
-    --glass-bg: rgba(12, 13, 16, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-light: rgba(255, 255, 255, 0.15);
-    --text-main: #ffffff;
-    --text-muted: #8e93a0;
-    --font-main: 'Plus Jakarta Sans', sans-serif;
-    --font-heading: 'Outfit', sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    background-color: var(--bg-dark);
-    font-family: var(--font-main);
-    color: var(--text-main);
-    overflow-x: hidden;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 
 .home-page {
-    animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --home-bg: #10131a;
+    --home-surface: #171b24;
+    --home-surface-raised: #1c212c;
+    --home-ink: #f6f7f9;
+    --home-muted: #a6afbb;
+    --home-border: rgba(255, 255, 255, 0.11);
+    --home-accent: #f05a28;
+    background: var(--home-bg);
+    color: var(--home-ink);
+    font-family: 'DM Sans', sans-serif;
 }
 
-@keyframes pageFadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(16px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
+.home-page *, .home-page *::before, .home-page *::after { box-sizing: border-box; }
+.home-shell { margin: 0 auto; max-width: 1180px; width: min(100% - 3rem, 1180px); }
+[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
-/* HERO SECTION */
-.hero {
-    min-height: min(860px, 92vh);
-    padding: 7rem 8% 4.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
+.home-hero {
+    background: radial-gradient(circle at 88% 22%, rgba(240, 90, 40, 0.18), transparent 23%), radial-gradient(circle at 72% 82%, rgba(75, 105, 154, 0.2), transparent 30%), #10131a;
+    min-height: 620px;
     overflow: hidden;
-    background: var(--bg-dark);
+    padding: 7.5rem 0 5.5rem;
+    position: relative;
 }
 
-.hero::after {
+.home-hero::after {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 52px 52px;
     content: '';
-    position: absolute;
-    inset: 0 0 0 38%;
-    z-index: 0;
-    background:
-        linear-gradient(90deg, var(--bg-dark) 0%, rgba(5, 5, 7, 0.72) 16%, rgba(5, 5, 7, 0.08) 60%, rgba(5, 5, 7, 0.28) 100%),
-        linear-gradient(180deg, rgba(5, 5, 7, 0.1), rgba(5, 5, 7, 0.72)),
-        url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=2070&auto=format&fit=crop') 62% center/cover no-repeat;
-}
-
-.hero-content {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-.hero-badge {
-    display: inline-block;
-    padding: 8px 18px;
-    background: rgba(255, 77, 0, 0.12);
-    border: 1px solid rgba(255, 77, 0, 0.35);
-    border-radius: 30px;
-    color: var(--primary);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 3px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(255, 77, 0, 0.15);
-}
-
-.hero h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(3rem, 6.8vw, 5.8rem);
-    font-weight: 800;
-    line-height: 0.98;
-    letter-spacing: -1.5px;
-    color: #ffffff;
-}
-
-.text-outline {
-    display: inline-block;
-    color: var(--primary);
-    font-family: var(--font-main);
-    font-size: 0.78em;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    margin-top: 0.45rem;
-    text-transform: none;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    color: #ffffff;
-    max-width: 540px;
-    margin: 2rem 0 3.5rem;
-    border-left: 3px solid var(--primary);
-    padding-left: 20px;
-    line-height: 1.6;
-    font-weight: 700;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
-}
-
-/* SEARCH WIDGET */
-.search-widget-v2 {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border-light);
-    padding: 0.8rem 1rem 0.8rem 2.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    border-radius: 100px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.5);
-    max-width: 960px;
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(25px);
-}
-
-.search-field {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    flex-grow: 1;
-}
-
-.field-icon {
-    font-size: 1.25rem;
-    color: var(--primary);
-}
-
-.field-inputs {
-    display: flex;
-    flex-direction: column;
-}
-
-.field-inputs label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    margin-bottom: 2px;
-}
-
-.field-inputs input {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 0.95rem;
-    font-weight: 700;
-    outline: none;
-}
-
-.custom-home-datepicker {
-    background: transparent;
-    border: none;
-    color: #ffffff !important;
-    font-size: 0.95rem;
-    font-weight: 700;
-    outline: none;
-    cursor: pointer;
-    width: 220px;
-    min-height: 24px;
-    padding: 2px 28px 2px 0;
-    text-overflow: ellipsis;
-}
-
-.date-field-inputs {
-    position: relative;
-}
-
-.date-field-inputs::after {
-    content: '\f073';
-    position: absolute;
-    right: 0;
-    bottom: 2px;
-    color: var(--primary);
-    font-family: 'Font Awesome 5 Free';
-    font-size: 0.9rem;
-    font-weight: 900;
+    inset: 0;
+    mask-image: linear-gradient(90deg, transparent 14%, black 54%, transparent 100%);
     pointer-events: none;
-}
-
-.custom-home-datepicker:hover,
-.custom-home-datepicker:focus {
-    color: var(--primary) !important;
-}
-
-.search-btn-v2 {
-    background: var(--primary);
-    color: #ffffff;
-    border: none;
-    padding: 1.2rem 2.8rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 30px var(--primary-glow);
-}
-
-.search-btn-v2:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px var(--primary-glow);
-}
-
-.hero-trust-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 2rem;
-    margin-top: 1.5rem;
-    color: #eef2f7;
-    font-size: 0.78rem;
-    font-weight: 700;
-}
-
-.hero-trust-row span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.72rem 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 999px;
-    background: linear-gradient(135deg, rgba(14, 18, 25, 0.8), rgba(31, 38, 49, 0.58));
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.hero-trust-row span:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 110, 52, 0.48);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0 18px rgba(255, 77, 0, 0.12);
-}
-
-.hero-trust-row i {
-    color: var(--primary);
-}
-
-/* SECTION HEADERS */
-.section-header-v2 {
-    text-align: center;
-    margin-bottom: 4.5rem;
-}
-
-.section-header-v2 h2 {
-    font-family: var(--font-heading);
-    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -1.2px;
-    color: #ffffff;
-}
-
-.section-header-v2 p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    margin-top: 0.6rem;
-    font-weight: 500;
-}
-
-/* FEATURED VEHICLES SECTION */
-.featured-fleet-section {
-    padding: 8rem 8%;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 77, 0, 0.06) 0%, var(--bg-dark) 75%);
-}
-
-.home-vehicle-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-.home-vehicle-card {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
-
-.home-vehicle-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-8px);
-    border-color: rgba(255, 77, 0, 0.4);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--primary-glow);
-}
-
-.home-vehicle-card:focus-within {
-    border-color: rgba(255, 77, 0, 0.55);
-    box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.16), 0 20px 45px rgba(0, 0, 0, 0.45);
-}
-
-.home-car-img-wrapper {
-    position: relative;
-    width: 100%;
-    height: 230px;
-    overflow: hidden;
-}
-
-.home-car-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.home-vehicle-card:hover .home-car-img-wrapper img {
-    transform: scale(1.08);
-}
-
-.home-car-tag {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    background: rgba(5, 5, 7, 0.85);
-    border: 1px solid var(--glass-border-light);
-    backdrop-filter: blur(12px);
-    padding: 6px 14px;
-    border-radius: 30px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ffffff;
 }
 
-.home-car-info {
-    padding: 1.8rem;
+.home-hero .home-shell { align-items: center; display: grid; gap: 5rem; grid-template-columns: minmax(0, 1fr) minmax(360px, 445px); position: relative; z-index: 1; }
+.hero-enter { animation: heroEnter 0.8s both cubic-bezier(0.16, 1, 0.3, 1); }
+.hero-enter-1 { animation-delay: 0.05s; }
+.hero-enter-2 { animation-delay: 0.13s; }
+.hero-enter-3 { animation-delay: 0.21s; }
+.hero-enter-4 { animation-delay: 0.29s; }
+.hero-enter-card { animation-delay: 0.2s; }
+@keyframes heroEnter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.home-eyebrow { color: #ff895f; display: block; font-size: 0.69rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.home-eyebrow i { font-size: 0.42rem; margin-right: 0.5rem; vertical-align: 1px; }
+.home-hero h1, .home-section-heading h2, .home-steps-intro h2 { font-family: 'Manrope', sans-serif; letter-spacing: -0.055em; }
+.home-hero h1 { font-size: clamp(3.2rem, 6vw, 5.5rem); line-height: 1.01; margin: 1.1rem 0 1.45rem; max-width: 650px; }
+.home-hero h1 em { color: var(--home-accent); font-style: normal; }
+.home-hero-copy > p { color: var(--home-muted); font-size: 1.02rem; line-height: 1.75; margin: 0; max-width: 535px; }
+.home-hero-proof { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2rem; }
+.home-hero-proof span { color: #d7dce3; font-size: 0.78rem; font-weight: 600; }
+.home-hero-proof i { color: #ffb347; margin-right: 0.35rem; }
+
+.home-booking-card { background: #ffffff; border-radius: 15px; box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32); color: #1a222d; padding: 1.4rem; transition: box-shadow 0.35s ease, transform 0.35s ease; }
+.home-booking-card:hover { box-shadow: 0 34px 82px rgba(0, 0, 0, 0.38); transform: translateY(-4px); }
+.booking-card-heading { align-items: flex-start; display: flex; justify-content: space-between; margin-bottom: 1.35rem; }
+.booking-card-heading span { display: block; font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: -0.03em; }
+.booking-card-heading small { color: #65717d; display: block; font-size: 0.74rem; line-height: 1.5; margin-top: 0.3rem; }
+.booking-card-heading > i { align-items: center; background: #fff0ea; border-radius: 10px; color: var(--home-accent); display: flex; height: 38px; justify-content: center; width: 38px; }
+.booking-search-field { align-items: center; background: #fbfcfd; border: 1px solid #dce3e8; border-radius: 9px; display: flex; gap: 0.7rem; margin-top: 0.75rem; min-height: 65px; padding: 0.7rem 0.8rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.booking-search-field:focus-within { border-color: var(--home-accent); box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.12); }
+.booking-search-field.location-field { cursor: default; }
+.booking-search-field.location-field input { cursor: default; pointer-events: none; }
+.booking-search-field.location-field:focus-within { border-color: #dce3e8; box-shadow: none; }
+.booking-search-field > i { color: var(--home-accent); width: 18px; }
+.booking-search-field label { display: grid; flex: 1; gap: 0.15rem; }
+.booking-search-field label > span { color: #6e7a87; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.booking-search-field input, .home-datepicker { background: transparent; border: 0; color: #1a222d !important; font-family: inherit; font-size: 0.9rem; font-weight: 700; outline: 0; padding: 0; width: 100%; }
+.home-datepicker { cursor: pointer; }
+.booking-search-button { align-items: center; background: var(--home-accent); border: 0; border-radius: 9px; color: #ffffff; cursor: pointer; display: flex; font-family: inherit; font-size: 0.78rem; font-weight: 800; gap: 0.7rem; justify-content: center; letter-spacing: 0.04em; margin-top: 0.9rem; min-height: 54px; text-transform: uppercase; transition: background 0.2s ease, transform 0.2s ease; width: 100%; }
+.booking-search-button:hover { background: #d9491a; transform: translateY(-2px); }
+.booking-search-button i { transition: transform 0.2s ease; }
+.booking-search-button:hover i { transform: translateX(4px); }
+.booking-card-note { color: #65717d; font-size: 0.68rem; margin: 0.85rem 0 0; text-align: center; }
+.booking-card-note i { color: #17965a; margin-right: 0.35rem; }
+
+/* Give the availability search a distinct dark surface in dark mode. */
+:root:not([data-theme='light']) .home-page .home-booking-card { background: #1a1f29 !important; border-color: rgba(255, 255, 255, 0.13); color: #f6f7f9 !important; }
+:root:not([data-theme='light']) .home-page .booking-card-heading span { color: #f6f7f9 !important; }
+:root:not([data-theme='light']) .home-page .booking-card-heading small, :root:not([data-theme='light']) .home-page .booking-card-note { color: #a6afbb !important; }
+:root:not([data-theme='light']) .home-page .booking-card-heading > i { background: rgba(240, 90, 40, 0.14); }
+:root:not([data-theme='light']) .home-page .booking-search-field { background: #11151d !important; border-color: rgba(255, 255, 255, 0.12) !important; }
+:root:not([data-theme='light']) .home-page .booking-search-field label > span { color: #9fa9b7 !important; }
+:root:not([data-theme='light']) .home-page .booking-search-field input, :root:not([data-theme='light']) .home-page .home-datepicker { color: #f6f7f9 !important; }
+
+.home-reassurance { background: #151922; border-bottom: 1px solid var(--home-border); border-top: 1px solid var(--home-border); }
+.reassurance-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.reassurance-grid > div { align-items: center; border-right: 1px solid var(--home-border); display: flex; gap: 0.85rem; min-height: 105px; padding: 1.5rem 2rem; transition: background 0.25s ease; }
+.reassurance-grid > div:hover { background: rgba(255, 255, 255, 0.035); }
+.reassurance-grid > div:first-child { padding-left: 0; }
+.reassurance-grid > div:last-child { border: 0; padding-right: 0; }
+.reassurance-grid > div > i { align-items: center; background: rgba(240, 90, 40, 0.13); border-radius: 9px; color: #ff895f; display: flex; flex: 0 0 auto; height: 35px; justify-content: center; width: 35px; }
+.reassurance-grid span { color: var(--home-muted); font-size: 0.72rem; line-height: 1.45; }
+.reassurance-grid strong { color: var(--home-ink); display: block; font-size: 0.79rem; margin-bottom: 0.2rem; }
+
+.home-fleet-section { background: #10131a; padding: 6.5rem 0; }
+.home-section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 2.6rem; }
+.home-section-heading h2 { font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1; margin: 0.65rem 0; }
+.home-section-heading p { color: var(--home-muted); font-size: 0.92rem; margin: 0; }
+.home-text-link { background: transparent; border: 0; color: var(--home-ink); cursor: pointer; font-family: inherit; font-size: 0.78rem; font-weight: 800; white-space: nowrap; }
+.home-text-link i { color: var(--home-accent); margin-left: 0.45rem; transition: transform 0.2s ease; }
+.home-text-link:hover i { transform: translateX(4px); }
+.home-vehicle-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); }
+.home-vehicle-card { background: var(--home-surface); border: 1px solid var(--home-border); border-radius: 12px; cursor: pointer; overflow: hidden; transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.home-vehicle-card:hover { border-color: rgba(240, 90, 40, 0.6); box-shadow: 0 25px 52px rgba(0, 0, 0, 0.28); transform: translateY(-8px); }
+.home-car-image { height: 205px; overflow: hidden; position: relative; }
+.home-car-image::after { background: linear-gradient(180deg, transparent 44%, rgba(8, 10, 14, 0.65)); content: ''; inset: 0; position: absolute; }
+.home-car-image img { height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease; width: 100%; }
+.home-vehicle-card:hover .home-car-image img { filter: saturate(1.08); transform: scale(1.08); }
+.home-car-image span { background: rgba(14, 17, 22, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 999px; color: #ffffff; font-size: 0.62rem; font-weight: 800; left: 0.85rem; letter-spacing: 0.05em; padding: 0.38rem 0.6rem; position: absolute; text-transform: uppercase; top: 0.85rem; z-index: 1; }
+.home-car-body { padding: 1.15rem; }
+.home-car-title { align-items: baseline; display: flex; gap: 0.7rem; justify-content: space-between; }
+.home-car-title h3 { font-family: 'Manrope', sans-serif; font-size: 1rem; letter-spacing: -0.03em; margin: 0; }
+.home-car-title small { color: var(--home-muted); font-size: 0.68rem; }
+.home-car-specs { border-bottom: 1px solid var(--home-border); display: flex; gap: 1rem; margin: 0.9rem 0; padding-bottom: 0.9rem; }
+.home-car-specs span { color: var(--home-muted); font-size: 0.68rem; font-weight: 600; }
+.home-car-specs i { color: #ff895f; margin-right: 0.35rem; }
+.home-car-footer { align-items: center; display: flex; justify-content: space-between; }
+.home-car-footer small { color: var(--home-muted); display: block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
+.home-car-footer strong { color: var(--home-ink); font-family: 'Manrope', sans-serif; font-size: 1.35rem; letter-spacing: -0.05em; }
+.home-car-footer span { color: var(--home-muted); font-size: 0.65rem; margin-left: 0.2rem; }
+.home-car-footer button { align-items: center; background: var(--home-soft); border: 1px solid var(--home-border); border-radius: 8px; color: var(--home-ink); cursor: pointer; display: flex; height: 36px; justify-content: center; transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease; width: 36px; }
+.home-vehicle-card:hover .home-car-footer button { background: var(--home-accent); border-color: var(--home-accent); }
+.home-vehicle-card:hover .home-car-footer button i { transform: translateX(2px); }
+.home-car-footer button i { transition: transform 0.2s ease; }
+.home-loader { align-items: center; display: flex; flex-direction: column; justify-content: center; min-height: 300px; }
+.home-loader span { animation: homeSpin 0.7s linear infinite; border: 3px solid rgba(255, 255, 255, 0.12); border-radius: 50%; border-top-color: var(--home-accent); height: 40px; width: 40px; }
+.home-loader p { color: var(--home-muted); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; margin-top: 1rem; }
+@keyframes homeSpin { to { transform: rotate(360deg); } }
+
+.home-steps-section { background: #171b24; border-top: 1px solid var(--home-border); padding: 6rem 0; }
+.home-steps-layout { display: grid; gap: 5rem; grid-template-columns: 0.8fr 1.2fr; }
+.home-steps-intro h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.07; margin: 0.75rem 0 1rem; }
+.home-steps-intro p { color: var(--home-muted); font-size: 0.92rem; line-height: 1.7; max-width: 390px; }
+.home-steps-grid { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); }
+.home-steps-grid article { background: rgba(255, 255, 255, 0.025); min-height: 240px; padding: 1.4rem; position: relative; transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.home-steps-grid article:hover { background: rgba(240, 90, 40, 0.08); transform: translateY(-5px); }
+.home-steps-grid article > span { color: rgba(255, 255, 255, 0.22); font-family: 'Manrope', sans-serif; font-size: 0.9rem; font-weight: 800; position: absolute; right: 1.1rem; top: 1rem; }
+.home-steps-grid article > i { align-items: center; background: rgba(240, 90, 40, 0.13); border-radius: 8px; color: #ff895f; display: flex; font-size: 1rem; height: 38px; justify-content: center; width: 38px; }
+.home-steps-grid h3 { font-family: 'Manrope', sans-serif; font-size: 0.9rem; margin: 3rem 0 0.65rem; }
+.home-steps-grid p { color: var(--home-muted); font-size: 0.76rem; line-height: 1.6; margin: 0; }
+
+.react-datepicker-popper { z-index: 9999 !important; }
+.react-datepicker { background: #ffffff !important; border: 1px solid #cfd8df !important; border-radius: 10px !important; box-shadow: 0 16px 36px rgba(22, 32, 42, 0.2) !important; color: #17202a !important; font-family: 'DM Sans', sans-serif !important; overflow: hidden; }
+.react-datepicker__header, .react-datepicker__month, .react-datepicker__month-container { background: #ffffff !important; }
+.react-datepicker__header { border-bottom: 1px solid #dce3e8 !important; padding-top: 0.8rem !important; }
+.react-datepicker__current-month { color: #17202a !important; font-weight: 800 !important; }
+.react-datepicker__day-name { color: #52606d !important; font-size: 0.72rem !important; font-weight: 800 !important; }
+.react-datepicker__day { color: #17202a !important; font-weight: 600 !important; }
+.react-datepicker__day:hover:not(.react-datepicker__day--disabled) { background: #fff0ea !important; color: #b93812 !important; }
+.react-datepicker__day--outside-month { color: #9ba7b2 !important; }
+.react-datepicker__day--disabled { color: #b7c0c8 !important; }
+.react-datepicker__day--keyboard-selected { background: #ffe2d6 !important; color: #8e2d0e !important; }
+.react-datepicker__day--in-range { background: #ffe2d6 !important; color: #7a270d !important; }
+.react-datepicker__day--selected, .react-datepicker__day--range-start, .react-datepicker__day--range-end { background: var(--home-accent) !important; color: #ffffff !important; font-weight: 800 !important; }
+.react-datepicker__navigation { top: 0.95rem !important; }
+.react-datepicker__navigation-icon::before { border-color: #34404c !important; border-width: 2px 2px 0 0 !important; }
+.react-datepicker__navigation:hover *::before { border-color: var(--home-accent) !important; }
+
+/* Scope the picker to Home and override the application's global dark calendar styles. */
+.home-page .react-datepicker,
+.home-page .react-datepicker__header,
+.home-page .react-datepicker__month,
+.home-page .react-datepicker__month-container {
+    background-color: #ffffff !important;
 }
 
-.home-car-info h3 {
-    font-size: 1.45rem;
-    font-weight: 900;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.5px;
-}
-
-.home-car-info h3 span {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.75);
-}
-
-.home-car-specs-row {
-    display: flex;
-    gap: 1.2rem;
-    margin-bottom: 1.8rem;
-}
-
-.home-car-specs-row span {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.home-car-specs-row i {
-    color: var(--primary);
-}
-
-.home-car-price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--glass-border);
-    padding-top: 1.2rem;
-}
-
-.home-price strong {
-    font-size: 1.65rem;
-    font-weight: 900;
-    color: #ffffff;
-}
-
-.home-price span {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-weight: 700;
-    margin-left: 4px;
-    text-transform: uppercase;
-}
-
-.home-view-deal-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border-light);
-    color: #ffffff;
-    padding: 10px 22px;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.home-vehicle-card:hover .home-view-deal-btn {
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 0 8px 25px var(--primary-glow);
-}
-
-/* FEATURES SECTION */
-.features-section {
-    padding: 6rem 8% 9rem;
-    background: var(--bg-dark);
-}
-
-.booking-steps-section {
-    background: #0a0b0e;
-    border-top: 1px solid var(--glass-border);
-    padding: 7rem 8%;
-}
-
-.booking-steps-intro {
-    max-width: 620px;
-    margin: 0 auto 3rem;
-    text-align: center;
-}
-
-.booking-steps-intro > span {
-    color: var(--primary);
-    font-size: 0.72rem;
-    font-weight: 900;
-    letter-spacing: 0.16em;
-}
-
-.booking-steps-intro h2 {
-    color: #ffffff;
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.05;
-    margin: 0.8rem 0;
-}
-
-.booking-steps-intro p {
-    color: var(--text-muted);
-    line-height: 1.6;
-}
-
-.booking-steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    margin: 0 auto;
-    max-width: 1280px;
-}
-
-.booking-step-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    min-height: 250px;
-    padding: 1.8rem;
-    position: relative;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
-}
-
-.booking-step-card:hover,
-.booking-step-card:focus-within {
-    background: linear-gradient(145deg, rgba(255, 77, 0, 0.12), rgba(255, 255, 255, 0.035));
-    border-color: rgba(255, 77, 0, 0.45);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 28px rgba(255, 77, 0, 0.12);
-    transform: translateY(-7px);
-}
-
-.booking-step-card:hover > i,
-.booking-step-card:focus-within > i {
-    background: var(--primary);
-    color: #ffffff;
-    box-shadow: 0 8px 20px var(--primary-glow);
-}
-
-.booking-step-card > i {
-    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.step-number {
-    color: rgba(255, 255, 255, 0.16);
-    font-family: var(--font-heading);
-    font-size: 2.1rem;
-    font-weight: 900;
-    position: absolute;
-    right: 1.5rem;
-    top: 1rem;
-}
-
-.booking-step-card > i {
-    align-items: center;
-    background: rgba(255, 77, 0, 0.12);
-    border: 1px solid rgba(255, 77, 0, 0.22);
-    border-radius: 12px;
-    color: var(--primary);
-    display: inline-flex;
-    font-size: 1.2rem;
-    height: 44px;
-    justify-content: center;
-    width: 44px;
-}
-
-.booking-step-card h3 {
-    color: #ffffff;
-    font-size: 1.1rem;
-    margin: 2rem 0 0.65rem;
-}
-
-.booking-step-card p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 3.8rem 2.2rem;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
-
-.feature-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-8px);
-    border-color: rgba(255, 77, 0, 0.4);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--primary-glow);
-}
-
-.feature-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 22px;
-    background: rgba(255, 77, 0, 0.12);
-    border: 1px solid rgba(255, 77, 0, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.8rem;
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover .feature-icon {
-    transform: scale(1.1);
-}
-
-.feature-icon i {
-    font-size: 1.9rem;
-    color: var(--primary);
-}
-
-.feature-card h3 {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.3px;
-}
-
-.feature-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    font-weight: 500;
-}
-
-/* LOADER */
-.loader-container {
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.loader {
-    width: 48px;
-    height: 48px;
-    border: 3px solid rgba(255, 255, 255, 0.08);
-    border-top: 3px solid var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-.loader-text {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    margin-top: 20px;
-    text-transform: uppercase;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* MEDIA QUERIES */
-@media (max-width: 992px) {
-    .hero {
-        padding-top: 7rem;
-    }
-
-    .search-widget-v2 {
-        flex-direction: column;
-        border-radius: 28px;
-        padding: 2.2rem;
-        gap: 1.5rem;
-        align-items: stretch;
-    }
-    
-    .search-field {
-        border-bottom: 1px solid var(--glass-border);
-        padding-bottom: 1.2rem;
-    }
-    
-    .custom-home-datepicker {
-        width: 100%;
-    }
-    
-    .search-btn-v2 {
-        justify-content: center;
-        width: 100%;
-    }
-
-    .hero-trust-row {
-        gap: 0.8rem 1rem;
-    }
-
-    .hero-trust-row span {
-        padding: 0.62rem 0.78rem;
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .hero {
-        padding: 6rem 5% 4rem;
-        min-height: auto;
-    }
-
-    .hero::after {
-        inset: 48% 0 0;
-        background:
-            linear-gradient(180deg, var(--bg-dark) 0%, rgba(5, 5, 7, 0.08) 42%, rgba(5, 5, 7, 0.78) 100%),
-            url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=2070&auto=format&fit=crop') 62% center/cover no-repeat;
-    }
-
-    .hero-content {
-        z-index: 1;
-    }
-
-    .hero h1 {
-        font-size: clamp(2.8rem, 13vw, 4.2rem);
-    }
-
-    .hero p {
-        margin: 1.5rem 0 2.5rem;
-    }
-
-    .featured-fleet-section,
-    .features-section,
-    .booking-steps-section {
-        padding: 4rem 5%;
-    }
-
-    .booking-steps-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.react-datepicker-wrapper,
-.react-datepicker__input-container {
-    display: block;
-    width: 100%;
-}
-
-.react-datepicker-popper {
-    z-index: 99999 !important;
-    padding-top: 10px !important;
-}
-
-.react-datepicker__triangle {
-    display: none !important;
-}
-
-.react-datepicker,
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker {
-    background-color: #08080a !important;
-    background: #08080a !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 20px !important;
-    font-family: var(--font-main) !important;
-    color: #ffffff !important;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 77, 0, 0.15) !important;
-    overflow: hidden !important;
-    padding: 10px !important;
-}
-
-.react-datepicker__header,
-.react-datepicker__month-container {
-    background-color: #08080a !important;
-    background: #08080a !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-.react-datepicker__header {
-    padding-top: 12px !important;
-}
-
-.react-datepicker__current-month,
-.react-datepicker-time__header,
-.react-datepicker-year-header {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-    font-size: 1rem !important;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px !important;
-}
-
-.react-datepicker__day-name {
-    color: var(--text-muted) !important;
-    font-weight: 700 !important;
-    font-size: 0.8rem !important;
-    width: 2.2rem !important;
-    line-height: 2.2rem !important;
-}
-
-.react-datepicker__month {
-    background-color: #08080a !important;
-    margin: 0.8rem 0.4rem !important;
-}
-
-.react-datepicker__day {
-    background-color: transparent !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    width: 2.2rem !important;
-    height: 2.2rem !important;
-    line-height: 2.2rem !important;
-    border-radius: 50% !important;
-    margin: 2px !important;
-    transition: all 0.2s ease !important;
-}
-
-.react-datepicker__day:hover {
-    background-color: rgba(255, 77, 0, 0.25) !important;
-    color: var(--primary) !important;
-}
-
-.react-datepicker__day--selected,
-.react-datepicker__day--in-selecting-range,
-.react-datepicker__day--in-range {
-    background-color: var(--primary) !important;
-    color: #ffffff !important;
-    font-weight: 800 !important;
-    border-radius: 50% !important;
-}
-
-.react-datepicker__day--range-start,
-.react-datepicker__day--range-end {
-    background-color: var(--primary) !important;
-    box-shadow: 0 0 15px var(--primary-glow) !important;
-    border-radius: 50% !important;
-}
-
-.react-datepicker__day--disabled {
-    color: #333642 !important;
-    background-color: transparent !important;
-    cursor: not-allowed !important;
-}
-
-.react-datepicker__navigation {
-    top: 16px !important;
-}
-
-.react-datepicker__navigation-icon::before {
-    border-color: #ffffff !important;
-    border-width: 2px 2px 0 0 !important;
-}
-
-.react-datepicker__navigation:hover *::before {
-    border-color: var(--primary) !important;
-}
-
-.custom-home-datepicker::placeholder {
-    color: rgba(255, 255, 255, 0.65) !important;
-}
-
-:root[data-theme='light'] .custom-home-datepicker::placeholder {
-    color: #65717d !important;
-    opacity: 1;
-}
-
-:root[data-theme='light'] .custom-home-datepicker {
+.home-page .react-datepicker__day,
+.home-page .react-datepicker__day-name,
+.home-page .react-datepicker__current-month {
     color: #17202a !important;
+    opacity: 1 !important;
 }
 
-:root[data-theme='light'] .date-field-inputs::after {
-    color: #d94700;
+.home-page .react-datepicker__day--outside-month { color: #8a98a5 !important; }
+.home-page .react-datepicker__day--disabled { color: #b5bec7 !important; }
+.home-page .react-datepicker__day--in-range { background-color: #ffe2d6 !important; color: #7a270d !important; }
+.home-page .react-datepicker__day--selected,
+.home-page .react-datepicker__day--range-start,
+.home-page .react-datepicker__day--range-end { background-color: #f05a28 !important; color: #ffffff !important; }
+
+/* Keep the Home booking calendar readable when global theme rules change. */
+:root:not([data-theme='light']) .home-page .react-datepicker,
+:root:not([data-theme='light']) .home-page .react-datepicker__month-container,
+:root:not([data-theme='light']) .home-page .react-datepicker__month,
+:root:not([data-theme='light']) .home-page .react-datepicker__week,
+:root:not([data-theme='light']) .home-page .react-datepicker__header {
+    background-color: #000000 !important;
 }
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day,
+:root:not([data-theme='light']) .home-page .react-datepicker__current-month {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day-name {
+    color: #aeb8c4 !important;
+    opacity: 1 !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day--outside-month {
+    color: #747e89 !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day--disabled {
+    color: #87939e !important;
+    opacity: 1 !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+    background-color: rgba(255, 77, 0, 0.25) !important;
+    color: #ffffff !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day--in-selecting-range {
+    background-color: rgba(255, 77, 0, 0.4) !important;
+    color: #ffffff !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__day--selected,
+:root:not([data-theme='light']) .home-page .react-datepicker__day--in-range,
+:root:not([data-theme='light']) .home-page .react-datepicker__day--range-start,
+:root:not([data-theme='light']) .home-page .react-datepicker__day--range-end {
+    background-color: #ff4d00 !important;
+    color: #ffffff !important;
+}
+
+:root:not([data-theme='light']) .home-page .react-datepicker__navigation:hover *::before {
+    border-color: #ff4d00 !important;
+}
+
+:root[data-theme='light'] .home-page { --home-bg: #f6f7f8; --home-surface: #ffffff; --home-surface-raised: #ffffff; --home-ink: #17202a; --home-muted: #65717d; --home-border: rgba(23, 32, 42, 0.12); --home-soft: #f2f5f7; }
+:root[data-theme='light'] .home-hero { background: radial-gradient(circle at 84% 14%, rgba(240, 90, 40, 0.14), transparent 24%), radial-gradient(circle at 76% 74%, rgba(84, 124, 180, 0.13), transparent 30%), #edf1f4; }
+:root[data-theme='light'] .home-hero::after { background-image: linear-gradient(rgba(23, 32, 42, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 32, 42, 0.045) 1px, transparent 1px); }
+:root[data-theme='light'] .home-hero-proof span { color: #40505e; }
+:root[data-theme='light'] .home-reassurance, :root[data-theme='light'] .home-steps-section { background: #e9edf1; }
+:root[data-theme='light'] .home-fleet-section { background: #f6f7f8; }
+:root[data-theme='light'] .home-vehicle-card { box-shadow: 0 12px 26px rgba(31, 41, 55, 0.06); }
+:root[data-theme='light'] .home-vehicle-card:hover { box-shadow: 0 22px 38px rgba(31, 41, 55, 0.12); }
+:root[data-theme='light'] .home-car-image span { background: rgba(255, 255, 255, 0.9); border-color: rgba(23, 32, 42, 0.1); color: #17202a; }
+:root[data-theme='light'] .home-steps-grid article { background: rgba(255, 255, 255, 0.58); }
+:root[data-theme='light'] .home-steps-grid article > span { color: rgba(23, 32, 42, 0.22); }
+
+@media (max-width: 900px) {
+    .home-hero { padding: 6rem 0 4rem; }
+    .home-hero .home-shell { gap: 3rem; grid-template-columns: 1fr; }
+    .home-booking-card { max-width: 560px; width: 100%; }
+    .home-steps-layout { gap: 3rem; grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+    .home-shell { width: min(100% - 2rem, 1180px); }
+    .home-hero { min-height: auto; padding: 5.5rem 0 3rem; }
+    .home-hero h1 { font-size: clamp(2.75rem, 13vw, 4rem); }
+    .reassurance-grid, .home-vehicle-grid, .home-steps-grid { grid-template-columns: 1fr; }
+    .reassurance-grid > div, .reassurance-grid > div:first-child, .reassurance-grid > div:last-child { border-bottom: 1px solid var(--home-border); border-right: 0; min-height: auto; padding: 1rem 0; }
+    .reassurance-grid > div:last-child { border-bottom: 0; }
+    .home-section-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
+    .home-fleet-section, .home-steps-section { padding: 4rem 0; }
+    .home-steps-grid article { min-height: 190px; }
+    .home-steps-grid h3 { margin-top: 1.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) { .home-page *, .home-page *::before, .home-page *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } [data-reveal] { opacity: 1; transform: none; } }
