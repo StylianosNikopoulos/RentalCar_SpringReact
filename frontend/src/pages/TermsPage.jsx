@@ -45,6 +45,15 @@ const TermsPage = () => {
           </ul>
         </section>
 
+        <section className="terms-section terms-cookie-section">
+          <h2>{t.cookieTitle}</h2>
+          <p>{t.cookieDesc}</p>
+          <button type="button" className="terms-cookie-settings" onClick={() => window.dispatchEvent(new Event('open-cookie-settings'))}>
+            <i className="fas fa-cookie-bite"></i>
+            {t.cookieSettings}
+          </button>
+        </section>
+
         <section className="terms-section">
           <h2>{t.sec2Title}</h2>
           <p>{t.sec2Desc}</p>

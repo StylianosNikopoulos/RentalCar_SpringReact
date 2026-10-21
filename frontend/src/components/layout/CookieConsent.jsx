@@ -88,13 +88,19 @@ const CookieConsent = () => {
         setVisible(false);
     };
 
+    useEffect(() => {
+        const reopen = () => setVisible(true);
+        window.addEventListener('open-cookie-settings', reopen);
+        return () => window.removeEventListener('open-cookie-settings', reopen);
+    }, []);
+
     if (!visible) return null;
 
     return (
-        <aside className="cookie-banner glass-panel show fade-in" aria-label="Cookie Consent">
+        <aside className="cookie-banner" aria-label="Cookie Consent">
             <div className="cookie-text-section">
                 <h4>
-                    <span className="cookie-icon" role="img" aria-label="cookie">🍪</span> 
+                    <span className="cookie-icon" aria-hidden="true"><i className="fas fa-cookie-bite"></i></span>
                     {t.title}
                 </h4>
                 <p>{t.text}</p>
