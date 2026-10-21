@@ -250,7 +250,10 @@ export const translations = {
       sec3Title: "3. Booking & Cancellation Policy",
       sec3Desc: "Reservations may be cancelled up to 24 hours prior to the scheduled pick-up time for a full refund. Late cancellations may be subject to applicable fees depending on the booking terms.",
       sec4Title: "4. Third-Party Services",
-      sec4Desc: "The platform may use third-party services such as payment processors (e.g. Stripe) to complete transactions securely. These providers process data under their own privacy policies."
+      sec4Desc: "The platform may use third-party services such as payment processors (e.g. Stripe) to complete transactions securely. These providers process data under their own privacy policies.",
+      cookieTitle: "5. Privacy & Cookies",
+      cookieDesc: "We use essential storage to remember your cookie choice and, only with your consent, Google Analytics cookies to understand website traffic. You can accept or reject analytics cookies and change your choice at any time using the button below.",
+      cookieSettings: "Manage cookie settings"
     },
     details: {
       perDay: "day",
@@ -757,7 +760,10 @@ export const translations = {
       sec3Title: "3. Πολιτική Κρατήσεων & Ακυρώσεων",
       sec3Desc: "Οι κρατήσεις μπορούν να ακυρωθούν έως και 24 ώρες πριν από την προγραμματισμένη ώρα παραλαβής για πλήρη επιστροφή χρημάτων. Οι εκπρόθεσμες ακυρώσεις ενδέχεται να υπόκεινται σε χρεώσεις ανάλογα με τους όρους της κράτησης.",
       sec4Title: "4. Υπηρεσίες Τρίτων",
-      sec4Desc: "Η πλατφόρμα ενδέχεται να χρησιμοποιεί υπηρεσίες τρίτων, όπως παρόχους επεξεργασίας πληρωμών (π.χ. Stripe), για την ασφαλή ολοκλήρωση των συναλλαγών. Αυτοί οι πάροχοι επεξεργάζονται δεδομένα σύμφωνα με τις δικές τους πολιτικές απορρήτου."
+      sec4Desc: "Η πλατφόρμα ενδέχεται να χρησιμοποιεί υπηρεσίες τρίτων, όπως παρόχους επεξεργασίας πληρωμών (π.χ. Stripe), για την ασφαλή ολοκλήρωση των συναλλαγών. Αυτοί οι πάροχοι επεξεργάζονται δεδομένα σύμφωνα με τις δικές τους πολιτικές απορρήτου.",
+      cookieTitle: "5. Πολιτική Απορρήτου και Cookies",
+      cookieDesc: "Χρησιμοποιούμε απαραίτητη τοπική αποθήκευση για να θυμόμαστε την επιλογή σας σχετικά με τα cookies και, μόνο με τη συγκατάθεσή σας, cookies του Google Analytics για την κατανόηση της επισκεψιμότητας. Μπορείτε να αποδεχτείτε ή να απορρίψετε τα στατιστικά cookies και να αλλάξετε την επιλογή σας οποιαδήποτε στιγμή από το παρακάτω κουμπί.",
+      cookieSettings: "Διαχείριση ρυθμίσεων cookies"
     },
     details: {
       perDay: "ημέρα",
