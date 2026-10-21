@@ -1,4 +1,4 @@
-const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const measurementId = import.meta.env.VITE_GA_ID;
 
 export const CONSENT_KEY = 'rentalcar-cookie-consent';
 export const OPEN_SETTINGS_EVENT = 'open-cookie-settings';
