@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../assets/styles/footer.css'; 
 import { useLang } from '../../context/LangContext';
 import { translations } from '../../i18n/translations';
+import { openCookieSettings } from '../../services/analytics';
 
 const Footer = () => {
     const { lang } = useLang();
@@ -34,6 +35,10 @@ const Footer = () => {
                         <h4>{t.legal}</h4>
                         <div className="footer-links-list">
                             <Link to="/terms">{t.terms}</Link>
+                            <Link to="/privacy">{t.privacy}</Link>
+                            <button type="button" className="footer-cookie-link" onClick={openCookieSettings}>
+                                {t.cookieSettings}
+                            </button>
                         </div>
                     </div>
 
