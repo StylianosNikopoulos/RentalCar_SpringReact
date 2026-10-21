@@ -2,51 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../assets/styles/cookieConsent.css';
 import { useLang } from '../../context/LangContext';
 import { translations } from '../../i18n/translations';
-
-const GA_ID = import.meta.env.VITE_GA_ID;
-
-const initializeConsentDefaults = () => {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () {
-        window.dataLayer.push(arguments);
-    };
-
-    if (!window.__ga_consent_default) {
-        window.gtag('consent', 'default', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-        });
-        window.__ga_consent_default = true;
-    }
-};
-
-const loadAnalytics = () => {
-    if (!GA_ID) {
-        console.warn("Google Analytics ID is missing.");
-        return;
-    }
-    
-    if (window.__ga_loaded) return;
-    window.__ga_loaded = true;
-
-    initializeConsentDefaults();
-
-    const script = document.createElement("script");
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    window.gtag('js', new Date());
-
-    window.gtag('consent', 'update', {
-        analytics_storage: 'granted',
-        ad_storage: 'denied'
-    });
-
-    window.gtag('config', GA_ID);
-};
+import { OPEN_SETTINGS_EVENT, getConsent, hasAnalyticsConsent, initAnalytics, saveConsent } from '../../services/analytics';
 
 const CookieConsent = () => {
     const [visible, setVisible] = useState(false);
@@ -54,44 +10,28 @@ const CookieConsent = () => {
     const t = translations[lang]?.cookieConsent || {};
 
     useEffect(() => {
-        const consent = localStorage.getItem('cookieConsent');
-
-        if (!consent) {
+        localStorage.removeItem('cookieConsent');
+        if (!getConsent() || !getConsent()?.savedAt) {
             setVisible(true);
-        } else if (consent === 'accepted') {
-            loadAnalytics();
+        } else if (hasAnalyticsConsent()) {
+            initAnalytics();
         }
     }, []);
 
     const handleAccept = () => {
-        localStorage.setItem('cookieConsent', 'accepted');
-        initializeConsentDefaults();
-
-        window.gtag('consent', 'update', {
-            analytics_storage: 'granted',
-            ad_storage: 'denied'
-        });
-
-        loadAnalytics();
+        saveConsent('all');
         setVisible(false);
     };
 
     const handleReject = () => {
-        localStorage.setItem('cookieConsent', 'rejected');
-        initializeConsentDefaults();
-
-        window.gtag('consent', 'update', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied'
-        });
-
+        saveConsent('necessary');
         setVisible(false);
     };
 
     useEffect(() => {
         const reopen = () => setVisible(true);
-        window.addEventListener('open-cookie-settings', reopen);
-        return () => window.removeEventListener('open-cookie-settings', reopen);
+        window.addEventListener(OPEN_SETTINGS_EVENT, reopen);
+        return () => window.removeEventListener(OPEN_SETTINGS_EVENT, reopen);
     }, []);
 
     if (!visible) return null;

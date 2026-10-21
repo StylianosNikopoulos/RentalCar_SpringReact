@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLang } from "../context/LangContext";
 import { translations } from "../i18n/translations";
 import "../assets/styles/about.css";
@@ -64,6 +64,10 @@ const AboutPage = () => {
           <button className="explore-btn" onClick={() => navigate("/vehicles")}>
             {t.button}
           </button>
+          <div className="about-legal-links">
+            <Link to="/terms">{t.terms}</Link>
+            <Link to="/privacy">{t.privacy}</Link>
+          </div>
         </div>
 
       </div>

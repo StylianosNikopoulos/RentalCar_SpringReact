@@ -15,11 +15,13 @@ import VehiclesPage from './pages/VehiclesPage';
 import NotFound from './pages/NotFound'; 
 import MyReservationPage from './pages/MyReservationPage';
 import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import AboutPage from './pages/AboutPage';
 import AdminPage from './pages/AdminPage';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import CookieConsent from './components/layout/CookieConsent';
+import { hasAnalyticsConsent, trackPageView } from './services/analytics';
 
 const AdminRoute = ({ children }) => {
   const { user } = useAuth();
@@ -33,7 +35,12 @@ const AdminRoute = ({ children }) => {
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (hasAnalyticsConsent()) {
+      trackPageView(pathname + window.location.search);
+    }
+  }, [pathname]);
   return null;
 };
 
@@ -59,6 +66,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/vehicles" element={<VehiclesPage />}/>
             <Route path="/vehicle/:id" element={<VehicleDetailsPage />}/>

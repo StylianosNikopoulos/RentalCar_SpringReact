@@ -18,6 +18,8 @@
 .footer-nav-column h4 { color: #f5f7f9; font-family: 'Manrope', sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; margin: 0; text-transform: uppercase; }
 .footer-links-list { display: flex; flex-direction: column; gap: 0.7rem; }
 .footer-links-list a { color: #9fa9b7; font-size: 0.8rem; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease; width: fit-content; }
+.footer-cookie-link { background: none; border: 0; color: #9fa9b7; cursor: pointer; font: inherit; font-size: 0.8rem; padding: 0; text-align: left; transition: color 0.2s ease, transform 0.2s ease; width: fit-content; }
+.footer-cookie-link:hover { color: #ff8b61; transform: translateX(3px); }
 .footer-links-list a:hover { color: #ff8b61; transform: translateX(3px); }
 .footer-main-divider { background: rgba(255, 255, 255, 0.1); height: 1px; width: 100%; }
 .footer-bottom-bar { align-items: center; display: flex; justify-content: space-between; padding-top: 1.35rem; }
@@ -29,6 +31,7 @@
 :root[data-theme='light'] .footer-root { background: #e9edf1; border-top-color: rgba(23, 32, 42, 0.11); color: #17202a; }
 :root[data-theme='light'] .footer-main-logo, :root[data-theme='light'] .footer-nav-column h4 { color: #17202a; }
 :root[data-theme='light'] .footer-brand-tagline, :root[data-theme='light'] .footer-links-list a, :root[data-theme='light'] .footer-copyright { color: #65717d; }
+:root[data-theme='light'] .footer-cookie-link { color: #65717d; }
 :root[data-theme='light'] .footer-trust-note, :root[data-theme='light'] .footer-social-links a { color: #52606d; }
 :root[data-theme='light'] .footer-main-divider { background: rgba(23, 32, 42, 0.12); }
 
