@@ -67,6 +67,7 @@ const ForgotPassword = () => {
                     />
                 </div>
                 
+                <div className="auth-action-spacing">
                 <button 
                     type="submit" 
                     className="confirm-glow-btn"
@@ -74,6 +75,7 @@ const ForgotPassword = () => {
                 >
                     {isSubmitting ? '...' : t.btnSubmit} <i className="fas fa-paper-plane"></i>
                 </button>
+                </div>
 
                 {isSubmitting ? (
                     <span className="back-to-login disabled-link">
