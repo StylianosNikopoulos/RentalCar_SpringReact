@@ -26,6 +26,9 @@ public class PaymentJpaEntity {
     @Column(name = "stripe_payment_id", unique = true)
     private String stripePaymentId;
 
+    @Column(name = "stripe_payment_intent_id")
+    private String stripePaymentIntentId;
+
     @Column(nullable = false)
     private BigDecimal amount;
 
