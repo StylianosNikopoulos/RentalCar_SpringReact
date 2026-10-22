@@ -1376,7 +1376,7 @@ tr.row-out-of-service:hover {
 .admin-container .admin-table td { font-size: .78rem; padding: .85rem; }
 .admin-container .add-btn { background: var(--primary); border-radius: 7px; box-shadow: none; font-size: .7rem; min-height: 40px; padding: .65rem .85rem; }
 .admin-container .add-btn:hover { background: var(--primary-hover); box-shadow: none; }
-.admin-container .btn-update, .admin-container .btn-delete, .admin-container .status-btn, .admin-container .details-btn { border-radius: 6px; font-size: .65rem; min-height: 34px; padding: .5rem .65rem; }
+.admin-container .btn-update, .admin-container .btn-delete, .admin-container .status-btn, .admin-container .payment-action-btn { border-radius: 6px; font-size: .65rem; min-height: 34px; padding: .5rem .65rem; }
 .admin-container input, .admin-container select, .admin-container textarea { background: var(--input-bg); border-color: var(--glass-border); border-radius: 7px; color: var(--text-main); font-family: 'DM Sans', sans-serif; }
 .admin-container input:focus, .admin-container select:focus, .admin-container textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240,90,40,.12); outline: 0; }
 .admin-container .search-input-wrapper { position: relative; }
