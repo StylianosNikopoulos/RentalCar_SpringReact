@@ -354,7 +354,7 @@ const PaymentsTab = () => {
                                             </td>
                                             <td>{getStatusBadge(payment.status)}</td>
                                             <td className="actions-cell">
-                                                 <button className="status-btn payment-action-btn" onClick={() => setSelectedPaymentDate(formattedDate)}>
+                                                 <button className="status-btn details-btn" onClick={() => setSelectedPaymentDate(formattedDate)}>
                                                     <i className="fas fa-eye"></i> {t.btnDetails || 'Details'}
                                                 </button>
 
@@ -363,7 +363,7 @@ const PaymentsTab = () => {
                                                         href={payment.receiptUrl} 
                                                         target="_blank" 
                                                         rel="noopener noreferrer" 
-                                                         className="status-btn payment-action-btn"
+                                                         className="status-btn details-btn"
                                                     >
                                                         <i className="fas fa-receipt"></i> {t.btnReceipt}
                                                     </a>
