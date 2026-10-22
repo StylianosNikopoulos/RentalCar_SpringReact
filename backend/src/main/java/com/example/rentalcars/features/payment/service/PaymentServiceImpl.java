@@ -152,6 +152,7 @@ public class PaymentServiceImpl implements PaymentService {
             Refund.create(params);
             payment.setStatus(PaymentStatus.REFUNDED);
             paymentRepository.save(payment);
+            reservationService.cancelReservationInternal(payment.getReservationId());
             log.info("Payment ID: {} successfully refunded and updated in DB", payment.getId());
 
         } catch (StripeException e) {
