@@ -363,7 +363,7 @@ const PaymentsTab = () => {
                                                         href={payment.receiptUrl} 
                                                         target="_blank" 
                                                         rel="noopener noreferrer" 
-                                                         className="status-btn receipt-btn"
+                                                         className="status-btn details-btn"
                                                     >
                                                         <i className="fas fa-receipt"></i> {t.btnReceipt}
                                                     </a>

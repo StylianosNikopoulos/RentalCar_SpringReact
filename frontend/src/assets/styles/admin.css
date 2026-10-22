@@ -319,18 +319,18 @@ tr.row-out-of-service:hover {
     margin-top: 2rem;
 }
 
-.details-btn, .receipt-btn {
+.details-btn {
     background: var(--glass-hover-bg);
     color: var(--text-main);
     border: 1px solid var(--glass-border);
     text-decoration: none;
 }
 
-.details-btn:hover, .receipt-btn:hover {
+.details-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="dark"] .details-btn:hover, [data-theme="dark"] .receipt-btn:hover {
+[data-theme="dark"] .details-btn:hover {
     background: rgba(255, 255, 255, 0.14);
 }
 
