@@ -164,9 +164,9 @@ textarea:focus-visible {
 
 :root[data-theme='light'] .hero::after {
     background:
-        linear-gradient(90deg, var(--theme-page-bg) 0%, rgba(244, 246, 248, 0.78) 16%, rgba(244, 246, 248, 0.08) 60%, rgba(244, 246, 248, 0.28) 100%),
-        linear-gradient(180deg, rgba(244, 246, 248, 0.08), rgba(23, 32, 42, 0.48)),
-        url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=2070&auto=format&fit=crop') 62% center/cover no-repeat;
+            linear-gradient(90deg, var(--theme-page-bg) 0%, rgba(244, 246, 248, 0.78) 16%, rgba(244, 246, 248, 0.08) 60%, rgba(244, 246, 248, 0.28) 100%),
+            linear-gradient(180deg, rgba(244, 246, 248, 0.08), rgba(23, 32, 42, 0.48)),
+            url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=2070&auto=format&fit=crop') 62% center/cover no-repeat;
 }
 
 :root[data-theme='light'] .field-inputs label,
@@ -241,8 +241,8 @@ textarea:focus-visible {
 :root[data-theme='light'] .terms-container {
     background: #f4f6f8;
     background-image:
-        radial-gradient(circle at 50% -20%, rgba(255, 77, 0, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 10% 80%, rgba(0, 153, 255, 0.04) 0%, transparent 40%);
+            radial-gradient(circle at 50% -20%, rgba(255, 77, 0, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 10% 80%, rgba(0, 153, 255, 0.04) 0%, transparent 40%);
 }
 
 :root[data-theme='light'] .portfolio-alert,
@@ -426,8 +426,8 @@ textarea:focus-visible {
     box-shadow: 0 22px 44px rgba(31, 41, 55, 0.14), 0 0 26px rgba(255, 77, 0, 0.12);
 }
 
-:root[data-theme='light'] .booking-step-card:hover > i,
-:root[data-theme='light'] .booking-step-card:focus-within > i {
+:root[data-theme='light'] .booking-step-card:hover>i,
+:root[data-theme='light'] .booking-step-card:focus-within>i {
     color: #ffffff;
 }
 
@@ -463,12 +463,12 @@ textarea:focus-visible {
 
 :root[data-theme='light'] .auth-container {
     background:
-        radial-gradient(circle at 50% 20%, rgba(255, 77, 0, 0.08) 0%, transparent 60%),
-        #f4f6f8 !important;
+            radial-gradient(circle at 50% 20%, rgba(255, 77, 0, 0.08) 0%, transparent 60%),
+            #f4f6f8 !important;
 }
 
 :root[data-theme='light'] .details-header,
-:root[data-theme='light'] .details-grid-v2 > *,
+:root[data-theme='light'] .details-grid-v2>*,
 :root[data-theme='light'] .back-link {
     border-color: rgba(23, 32, 42, 0.12);
 }
@@ -651,12 +651,12 @@ textarea:focus-visible {
     background: #fff7f3;
 }
 
-:root[data-theme='light'] .checkbox-container input:focus-visible ~ .checkmark {
+:root[data-theme='light'] .checkbox-container input:focus-visible~.checkmark {
     outline: 3px solid var(--theme-focus-ring);
     outline-offset: 2px;
 }
 
-:root[data-theme='light'] .checkbox-container input:checked ~ .checkmark {
+:root[data-theme='light'] .checkbox-container input:checked~.checkmark {
     background: #d94700;
     border-color: #d94700;
     box-shadow: 0 3px 10px rgba(217, 71, 0, 0.28);
@@ -951,6 +951,7 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     html,
     body,
     #root {
@@ -1217,6 +1218,7 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
