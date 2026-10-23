@@ -146,12 +146,15 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional
-    public void cancelExpiredPendingReservations() {
+    public void cancelExpiredPendingReservationsAndPayments() {
         LocalDateTime threshold = LocalDateTime.now().minusHours(1);
-        int canceledCount = reservationRepository.cancelExpiredPending(threshold);
 
-        if (canceledCount > 0) {
-            log.info("Canceled {} pending reservations due to payment timeout", canceledCount);
+        int canceledReservations = reservationRepository.cancelExpiredPendingReservations(threshold);
+        int failedPayments = paymentService.cancelExpiredPendingPayments(threshold);
+
+        if (canceledReservations > 0 || failedPayments > 0) {
+            log.info("Cleanup completed: Canceled {} reservation(s) and marked {} payment(s) as FAILED",
+                    canceledReservations, failedPayments);
         }
     }
 

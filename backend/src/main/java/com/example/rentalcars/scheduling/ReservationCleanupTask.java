@@ -10,10 +10,9 @@ import org.springframework.stereotype.Component;
 public class ReservationCleanupTask {
     private final ReservationService reservationService;
 
-    //TODO Investigate for race condition
     @Scheduled(fixedRate = 300000)
     public void cancelExpiredReservations() {
-        reservationService.cancelExpiredPendingReservations();
+        reservationService.cancelExpiredPendingReservationsAndPayments();
     }
 
     @Scheduled(fixedRate = 300000)

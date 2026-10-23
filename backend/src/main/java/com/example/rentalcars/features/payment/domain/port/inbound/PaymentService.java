@@ -16,4 +16,5 @@ public interface PaymentService {
     void processFailedPayment(String stripePaymentId);
     Payment getPaymentByReservationId(UUID reservationId);
     Page<Payment> getAllPaymentsFiltered(PaymentStatus status, LocalDateTime startDate, LocalDateTime endDate, String userEmail, Pageable pageable);
+    int cancelExpiredPendingPayments(LocalDateTime threshold);
 }

@@ -296,10 +296,16 @@ const ProfilePage = () => {
                                     <div className="input-with-icon">
                                         <i className="fas fa-mobile-alt"></i>
                                         <input 
-                                            type="text" 
+                                            type="tel" 
                                             placeholder="6912345678"
                                             value={editData.phoneNumber}
-                                            onChange={(e) => setEditData({...editData, phoneNumber: e.target.value})}
+                                            onChange={(e) => {
+                                            const onlyNums = e.target.value.replace(/\D/g, '');
+                                                if (onlyNums.length <= 10) {
+                                                    setEditData({ ...editData, phoneNumber: onlyNums });
+                                                }
+                                            }}
+                                            maxLength={10}
                                             disabled={isSubmitting}
                                         />
                                     </div>

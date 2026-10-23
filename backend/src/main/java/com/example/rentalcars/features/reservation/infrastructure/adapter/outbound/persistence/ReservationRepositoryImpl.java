@@ -70,7 +70,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public int cancelExpiredPending(LocalDateTime threshold) {
+    public int cancelExpiredPendingReservations(LocalDateTime threshold) {
         return jpaRepository.cancelExpiredPendingReservations(
                 ReservationStatus.PENDING,
                 ReservationStatus.CANCELED,
