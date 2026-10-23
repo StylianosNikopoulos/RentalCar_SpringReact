@@ -16,7 +16,10 @@ public class UpdateUserRequest {
     @NotBlank(message = "Last name is required")
     private String lastName;
 
-    @Pattern(regexp = "^[26]\\d{9}$", message = "Invalid Greek phone number format")
+    @Pattern(
+            regexp = "^(\\+30|0030)?(2[0-9]{9}|69[0-9]{8})$",
+            message = "Invalid Greek phone number format"
+    )
     private String phoneNumber;
 
     private String address;

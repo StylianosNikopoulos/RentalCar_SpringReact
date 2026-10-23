@@ -46,6 +46,11 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
+    public int cancelExpiredPending(LocalDateTime threshold) {
+        return jpaRepository.cancelExpiredPendingPayments(threshold);
+    }
+
+    @Override
     public Optional<Payment> findById(UUID id) {
         return jpaRepository.findById(id)
                 .map(mapper::toDomain);

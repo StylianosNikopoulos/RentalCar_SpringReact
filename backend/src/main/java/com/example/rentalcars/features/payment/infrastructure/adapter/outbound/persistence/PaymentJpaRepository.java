@@ -3,6 +3,7 @@ package com.example.rentalcars.features.payment.infrastructure.adapter.outbound.
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -42,4 +43,9 @@ public interface PaymentJpaRepository extends JpaRepository<PaymentJpaEntity, UU
             @Param("email") String email,
             Pageable pageable
     );
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE PaymentJpaEntity p SET p.status = 'FAILED', p.updatedAt = CURRENT_TIMESTAMP " +
+            "WHERE p.status = 'PENDING' AND p.createdAt < :threshold")
+    int cancelExpiredPendingPayments(@Param("threshold") LocalDateTime threshold);
 }

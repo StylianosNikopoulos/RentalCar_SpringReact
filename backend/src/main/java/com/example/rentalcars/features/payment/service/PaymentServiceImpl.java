@@ -195,6 +195,16 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentRepository.findAllFiltered(status, startDate, endDate, userEmail, pageable);
     }
 
+    @Override
+    @Transactional
+    public int cancelExpiredPendingPayments(LocalDateTime threshold) {
+        int updatedCount = paymentRepository.cancelExpiredPending(threshold);
+        if (updatedCount > 0) {
+            log.info("Bulk updated {} pending payment(s) to FAILED due to timeout", updatedCount);
+        }
+        return updatedCount;
+    }
+
     private String extractReceiptUrlFromPaymentIntent(String paymentIntentId) {
         if (paymentIntentId == null || paymentIntentId.isBlank()) {
             return null;

@@ -15,4 +15,5 @@ public interface PaymentRepository {
     Optional<Payment> findById(UUID id);
     Optional<Payment> findByReservationId(UUID reservationId);
     Page<Payment> findAllFiltered(PaymentStatus status, LocalDateTime startDate, LocalDateTime endDate, String userEmail, Pageable pageable);
+    int cancelExpiredPending(LocalDateTime threshold);
 }
