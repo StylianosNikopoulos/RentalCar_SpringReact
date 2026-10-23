@@ -16,16 +16,17 @@ public class Payment extends AggregateRoot {
     private String userEmail;
     private Money amount;
     private String stripePaymentId;
+    private String stripePaymentIntentId;
     private PaymentStatus status;
     private String receiptUrl;
 
     @Builder
-    public Payment(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID reservationId, String userEmail, Money amount, String stripePaymentId, PaymentStatus status, String receiptUrl) {
-        super(id, createdAt, updatedAt);
+    public Payment(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID reservationId, String userEmail, Money amount, String stripePaymentId, String stripePaymentIntentId, PaymentStatus status, String receiptUrl) {        super(id, createdAt, updatedAt);
         this.reservationId = reservationId;
         this.userEmail = userEmail;
         this.amount = amount;
         this.stripePaymentId = stripePaymentId;
+        this.stripePaymentIntentId = stripePaymentIntentId;
         this.status = status;
         this.receiptUrl = receiptUrl;
     }

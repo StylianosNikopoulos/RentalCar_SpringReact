@@ -111,6 +111,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         payment.setStatus(PaymentStatus.COMPLETED);
         payment.setReceiptUrl(receiptUrl);
+        payment.setStripePaymentIntentId(paymentIntentId);
         paymentRepository.save(payment);
         log.info("Payment ID: {} status updated to COMPLETED with Receipt URL: {}", payment.getId(), receiptUrl);
 
@@ -145,12 +146,13 @@ public class PaymentServiceImpl implements PaymentService {
 
         try {
             RefundCreateParams params = RefundCreateParams.builder()
-                    .setPaymentIntent(stripePaymentId)
+                    .setPaymentIntent(payment.getStripePaymentIntentId())
                     .build();
 
             Refund.create(params);
             payment.setStatus(PaymentStatus.REFUNDED);
             paymentRepository.save(payment);
+            reservationService.cancelReservationInternal(payment.getReservationId());
             log.info("Payment ID: {} successfully refunded and updated in DB", payment.getId());
 
         } catch (StripeException e) {

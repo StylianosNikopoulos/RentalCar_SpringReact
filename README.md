@@ -21,7 +21,7 @@ For testing and exploring the application locally, you can use the following pre
 | **Admin** | `admin@example.com` | `123456` |
 | **Customer** | `customer@example.com` | `123456` |
 
-### Cold Start Mitigation (The "Keep-Alive" Hack)
+### Cold Start Mitigation (Keep-Alive Server)
 Since the application is hosted on **Render's Free Tier**, the backend service normally "spins down" after 15 minutes of inactivity. 
 To ensure a smooth user experience, I have implemented a **Warm-up Strategy**:
 * **Cron-job Integration:** An external monitoring service pings the `/api/v1/vehicles` endpoint every 10 minutes.

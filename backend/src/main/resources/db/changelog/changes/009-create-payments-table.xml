@@ -16,6 +16,7 @@
             <column name="stripe_payment_id" type="VARCHAR(255)">
                 <constraints unique="true"/>
             </column>
+            <column name="stripe_payment_intent_id" type="VARCHAR(255)"/>
             <column name="amount" type="DECIMAL(19, 2)">
                 <constraints nullable="false"/>
             </column>

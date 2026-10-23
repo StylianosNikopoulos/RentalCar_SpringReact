@@ -359,14 +359,13 @@ const PaymentsTab = () => {
                                                 </button>
 
                                                 {payment.receiptUrl && (
-                                                    <a 
-                                                        href={payment.receiptUrl} 
-                                                        target="_blank" 
-                                                        rel="noopener noreferrer" 
-                                                         className="status-btn details-btn"
+                                                    <button 
+                                                        type="button"
+                                                        className="status-btn details-btn"
+                                                        onClick={() => window.open(payment.receiptUrl, '_blank', 'noopener,noreferrer')}
                                                     >
                                                         <i className="fas fa-receipt"></i> {t.btnReceipt}
-                                                    </a>
+                                                    </button>
                                                 )}
 
                                                 {payment.status === 'COMPLETED' && (

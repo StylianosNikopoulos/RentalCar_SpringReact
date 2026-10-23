@@ -188,6 +188,9 @@ public class ReservationServiceImpl implements ReservationService {
                 .orElseThrow(() -> new ReservationNotFoundException(reservationId));
         reservation.setStatus(ReservationStatus.CANCELED);
         reservationRepository.save(reservation);
+        if (reservation.getVehicleId() != null) {
+            vehicleService.restoreVehicle(reservation.getVehicleId());
+        }
         log.info("Reservation {} canceled internally by system", reservationId);
     }
 
