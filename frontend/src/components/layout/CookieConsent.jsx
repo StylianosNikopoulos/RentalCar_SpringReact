@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../assets/styles/cookieConsent.css';
 import { useLang } from '../../context/LangContext';
 import { translations } from '../../i18n/translations';
@@ -42,7 +43,12 @@ const CookieConsent = () => {
                     <span className="cookie-icon" aria-hidden="true"><i className="fas fa-cookie-bite"></i></span>
                     {t.title}
                 </h4>
-                <p>{t.text}</p>
+                <p>
+                    {t.text}{' '}
+                    <Link to="/privacy" className="cookie-privacy-link">
+                        {t.privacyPolicyLink || 'Privacy Policy'}
+                    </Link>
+                </p>
             </div>
 
             <div className="cookie-actions">

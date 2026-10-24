@@ -95,6 +95,34 @@
 
 .cookie-actions button:focus-visible { outline: 3px solid rgba(255, 139, 97, 0.35); outline-offset: 2px; }
 
+.cookie-privacy-link {
+    color: var(--primary-color, #3b82f6);
+    font-weight: 600;
+    margin-left: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: rgba(59, 130, 246, 0.08);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cookie-privacy-link:hover {
+    color: var(--primary-hover, #2563eb);
+    background-color: rgba(59, 130, 246, 0.16);
+    transform: translateY(-1px);
+}
+
+.cookie-privacy-link:active {
+    transform: translateY(0);
+}
+
+.cookie-privacy-link:focus-visible {
+    outline: 2px solid var(--primary-color, #3b82f6);
+    outline-offset: 2px;
+}
 @keyframes premiumSlide {
     from { 
         opacity: 0; 
