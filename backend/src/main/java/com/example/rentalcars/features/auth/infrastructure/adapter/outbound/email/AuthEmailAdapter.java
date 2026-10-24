@@ -41,4 +41,26 @@ public class AuthEmailAdapter implements AuthEmailPort {
 
         mailjetEmailSender.sendEmail(toEmail, "Reset Your Password - RentalCars", htmlContent);
     }
+
+    @Override
+    @Async
+    public void sendWelcomeEmail(String email, String firstName) {
+        log.info("Preparing welcome email for new user: {}", email);
+
+        String name = (firstName != null && !firstName.isBlank()) ? firstName : "there";
+
+        String htmlContent = """
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 5px;">
+                <h2 style="color: #ff4d00; text-align: center;">RentalCars</h2>
+                <h3 style="color: #333; text-align: center;">Welcome to RentalCars, %s!</h3>
+                <p>Hello %s,</p>
+                <p>Your account has been successfully created. We're excited to have you on board!</p>
+                <p>You can now browse our fleet and make vehicle reservations anytime.</p>
+                <hr style="border: none; border-top: 1px solid #eee; margin-top: 30px;">
+                <p style="color: #999; font-size: 12px; text-align: center;">Thank you for choosing RentalCars!</p>
+            </div>
+            """.formatted(name, name);
+
+        mailjetEmailSender.sendEmail(email, "Welcome to RentalCars!", htmlContent);
+    }
 }

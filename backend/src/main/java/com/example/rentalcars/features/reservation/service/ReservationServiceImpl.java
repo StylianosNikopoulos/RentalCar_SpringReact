@@ -186,15 +186,18 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional
-    public void cancelReservationInternal(UUID reservationId) {
+    public Reservation cancelReservationInternal(UUID reservationId) {
         var reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new ReservationNotFoundException(reservationId));
+
         reservation.setStatus(ReservationStatus.CANCELED);
-        reservationRepository.save(reservation);
-        if (reservation.getVehicleId() != null) {
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        if (savedReservation.getVehicleId() != null) {
             vehicleService.restoreVehicle(reservation.getVehicleId());
         }
         log.info("Reservation {} canceled internally by system", reservationId);
+        return savedReservation;
     }
 
     @Override

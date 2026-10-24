@@ -40,4 +40,27 @@ public class PaymentEmailAdapter implements PaymentEmailPort {
 
         mailjetEmailSender.sendEmail(toEmail, "Payment Confirmation - RentalCars", htmlContent);
     }
+
+    @Override
+    @Async
+    public void sendRefundConfirmationEmail(String email, String amount, String reservationId) {
+        log.info("Preparing refund confirmation email for recipient: {} (Amount: {})", email, amount);
+
+        String displayReservationId = (reservationId != null && reservationId.length() >= 8)
+                ? reservationId.substring(0, 8)
+                : (reservationId != null ? reservationId : "N/A");
+
+        String htmlContent = """
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 5px;">
+                <h2 style="color: #ff4d00; text-align: center;">RentalCars</h2>
+                <h3 style="color: #333; text-align: center;">Refund Processed</h3>
+                <p>Hello,</p>
+                <p>Your refund of <strong>%s</strong> for reservation <strong>#%s</strong> has been successfully processed and sent back to your original payment method.</p>
+                <hr style="border: none; border-top: 1px solid #eee; margin-top: 30px;">
+                <p style="color: #999; font-size: 12px; text-align: center;">Thank you for using RentalCars!</p>
+            </div>
+            """.formatted(amount, displayReservationId);
+
+        mailjetEmailSender.sendEmail(email, "Refund Confirmation - RentalCars", htmlContent);
+    }
 }

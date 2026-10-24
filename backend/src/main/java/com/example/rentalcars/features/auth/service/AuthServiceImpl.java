@@ -69,6 +69,13 @@ public class AuthServiceImpl implements AuthService {
         var user = userService.register(userRequest);
         var token = identityPort.generateTokens(user);
 
+        try {
+            authEmailPort.sendWelcomeEmail(user.getEmail(), user.getFirstName());
+            log.info("Sent registration confirmation email to: {}", user.getEmail());
+        } catch (Exception e) {
+            log.error("Failed to send welcome email to {}: {}", user.getEmail(), e.getMessage());
+        }
+
         return AuthResponse.builder()
                 .accessToken(token.getAccessToken())
                 .refreshToken(token.getRefreshToken())

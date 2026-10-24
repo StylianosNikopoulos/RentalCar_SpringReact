@@ -122,7 +122,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .map(userService::getInternalUserById)
                 .filter(user -> user.getEmail() != null && !user.getEmail().isBlank())
                 .ifPresentOrElse(
-                        user -> sendConfirmationEmail(user, payment, receiptUrl, reservation.getId()),
+                        user -> sendConfirmationEmail(user, payment, receiptUrl, reservation != null ? reservation.getId() : null),
                         () -> log.warn("User or User Email not found for reservation ID: {}. Email was not sent.",
                                 Optional.ofNullable(reservation).map(Reservation::getId).orElse(null))
                 );
@@ -152,8 +152,17 @@ public class PaymentServiceImpl implements PaymentService {
             Refund.create(params);
             payment.setStatus(PaymentStatus.REFUNDED);
             paymentRepository.save(payment);
-            reservationService.cancelReservationInternal(payment.getReservationId());
+            Reservation reservation = reservationService.cancelReservationInternal(payment.getReservationId());
             log.info("Payment ID: {} successfully refunded and updated in DB", payment.getId());
+
+            Optional.ofNullable(reservation)
+                    .map(Reservation::getUserId)
+                    .map(userService::getInternalUserById)
+                    .filter(user -> user.getEmail() != null && !user.getEmail().isBlank())
+                    .ifPresentOrElse(
+                            user -> sendRefundEmail(user, payment, reservation != null ? reservation.getId() : null),
+                            () -> log.warn("User or User Email not found for reservation ID: {}. Refund email was not sent.", payment.getReservationId())
+                    );
 
         } catch (StripeException e) {
             log.error("Stripe refund exception for Stripe Payment ID: {}. Error: {}", stripePaymentId, e.getMessage(), e);
@@ -230,5 +239,11 @@ public class PaymentServiceImpl implements PaymentService {
         String formattedAmount = payment.getAmount().amount() + " " + payment.getAmount().currency();
         log.info("Sending payment confirmation email to: {} for reservation ID: {}", user.getEmail(), reservationId);
         paymentEmailPort.sendPaymentConfirmationEmail(user.getEmail(), formattedAmount, receiptUrl);
+    }
+
+    private void sendRefundEmail(User user, Payment payment, UUID reservationId) {
+        String formattedAmount = payment.getAmount().amount() + " " + payment.getAmount().currency();
+        log.info("Sending refund confirmation email to: {} for reservation ID: {}", user.getEmail(), reservationId);
+        paymentEmailPort.sendRefundConfirmationEmail(user.getEmail(), formattedAmount, reservationId.toString());
     }
 }
