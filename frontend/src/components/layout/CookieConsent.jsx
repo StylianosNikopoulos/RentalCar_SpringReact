@@ -10,7 +10,6 @@ const CookieConsent = () => {
     const t = translations[lang]?.cookieConsent || {};
 
     useEffect(() => {
-        localStorage.removeItem('cookieConsent');
         if (!getConsent() || !getConsent()?.savedAt) {
             setVisible(true);
         } else if (hasAnalyticsConsent()) {
