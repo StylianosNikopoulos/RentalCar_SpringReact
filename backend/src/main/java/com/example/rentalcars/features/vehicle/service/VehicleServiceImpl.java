@@ -13,6 +13,9 @@ import com.example.rentalcars.features.vehicle.domain.port.outbound.VehicleRepos
 import com.example.rentalcars.features.vehicle.infrastructure.adapter.inbound.rest.dto.VehicleRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "vehicles_available", allEntries = true)
     public Vehicle createVehicle(VehicleRequest request) {
         if (vehicleRepository.existsByLicensePlate(request.getLicensePlate())) {
             log.warn("Vehicle creation failed: Duplicate license plate {}", request.getLicensePlate());
@@ -63,6 +67,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "vehicle_details", key = "#id")
     public Vehicle getVehicleById(UUID id) {
         return vehicleRepository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException(id));
@@ -70,6 +75,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(value = "vehicle_details", key = "#id"), @CacheEvict(value = "vehicles_available", allEntries = true)})
     public Vehicle updateVehicle(UUID id, VehicleRequest request) {
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException(id));
@@ -104,6 +110,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(value = "vehicle_details", key = "#id"), @CacheEvict(value = "vehicles_available", allEntries = true)})
     public void markVehicleOutOfService(UUID id) {
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException(id));
@@ -122,6 +129,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(value = "vehicle_details", key = "#vehicleId"), @CacheEvict(value = "vehicles_available", allEntries = true)})
     public void updateVehicleStatus(UUID vehicleId, VehicleStatus newStatus) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new VehicleNotFoundException(vehicleId));
@@ -133,6 +141,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(value = "vehicle_details", allEntries = true), @CacheEvict(value = "vehicles_available", allEntries = true)})
     public int updateVehiclesStatusBulk(List<UUID> vehicleIds, VehicleStatus newStatus) {
         if (!CollectionUtils.isEmpty(vehicleIds)) {
             int count = vehicleRepository.updateStatusForIds(vehicleIds, newStatus);
@@ -144,6 +153,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(value = "vehicle_details", key = "#id"), @CacheEvict(value = "vehicles_available", allEntries = true)})
     public Vehicle restoreVehicle(UUID id) {
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException(id));
@@ -162,6 +172,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "vehicles_available", key = "{#search, #brand, #fuelType, #minPrice, #maxPrice, #pageable.pageNumber, #pageable.pageSize, #pageable.sort}")
     public Page<Vehicle> getAllAvailableVehicles(String search, String brand, FuelType fuelType, BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable) {
         return vehicleRepository.findAllAvailableVehicles(cleanSearchParam(search), cleanBrandParam(brand), fuelType, minPrice, maxPrice, pageable);
     }
