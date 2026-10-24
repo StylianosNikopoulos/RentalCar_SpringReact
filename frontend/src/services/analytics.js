@@ -66,13 +66,17 @@ export function loadGoogleAnalytics() {
   document.head.appendChild(script);
 
   window.gtag('js', new Date());
+
+  window.gtag('consent', 'update', {
+    analytics_storage: 'granted',
+    ad_storage: 'denied',
+  });
+
   window.gtag('config', measurementId, {
-    send_page_view: false,
+    send_page_view: true,
     allow_google_signals: false,
     allow_ad_personalization_signals: false,
   });
-
-  trackPageView(window.location.pathname + window.location.search);
 }
 
 export function disableGoogleAnalytics() {
