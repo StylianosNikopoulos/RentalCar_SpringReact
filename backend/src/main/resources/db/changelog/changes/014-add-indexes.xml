@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="db" id="014-add-indexes">
+        <createIndex indexName="idx_vehicles_available_filtering" tableName="vehicles">
+            <column name="status"/>
+            <column name="brand"/>
+            <column name="fuel_type"/>
+            <column name="daily_price"/>
+        </createIndex>
+
+        <createIndex indexName="idx_users_email_lower" tableName="users">
+            <column name="email" computed="true">LOWER(email)</column>
+        </createIndex>
+
+        <createIndex indexName="idx_users_reset_token" tableName="users">
+            <column name="reset_token"/>
+        </createIndex>
+
+        <createIndex indexName="idx_reservations_user_id_status" tableName="reservations">
+            <column name="user_id"/>
+            <column name="status"/>
+        </createIndex>
+
+        <createIndex indexName="idx_payments_reservation_id" tableName="payments">
+            <column name="reservation_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_payments_status_createdat" tableName="payments">
+            <column name="status"/>
+            <column name="created_at"/>
+        </createIndex>
+
+        <createIndex indexName="idx_refresh_tokens_user_id" tableName="refresh_tokens">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_refresh_tokens_expiry_date" tableName="refresh_tokens">
+            <column name="expiry_date"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
