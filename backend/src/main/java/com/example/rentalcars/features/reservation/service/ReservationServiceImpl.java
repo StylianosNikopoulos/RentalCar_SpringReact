@@ -165,9 +165,9 @@ public class ReservationServiceImpl implements ReservationService {
         List<UUID> vehicleIds = reservationRepository.findVehicleIdsToStart(now);
 
         if (!vehicleIds.isEmpty()) {
-            int updatedCount = reservationRepository.bulkStartReservations(now);
             int updatedVehicles = vehicleService.updateVehiclesStatusBulk(vehicleIds, VehicleStatus.RENTED);
-            log.info("Auto-start task: Updated {} reservation(s) and {} vehicle(s)", updatedCount, updatedVehicles);
+            int updatedReservations = reservationRepository.bulkStartReservations(now);
+            log.info("Auto-start task: Set {} vehicle(s) to RENTED and updated {} reservation(s)", updatedVehicles, updatedReservations);
         }
     }
 
@@ -178,9 +178,9 @@ public class ReservationServiceImpl implements ReservationService {
         List<UUID> vehicleIds = reservationRepository.findVehicleIdsToComplete(now);
 
         if (!vehicleIds.isEmpty()) {
-            int updatedCount = reservationRepository.bulkCompleteReservations(now);
             int updatedVehicles = vehicleService.updateVehiclesStatusBulk(vehicleIds, VehicleStatus.ACTIVE);
-            log.info("Auto-complete task: Updated {} reservation(s) and {} vehicle(s)", updatedCount, updatedVehicles);
+            int updatedReservations = reservationRepository.bulkCompleteReservations(now);
+            log.info("Auto-complete task: Set {} vehicle(s) to ACTIVE and updated {} reservation(s)", updatedVehicles, updatedReservations);
         }
     }
 
