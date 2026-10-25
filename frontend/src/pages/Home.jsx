@@ -120,22 +120,35 @@ const Home = () => {
                             <label>
                                 <span>{t.timelineLabel}</span>
                                 <DatePicker
-                                    selectsRange
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    onChange={(update) => {
-                                        const [start, end] = update;
-                                        setStartDate(start);
-                                        setEndDate(end);
-                                    }}
-                                    minDate={new Date()}
-                                    isClearable
-                                    placeholderText={t.placeholderDate}
-                                    className="home-datepicker"
-                                    dateFormat="dd MMM yyyy"
-                                    popperPlacement="bottom-start"
-                                    aria-label={t.timelineLabel}
-                                />
+                                selectsRange
+                                startDate={startDate}
+                                endDate={endDate}
+                                onChange={(update) => {
+                                    const [start, end] = update;
+                                    setStartDate(start);
+                                    setEndDate(end);
+                                }}
+                                minDate={new Date()}
+                                isClearable
+                                placeholderText={t.placeholderDate}
+                                className="home-datepicker"
+                                dateFormat="dd MMM yyyy"
+                                popperPlacement="bottom-start"
+                                aria-label={t.timelineLabel}
+                                
+                                customInput={
+                                    <input
+                                        type="text"
+                                        className="home-datepicker"
+                                        inputMode="none"
+                                        onFocus={(e) => {
+                                            if (window.innerWidth <= 768) {
+                                                e.target.blur();
+                                            }
+                                        }}
+                                    />
+                                }
+                            />
                             </label>
                         </div>
 
