@@ -4,6 +4,7 @@ import com.example.rentalcars.features.vehicle.domain.enums.FuelType;
 import com.example.rentalcars.features.vehicle.domain.enums.VehicleStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -63,6 +64,7 @@ public class VehicleJpaEntity {
     }
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 25)
     private List<VehicleImageJpaEntity> images = new ArrayList<>();
 
     public void addImage(VehicleImageJpaEntity image) {
