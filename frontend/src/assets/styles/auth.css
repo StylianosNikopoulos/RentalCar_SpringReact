@@ -8,15 +8,22 @@
     --auth-border: rgba(255, 255, 255, 0.12);
     --auth-input: #11151d;
     --auth-accent: #f05a28;
-    align-items: center;
-    background: radial-gradient(circle at 82% 16%, rgba(240, 90, 40, 0.16), transparent 23%), radial-gradient(circle at 16% 88%, rgba(63, 96, 153, 0.15), transparent 31%), var(--auth-bg);
-    color: var(--auth-ink);
+    
     display: flex;
-    font-family: 'DM Sans', sans-serif;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    overflow: hidden;
-    padding: 6rem 1.5rem;
+    min-height: 100dvh;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3rem 1.5rem;
+    overflow-y: auto;
+    
+    background: radial-gradient(circle at 82% 16%, rgba(240, 90, 40, 0.16), transparent 23%), 
+                radial-gradient(circle at 16% 88%, rgba(63, 96, 153, 0.15), transparent 31%), 
+                var(--auth-bg);
+    color: var(--auth-ink);
+    font-family: 'DM Sans', sans-serif;
     position: relative;
 }
 
@@ -41,6 +48,7 @@
     position: relative;
     width: 100%;
     z-index: 1;
+    margin: auto 0;
 }
 
 .auth-card::before {
