@@ -137,9 +137,11 @@ const VehicleDetailsPage = () => {
 
     if ((vehicleLoading || datesLoading) && !isActionPending) {
         return (
-            <div className="loader-container">
-                <div className="luxury-spinner"></div>
-                <span className="loader-text">{t.fetching || t.loadingDetails}</span>
+            <div className="details-container details-loader-page">
+                <div className="loader-container">
+                    <div className="luxury-spinner"></div>
+                    <span className="loader-text">{t.fetching || t.loadingDetails}</span>
+                </div>
             </div>
         );
     }
@@ -147,8 +149,8 @@ const VehicleDetailsPage = () => {
     if (!vehicle) {
         return (
             <div className="error-message">
-                    <h2>{t.errorNotFound}</h2>
-                    <button onClick={() => navigate('/vehicles')} className="back-btn">
+                <h2>{t.errorNotFound}</h2>
+                <button onClick={() => navigate('/vehicles')} className="back-btn">
                     {t.exploreFleet}
                 </button>
             </div>
@@ -211,7 +213,6 @@ const VehicleDetailsPage = () => {
                                 </div>
                             )}
                         </div>
-
                     </div>
 
                     <div className="real-car-features">
@@ -250,7 +251,7 @@ const VehicleDetailsPage = () => {
                             </div>
                         )}
                         <div className="card-header">
-                                    <span className="booking-step">{t.bookingStep}</span>
+                            <span className="booking-step">{t.bookingStep}</span>
                             <h3>{t.sidebarTitle}</h3>
                             <p>{t.chooseDates}</p>
                         </div>
