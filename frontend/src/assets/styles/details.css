@@ -1,997 +1,1029 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap");
 
-/* Color Variables */
 :root {
-    --primary: #ff4d00;
-    --primary-hover: #ff6a26;
-    --primary-glow: rgba(255, 77, 0, 0.4);
-    --bg-dark: #070709;
-    --card-bg: #0d0e12;
-    --glass-bg: rgba(18, 20, 29, 0.6);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --text-main: #ffffff;
-    --text-muted: #888d9b;
-    --font-main: 'Plus Jakarta Sans', sans-serif;
+  --primary: #ff4d00;
+  --primary-hover: #ff6a26;
+  --primary-glow: rgba(255, 77, 0, 0.4);
+  --bg-dark: #070709;
+  --card-bg: #0d0e12;
+  --glass-bg: rgba(18, 20, 29, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-main: #ffffff;
+  --text-muted: #888d9b;
+  --font-main: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Global Reset */
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: var(--font-main);
-    overflow-x: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  overflow-x: hidden;
 }
 
-/* Page Wrapper */
 .details-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 3rem 5% 6rem;
-    min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3rem 5% 6rem;
+  min-height: 100vh;
 }
 
-/* Top Bar */
 .details-top-bar {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
-/* Back Link */
 .back-link {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
 }
 
 .back-link:hover {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(-4px);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-4px);
 }
 
-/* Page Header */
 .details-header {
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid var(--glass-border);
-    padding-bottom: 1.8rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1.8rem;
 }
 
-/* Header Flex */
 .header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-/* Brand Subtitle */
 .brand-subtitle {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
 }
 
-/* Vehicle Title */
 .details-header h1 {
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -1px;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -1px;
 }
 
 .details-header h1 .model-accent {
-    color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
 }
 
-/* Price Box */
 .price-tag {
-    text-align: right;
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    padding: 12px 24px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+  text-align: right;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  padding: 12px 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 
 .price-tag:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
-/* Price Flex */
 .price-wrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .price-tag .currency {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-top: 2px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-top: 2px;
 }
 
 .price-tag .amount {
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 0.9;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 0.9;
 }
 
 .price-tag .per-day {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 1px;
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-/* Main Grid */
 .details-grid-v2 {
-    display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 3rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 3rem;
+  align-items: start;
 }
 
-/* Gallery Container */
 .vehicle-gallery-wrapper {
-    margin-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Main Swiper */
 .main-vehicle-swiper {
-    width: 100%;
-    height: 480px;
-    border-radius: 24px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
 }
 
 .main-vehicle-swiper .swiper-vehicle-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: none !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: none !important;
 }
 
 .gallery-thumbnails {
-    bottom: 1rem;
-    display: flex;
-    gap: 0.45rem;
-    left: 1rem;
-    position: absolute;
-    right: 1rem;
-    z-index: 1;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.45rem;
+  left: 1rem;
+  position: absolute;
+  right: 1rem;
+  z-index: 1;
 }
 
 .gallery-thumbnail {
-    background: transparent;
-    border: 2px solid transparent;
-    border-radius: 7px;
-    cursor: pointer;
-    height: 48px;
-    opacity: 0.68;
-    overflow: hidden;
-    padding: 0;
-    width: 68px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  height: 48px;
+  opacity: 0.68;
+  overflow: hidden;
+  padding: 0;
+  width: 68px;
 }
 
-.gallery-thumbnail.is-active { border-color: var(--primary); opacity: 1; }
-.gallery-thumbnail img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.gallery-thumbnail.is-active {
+  border-color: var(--primary);
+  opacity: 1;
+}
+.gallery-thumbnail img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
 
-/* Swiper Controls */
 .main-vehicle-swiper .swiper-button-next,
 .main-vehicle-swiper .swiper-button-prev {
-    color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.3s ease;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
 }
 
 .main-vehicle-swiper .swiper-button-next:after,
 .main-vehicle-swiper .swiper-button-prev:after {
-    font-size: 1.1rem;
-    font-weight: 900;
+  font-size: 1.1rem;
+  font-weight: 900;
 }
 
 .main-vehicle-swiper .swiper-button-next:hover,
 .main-vehicle-swiper .swiper-button-prev:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    transform: scale(1.1);
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.1);
 }
 
-/* Pagination Dots */
 .main-vehicle-swiper .swiper-pagination-bullet {
-    background: #fff;
-    opacity: 0.4;
+  background: #fff;
+  opacity: 0.4;
 }
 
 .main-vehicle-swiper .swiper-pagination-bullet-active {
-    background: var(--primary);
-    opacity: 1;
-    width: 24px;
-    border-radius: 6px;
+  background: var(--primary);
+  opacity: 1;
+  width: 24px;
+  border-radius: 6px;
 }
 
-/* Thumbnails Swiper */
 .thumbs-vehicle-swiper {
-    margin-top: 14px;
+  margin-top: 14px;
 }
 
 .thumbs-vehicle-swiper .swiper-slide {
-    height: 90px;
-    opacity: 0.4;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+  height: 90px;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .thumbs-vehicle-swiper .swiper-slide-thumb-active {
-    opacity: 1;
+  opacity: 1;
 }
 
-/* Thumbnail Box */
 .thumb-img-box {
-    width: 100%;
-    height: 100%;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
 .thumbs-vehicle-swiper .swiper-slide-thumb-active .thumb-img-box {
-    border-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .thumb-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Features Container */
 .real-car-features {
-    background: var(--card-bg);
-    border-radius: 24px;
-    padding: 2.2rem;
-    border: 1px solid var(--glass-border);
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 2.2rem;
+  border: 1px solid var(--glass-border);
 }
 
 .real-car-features h2 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ffffff;
-    margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
 }
 
-/* Features Grid */
 .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-/* Feature Item */
 .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 1.2rem 1.4rem;
-    border-radius: 18px;
-    border: 1px solid var(--glass-border);
-    transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.2rem 1.4rem;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
 }
 
 .feature-item:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 77, 0, 0.3);
-    transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 77, 0, 0.3);
+  transform: translateY(-2px);
 }
 
 .feature-item i {
-    color: var(--primary);
-    font-size: 1.3rem;
-    background: rgba(255, 77, 0, 0.1);
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    flex-shrink: 0;
+  color: var(--primary);
+  font-size: 1.3rem;
+  background: rgba(255, 77, 0, 0.1);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
-/* Feature Details */
 .feature-meta span {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-weight: 700;
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .feature-meta strong {
-    display: block;
-    font-size: 1.05rem;
-    color: #ffffff;
-    margin-top: 2px;
-    font-weight: 800;
+  display: block;
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-top: 2px;
+  font-weight: 800;
 }
 
-/* Sidebar Container */
 .booking-sidebar {
-    position: sticky;
-    top: 2rem;
+  position: sticky;
+  top: 2rem;
 }
 
-/* Booking Box */
 .booking-card {
-    background: var(--card-bg);
-    padding: 2.2rem;
-    border-radius: 28px;
-    border: 1px solid rgba(255, 77, 0, 0.3);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    position: relative;
-    overflow: hidden;
+  background: var(--card-bg);
+  padding: 2.2rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 77, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Card Title */
 .card-header h3 {
-    font-size: 1.4rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin: 0 0 0.3rem;
-    letter-spacing: 0.5px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 0.3rem;
+  letter-spacing: 0.5px;
 }
 
 .booking-step {
-    display: inline-block;
-    margin-bottom: 0.65rem;
-    color: var(--primary);
-    font-size: 0.68rem;
-    font-weight: 900;
-    letter-spacing: 0.14em;
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
 }
 
 .card-header p {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Form Group */
 .form-group label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: #ccc;
-    font-weight: 800;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #ccc;
+  font-weight: 800;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
 }
 
 .form-group label i {
-    color: var(--primary);
+  color: var(--primary);
 }
 
-/* Datepicker Box */
 .inline-datepicker-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background: #f6f8fa;
-    padding: 14px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    margin-bottom: 1.5rem;
-    box-shadow: none;
-    box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f6f8fa;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1.5rem;
+  box-shadow: none;
+  box-sizing: border-box;
 }
 
-/* Calendar Base */
 .react-datepicker {
-    font-family: var(--font-main) !important;
-    background-color: transparent !important;
-    border: none !important;
-    color: #17202a !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
+  font-family: var(--font-main) !important;
+  background-color: transparent !important;
+  border: none !important;
+  color: #17202a !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .react-datepicker__month-container {
-    width: 100% !important;
-    float: none !important;
+  width: 100% !important;
+  float: none !important;
 }
 
 .react-datepicker__header {
-    background-color: #f6f8fa !important;
-    border-bottom: 1px solid #d7dfe5 !important;
-    padding-top: 0 !important;
+  background-color: #f6f8fa !important;
+  border-bottom: 1px solid #d7dfe5 !important;
+  padding-top: 0 !important;
 }
 
 .react-datepicker__current-month {
-    color: #17202a !important;
-    font-size: 0.95rem !important;
-    font-weight: 800 !important;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
+  color: #17202a !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
 }
 
 .react-datepicker__day-name {
-    color: #52606d !important;
-    font-weight: 700 !important;
-    width: 38px !important;
-    line-height: 38px !important;
-    margin: 2px !important;
+  color: #52606d !important;
+  font-weight: 700 !important;
+  width: 38px !important;
+  line-height: 38px !important;
+  margin: 2px !important;
 }
 
 .react-datepicker__day {
-    color: #17202a !important;
-    width: 38px !important;
-    line-height: 38px !important;
-    margin: 2px !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-    transition: all 0.2s ease !important;
+  color: #17202a !important;
+  width: 38px !important;
+  line-height: 38px !important;
+  margin: 2px !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
 }
 
 .react-datepicker__day:hover {
-    background-color: #ffe2d6 !important;
-    color: #922f10 !important;
+  background-color: #ffe2d6 !important;
+  color: #922f10 !important;
 }
 
 .react-datepicker__day--selected,
 .react-datepicker__day--in-range,
 .react-datepicker__day--range-start,
 .react-datepicker__day--range-end {
-    background-color: var(--primary) !important;
-    color: #fff !important;
-    font-weight: 800 !important;
+  background-color: var(--primary) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
 }
 
 .react-datepicker__day--in-selecting-range {
-    background-color: rgba(255, 77, 0, 0.4) !important;
+  background-color: rgba(255, 77, 0, 0.4) !important;
 }
 
 .react-datepicker__day--disabled {
-    color: #87939e !important;
-    text-decoration: line-through;
-    opacity: 0.4;
+  color: #87939e !important;
+  text-decoration: line-through;
+  opacity: 0.4;
 }
 
 .react-datepicker__navigation-icon::before {
-    border-color: #34404c !important;
-    border-width: 2px 2px 0 0 !important;
+  border-color: #34404c !important;
+  border-width: 2px 2px 0 0 !important;
 }
 
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper { background: #000; box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8); }
-:root:not([data-theme='light']) .details-container .react-datepicker__header { background: transparent !important; border-bottom-color: var(--glass-border) !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker { color: #ffffff !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker__current-month,
-:root:not([data-theme='light']) .details-container .react-datepicker__day { color: #ffffff !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker__day-name { color: var(--text-muted) !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker__day:hover { background-color: rgba(255, 77, 0, 0.25) !important; color: #ffffff !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker__day--disabled { color: #6f7680 !important; }
-:root:not([data-theme='light']) .details-container .react-datepicker__navigation-icon::before { border-color: #ffffff !important; }
-
-/* Keep the inline booking calendar self-contained in dark mode. */
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker,
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__month-container,
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__month,
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__week,
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__header {
-    background-color: #000000 !important;
+:root:not([data-theme="light"]) .details-container .inline-datepicker-wrapper {
+  background: #000;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+:root:not([data-theme="light"]) .details-container .react-datepicker__header {
+  background: transparent !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+:root:not([data-theme="light"]) .details-container .react-datepicker {
+  color: #ffffff !important;
+}
+:root:not([data-theme="light"])
+  .details-container
+  .react-datepicker__current-month,
+:root:not([data-theme="light"]) .details-container .react-datepicker__day {
+  color: #ffffff !important;
+}
+:root:not([data-theme="light"]) .details-container .react-datepicker__day-name {
+  color: var(--text-muted) !important;
+}
+:root:not([data-theme="light"])
+  .details-container
+  .react-datepicker__day:hover {
+  background-color: rgba(255, 77, 0, 0.25) !important;
+  color: #ffffff !important;
+}
+:root:not([data-theme="light"])
+  .details-container
+  .react-datepicker__day--disabled {
+  color: #6f7680 !important;
+}
+:root:not([data-theme="light"])
+  .details-container
+  .react-datepicker__navigation-icon::before {
+  border-color: #ffffff !important;
 }
 
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__day,
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__current-month {
-    color: #ffffff !important;
-    opacity: 1 !important;
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker,
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__month-container,
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__month,
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__week,
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__header {
+  background-color: #000000 !important;
 }
 
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__day-name {
-    color: #aeb8c4 !important;
-    opacity: 1 !important;
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__day,
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__current-month {
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
 
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__day--outside-month {
-    color: #747e89 !important;
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__day-name {
+  color: #aeb8c4 !important;
+  opacity: 1 !important;
 }
 
-:root:not([data-theme='light']) .details-container .inline-datepicker-wrapper .react-datepicker__day--disabled {
-    color: #87939e !important;
-    opacity: 1 !important;
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__day--outside-month {
+  color: #747e89 !important;
 }
 
-:root[data-theme='light'] .details-container .inline-datepicker-wrapper {
-    background: #f6f8fa;
-    border-color: rgba(23, 32, 42, 0.14);
-    box-shadow: none;
+:root:not([data-theme="light"])
+  .details-container
+  .inline-datepicker-wrapper
+  .react-datepicker__day--disabled {
+  color: #87939e !important;
+  opacity: 1 !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker,
-:root[data-theme='light'] .details-container .react-datepicker__month-container,
-:root[data-theme='light'] .details-container .react-datepicker__header,
-:root[data-theme='light'] .details-container .react-datepicker__month,
-:root[data-theme='light'] .details-container .react-datepicker__week,
-:root[data-theme='light'] .details-container .react-datepicker__week-wrapper {
-    background: #f6f8fa !important;
-    color: #17202a !important;
+:root[data-theme="light"] .details-container .inline-datepicker-wrapper {
+  background: #f6f8fa;
+  border-color: rgba(23, 32, 42, 0.14);
+  box-shadow: none;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__header {
-    border-bottom-color: rgba(23, 32, 42, 0.14) !important;
+:root[data-theme="light"] .details-container .react-datepicker,
+:root[data-theme="light"] .details-container .react-datepicker__month-container,
+:root[data-theme="light"] .details-container .react-datepicker__header,
+:root[data-theme="light"] .details-container .react-datepicker__month,
+:root[data-theme="light"] .details-container .react-datepicker__week,
+:root[data-theme="light"] .details-container .react-datepicker__week-wrapper {
+  background: #f6f8fa !important;
+  color: #17202a !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__current-month,
-:root[data-theme='light'] .details-container .react-datepicker__day,
-:root[data-theme='light'] .details-container .react-datepicker__day--keyboard-selected {
-    color: #17202a !important;
-    text-shadow: none !important;
+:root[data-theme="light"] .details-container .react-datepicker__header {
+  border-bottom-color: rgba(23, 32, 42, 0.14) !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day-name {
-    color: #52606d !important;
+:root[data-theme="light"] .details-container .react-datepicker__current-month,
+:root[data-theme="light"] .details-container .react-datepicker__day,
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__day--keyboard-selected {
+  color: #17202a !important;
+  text-shadow: none !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day--outside-month {
-    color: #8d99a5 !important;
+:root[data-theme="light"] .details-container .react-datepicker__day-name {
+  color: #52606d !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day--disabled {
-    color: #7b8792 !important;
-    opacity: 1;
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__day--outside-month {
+  color: #8d99a5 !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
-    background: #ffe2d6 !important;
-    color: #922f10 !important;
+:root[data-theme="light"] .details-container .react-datepicker__day--disabled {
+  color: #7b8792 !important;
+  opacity: 1;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day--in-selecting-range,
-:root[data-theme='light'] .details-container .react-datepicker__day--in-range {
-    background: #ffe2d6 !important;
-    color: #7a270d !important;
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+  background: #ffe2d6 !important;
+  color: #922f10 !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__day--selected,
-:root[data-theme='light'] .details-container .react-datepicker__day--range-start,
-:root[data-theme='light'] .details-container .react-datepicker__day--range-end {
-    background: #f05a28 !important;
-    color: #ffffff !important;
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__day--in-selecting-range,
+:root[data-theme="light"] .details-container .react-datepicker__day--in-range {
+  background: #ffe2d6 !important;
+  color: #7a270d !important;
 }
 
-:root[data-theme='light'] .details-container .react-datepicker__navigation-icon::before {
-    border-color: #34404c !important;
+:root[data-theme="light"] .details-container .react-datepicker__day--selected,
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__day--range-start,
+:root[data-theme="light"] .details-container .react-datepicker__day--range-end {
+  background: #f05a28 !important;
+  color: #ffffff !important;
 }
 
-/* Invoice Box */
+:root[data-theme="light"]
+  .details-container
+  .react-datepicker__navigation-icon::before {
+  border-color: #34404c !important;
+}
+
 .invoice-breakdown {
-    padding: 1.4rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 18px;
-    border: 1px dashed rgba(255, 77, 0, 0.3);
+  padding: 1.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 18px;
+  border: 1px dashed rgba(255, 77, 0, 0.3);
 }
 
 .invoice-breakdown h4 {
-    margin: 0 0 1rem;
-    font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--primary);
-    letter-spacing: 1px;
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary);
+  letter-spacing: 1px;
 }
 
-/* Invoice Row */
 .invoice-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 0.8rem;
-    font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
 }
 
-/* Badge Element */
 .free-badge {
-    color: #00ff88;
-    font-weight: 800;
-    font-size: 0.75rem;
-    background: rgba(0, 255, 136, 0.1);
-    padding: 3px 8px;
-    border-radius: 6px;
+  color: #00ff88;
+  font-weight: 800;
+  font-size: 0.75rem;
+  background: rgba(0, 255, 136, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
 }
 
-/* Total Price */
 .invoice-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-border);
 }
 
 .invoice-total span {
-    font-size: 0.9rem;
-    font-weight: 800;
-    text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .invoice-total strong {
-    font-size: 1.7rem;
-    color: #ffffff;
-    font-weight: 900;
+  font-size: 1.7rem;
+  color: #ffffff;
+  font-weight: 900;
 }
 
-/* Checkbox Wrapper */
 .terms-checkbox-group {
-    margin: 22px 0;
+  margin: 22px 0;
 }
 
-/* Checkbox Container */
 .checkbox-container {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    user-select: none;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  user-select: none;
 }
 
 .checkbox-container input {
-    position: absolute;
-    opacity: 0;
+  position: absolute;
+  opacity: 0;
 }
 
-/* Custom Checkmark */
 .checkmark {
-    position: absolute;
-    top: 2px;
-    left: 0;
-    height: 18px;
-    width: 18px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1.5px solid var(--glass-border);
-    border-radius: 5px;
-    transition: all 0.2s ease;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 5px;
+  transition: all 0.2s ease;
 }
 
 .checkbox-container:hover input ~ .checkmark {
-    border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .checkbox-container input:checked ~ .checkmark {
-    background-color: var(--primary);
-    border-color: var(--primary);
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 5px;
-    top: 2px;
-    width: 4px;
-    height: 8px;
-    border: solid #ffffff;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .checkbox-container input:checked ~ .checkmark:after {
-    display: block;
+  display: block;
 }
 
 .checkbox-text a {
-    color: #ffffff;
-    text-decoration: underline;
-    font-weight: 700;
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: 700;
 }
 
-/* Confirm Button */
 .confirm-glow-btn {
-    width: 100%;
-    padding: 1.1rem;
-    background: var(--primary);
-    color: #ffffff;
-    border: none;
-    border-radius: 16px;
-    font-weight: 900;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 25px var(--primary-glow);
+  width: 100%;
+  padding: 1.1rem;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px var(--primary-glow);
 }
 
 .confirm-glow-btn:hover:not(:disabled) {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px var(--primary-glow);
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px var(--primary-glow);
 }
 
 .confirm-glow-btn:disabled {
-    background: #1e2026;
-    color: #555;
-    cursor: not-allowed;
-    border: 1px solid var(--glass-border);
-    box-shadow: none;
+  background: #1e2026;
+  color: #555;
+  cursor: not-allowed;
+  border: 1px solid var(--glass-border);
+  box-shadow: none;
 }
 
 .booking-note {
-    margin: 1rem 0 0;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    line-height: 1.45;
-    text-align: center;
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .booking-note i {
-    color: #4ade80;
-    margin-right: 0.35rem;
+  color: #4ade80;
+  margin-right: 0.35rem;
 }
 
-/* Submitting State */
 .booking-card.submitting {
-    pointer-events: none;
+  pointer-events: none;
 }
 
-/* Loading Overlay */
 .booking-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(13, 14, 18, 0.85);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 28px;
-    backdrop-filter: blur(4px);
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 14, 18, 0.85);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 28px;
+  backdrop-filter: blur(4px);
 }
 
-/* Spinner Icon */
 .mini-loader {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 77, 0, 0.2);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loader-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: auto 0;
+  padding: 2rem 1rem;
+}
+
+.luxury-spinner {
+  width: 45px;
+  height: 45px;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-top: 2px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  flex-shrink: 0;
+}
+
+.loader-text {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 15px;
+}
+
+.error-message {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: auto 0;
+  padding: 2rem 1rem;
+}
+
+.back-btn {
+  padding: 10px 24px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .details-container {
+    padding: 2rem 4% 4rem;
+  }
+
+  .details-grid-v2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .booking-sidebar {
+    position: static;
+  }
+
+  .main-vehicle-swiper {
+    height: 380px;
+  }
+
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .price-tag {
+    text-align: left;
+    width: auto;
+    display: inline-block;
+  }
+
+  .price-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-container {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .details-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .details-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .price-tag {
+    padding: 10px 18px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .price-tag .amount {
+    font-size: 2.2rem;
+  }
+
+  .main-vehicle-swiper {
+    height: 250px;
+    border-radius: 16px;
+  }
+
+  .main-vehicle-swiper .swiper-button-next,
+  .main-vehicle-swiper .swiper-button-prev {
     width: 36px;
     height: 36px;
-    border: 3px solid rgba(255, 77, 0, 0.2);
-    border-top: 3px solid var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
+  }
 
-/* Full Loader */
-.loader-container {
-    min-height: 100vh;
-    min-height: 100dvh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    margin: auto 0;
-    padding: 2rem 1rem;
-}
+  .main-vehicle-swiper .swiper-button-next:after,
+  .main-vehicle-swiper .swiper-button-prev:after {
+    font-size: 0.85rem;
+  }
 
-/* Luxury Spinner */
-.luxury-spinner {
-    width: 45px;
-    height: 45px;
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    border-top: 2px solid var(--primary);
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
-    flex-shrink: 0;
-}
+  .thumbs-vehicle-swiper .swiper-slide {
+    height: 65px;
+  }
 
-/* Loader Text */
-.loader-text {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-top: 15px;
-}
+  .real-car-features {
+    padding: 1.25rem;
+    border-radius: 18px;
+  }
 
-/* Error Container */
-.error-message {
-    min-height: 100vh;
-    min-height: 100dvh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    margin: auto 0;
-    padding: 2rem 1rem;
-}
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 
-/* Back Button */
-.back-btn {
-    padding: 10px 24px;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 24px;
-    font-weight: 800;
-    cursor: pointer;
-    margin-top: 1rem;
-}
+  .feature-item {
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+  }
 
-/* Keyframe Rotation */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+  .booking-card {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
 
-/* Tablet Media */
-@media (max-width: 1024px) {
-    .details-container {
-        padding: 2rem 4% 4rem;
-    }
+  .inline-datepicker-wrapper {
+    padding: 8px 4px;
+    border-radius: 14px;
+  }
 
-    .details-grid-v2 {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .booking-sidebar {
-        position: static;
-    }
-    
-    .main-vehicle-swiper {
-        height: 380px;
-    }
-    
-    .header-main {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.2rem;
-    }
+  .react-datepicker__month-container {
+    padding: 0;
+  }
 
-    .price-tag {
-        text-align: left;
-        width: auto;
-        display: inline-block;
-    }
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    width: 28px !important;
+    line-height: 28px !important;
+    font-size: 0.75rem !important;
+    margin: 1px !important;
+  }
 
-    .price-wrapper {
-        justify-content: flex-start;
-    }
-}
+  .react-datepicker__current-month {
+    font-size: 0.85rem !important;
+    margin-bottom: 6px;
+  }
 
-/* Mobile Media */
-@media (max-width: 600px) {
-    .details-container {
-        padding: 1.25rem 1rem 3rem;
-    }
+  .invoice-breakdown {
+    padding: 1rem;
+  }
 
-    .details-header {
-        margin-bottom: 1.5rem;
-        padding-bottom: 1.2rem;
-    }
-
-    .details-header h1 {
-        font-size: 1.8rem;
-    }
-
-    .price-tag {
-        padding: 10px 18px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .price-tag .amount {
-        font-size: 2.2rem;
-    }
-
-    .main-vehicle-swiper {
-        height: 250px;
-        border-radius: 16px;
-    }
-
-    .main-vehicle-swiper .swiper-button-next,
-    .main-vehicle-swiper .swiper-button-prev {
-        width: 36px;
-        height: 36px;
-    }
-
-    .main-vehicle-swiper .swiper-button-next:after,
-    .main-vehicle-swiper .swiper-button-prev:after {
-        font-size: 0.85rem;
-    }
-
-    .thumbs-vehicle-swiper .swiper-slide {
-        height: 65px;
-    }
-
-    .real-car-features {
-        padding: 1.25rem;
-        border-radius: 18px;
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-
-    .feature-item {
-        padding: 0.9rem 1rem;
-        border-radius: 14px;
-    }
-
-    .booking-card {
-        padding: 1.25rem;
-        border-radius: 20px;
-    }
-
-    .inline-datepicker-wrapper {
-        padding: 8px 4px;
-        border-radius: 14px;
-    }
-
-    .react-datepicker__month-container {
-        padding: 0;
-    }
-
-    .react-datepicker__day-name, 
-    .react-datepicker__day {
-        width: 28px !important;
-        line-height: 28px !important;
-        font-size: 0.75rem !important;
-        margin: 1px !important;
-    }
-
-    .react-datepicker__current-month {
-        font-size: 0.85rem !important;
-        margin-bottom: 6px;
-    }
-
-    .invoice-breakdown {
-        padding: 1rem;
-    }
-
-    .invoice-total strong {
-        font-size: 1.4rem;
-    }
+  .invoice-total strong {
+    font-size: 1.4rem;
+  }
 }

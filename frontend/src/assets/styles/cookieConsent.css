@@ -25,7 +25,6 @@
 .cookie-banner::before { background: #f05a28; border-radius: 999px; content: ''; height: 3px; left: 20px; position: absolute; right: 20px; top: 0; }
 .cookie-icon { align-items: center; background: rgba(240, 90, 40, 0.13); border: 1px solid rgba(255, 139, 97, 0.25); border-radius: 50%; color: #ff8b61; display: inline-flex; font-size: 0.9rem; height: 32px; justify-content: center; width: 32px; }
 
-/* Typography & Layout */
 .cookie-text-section h4 {
     margin: 0 0 7px;
     font-size: 1rem;
@@ -45,14 +44,12 @@
     font-weight: 400;
 }
 
-/* Actions Layout */
 .cookie-actions {
     display: flex;
     gap: 9px;
     width: 100%;
 }
 
-/* Base Button */
 .cookie-actions button {
     flex: 1;
     padding: 10px 15px;
@@ -79,7 +76,6 @@
     box-shadow: 0 8px 20px rgba(255, 77, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Subtle Secondary Button */
 .cookie-actions .btn-secondary {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -134,7 +130,6 @@
     }
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 480px) {
     .cookie-banner {
         bottom: 16px;
