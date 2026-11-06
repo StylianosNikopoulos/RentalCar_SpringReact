@@ -16,7 +16,6 @@ import com.example.rentalcars.features.user.domain.port.inbound.UserService;
 import com.example.rentalcars.features.user.infrastructure.adapter.inbound.rest.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(LoginRequest request) {
         try {
             identityPort.authenticate(request.getEmail(), request.getPassword());
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             throw new InvalidCredentialsException();
         }
 
