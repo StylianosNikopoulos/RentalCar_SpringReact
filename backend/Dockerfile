@@ -7,7 +7,7 @@ RUN sed -i 's/\r$//' mvnw && chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 
 COPY src ./src
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean verify
 
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
