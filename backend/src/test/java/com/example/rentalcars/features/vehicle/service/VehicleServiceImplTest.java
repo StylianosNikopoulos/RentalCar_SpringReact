@@ -4,7 +4,9 @@ import com.example.rentalcars.core.exception.BusinessException;
 import com.example.rentalcars.features.vehicle.domain.enums.FuelType;
 import com.example.rentalcars.features.vehicle.domain.enums.VehicleStatus;
 import com.example.rentalcars.features.vehicle.domain.exception.VehicleNotFoundException;
+import com.example.rentalcars.features.vehicle.domain.model.LicensePlate;
 import com.example.rentalcars.features.vehicle.domain.model.Vehicle;
+import com.example.rentalcars.features.vehicle.domain.model.VehicleImage;
 import com.example.rentalcars.features.vehicle.domain.port.outbound.VehicleRepository;
 import com.example.rentalcars.features.vehicle.infrastructure.adapter.inbound.rest.dto.VehicleRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,8 +44,15 @@ class VehicleServiceImplTest {
     @Test
     void createVehicle_shouldCreateActiveVehicleWithImages() {
         VehicleRequest request = vehicleRequest();
-        Vehicle savedVehicle = Vehicle.builder().id(UUID.randomUUID()).build();
-        when(vehicleRepository.existsByLicensePlate("ABC-123")).thenReturn(false);
+        Vehicle savedVehicle = Vehicle.builder()
+                .id(UUID.randomUUID())
+                .brand(request.getBrand())
+                .model(request.getModel())
+                .licensePlate(new LicensePlate(request.getLicensePlate()))
+                .status(VehicleStatus.ACTIVE)
+                .build();
+
+        when(vehicleRepository.existsByLicensePlate("ABC-1234")).thenReturn(false);
         when(vehicleRepository.save(any(Vehicle.class))).thenReturn(savedVehicle);
 
         Vehicle result = vehicleService.createVehicle(request);
@@ -53,15 +62,15 @@ class VehicleServiceImplTest {
                 vehicle.getBrand().equals("Toyota")
                         && vehicle.getModel().equals("Corolla")
                         && vehicle.getStatus() == VehicleStatus.ACTIVE
-                        && vehicle.getLicensePlate().value().equals("ABC-123")
+                        && vehicle.getLicensePlate().value().equals("ABC-1234")
                         && vehicle.getImages().size() == 2
-                        && vehicle.getImages().stream().filter(image -> image.isMain()).count() == 1));
+                        && vehicle.getImages().stream().filter(VehicleImage::isMain).count() == 1));
     }
 
     @Test
     void createVehicle_shouldRejectDuplicateLicensePlate() {
         VehicleRequest request = vehicleRequest();
-        when(vehicleRepository.existsByLicensePlate("ABC-123")).thenReturn(true);
+        when(vehicleRepository.existsByLicensePlate("ABC-1234")).thenReturn(true);
 
         BusinessException exception = assertThrows(BusinessException.class,
                 () -> vehicleService.createVehicle(request));
@@ -112,15 +121,15 @@ class VehicleServiceImplTest {
                 .id(id)
                 .brand("Toyota")
                 .model("Corolla")
-                .licensePlate(new com.example.rentalcars.features.vehicle.domain.model.LicensePlate("ABC-123"))
+                .licensePlate(new LicensePlate("ABC-1234"))
                 .images(List.of())
                 .build();
         VehicleRequest request = vehicleRequest();
         request.setBrand("Honda");
         request.setModel("Civic");
-        request.setLicensePlate("XYZ-789");
+        request.setLicensePlate("XYZ-7890");
         when(vehicleRepository.findById(id)).thenReturn(Optional.of(vehicle));
-        when(vehicleRepository.existsByLicensePlate("XYZ-789")).thenReturn(false);
+        when(vehicleRepository.existsByLicensePlate("XYZ-7890")).thenReturn(false);
         when(vehicleRepository.save(vehicle)).thenReturn(vehicle);
 
         Vehicle result = vehicleService.updateVehicle(id, request);
@@ -128,7 +137,7 @@ class VehicleServiceImplTest {
         assertSame(vehicle, result);
         assertEquals("Honda", vehicle.getBrand());
         assertEquals("Civic", vehicle.getModel());
-        assertEquals("XYZ-789", vehicle.getLicensePlate().value());
+        assertEquals("XYZ-7890", vehicle.getLicensePlate().value());
         verify(vehicleRepository).save(vehicle);
     }
 
@@ -193,7 +202,7 @@ class VehicleServiceImplTest {
     void getAllAvailableVehicles_shouldCleanSearchParametersBeforeQuery() {
         PageRequest pageable = PageRequest.of(0, 10);
         Page<Vehicle> expected = new PageImpl<>(List.of());
-        when(vehicleRepository.findAllAvailableVehicles("Toyota", "Toyota", FuelType.PETROL,
+        when(vehicleRepository.findAllAvailableVehicles("%toyota%", "toyota", FuelType.PETROL,
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable)).thenReturn(expected);
 
         Page<Vehicle> result = vehicleService.getAllAvailableVehicles(
@@ -201,7 +210,7 @@ class VehicleServiceImplTest {
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
 
         assertSame(expected, result);
-        verify(vehicleRepository).findAllAvailableVehicles("Toyota", "Toyota", FuelType.PETROL,
+        verify(vehicleRepository).findAllAvailableVehicles("%toyota%", "toyota", FuelType.PETROL,
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
     }
 
@@ -209,7 +218,7 @@ class VehicleServiceImplTest {
     void getAllVehiclesAdmin_shouldCleanSearchParametersBeforeQuery() {
         PageRequest pageable = PageRequest.of(0, 10);
         Page<Vehicle> expected = new PageImpl<>(List.of());
-        when(vehicleRepository.findAllAdminVehicles("Toyota", "Toyota", FuelType.PETROL,
+        when(vehicleRepository.findAllAdminVehicles("%toyota%", "toyota", FuelType.PETROL,
                 VehicleStatus.ACTIVE, BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable))
                 .thenReturn(expected);
 
@@ -218,7 +227,7 @@ class VehicleServiceImplTest {
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
 
         assertSame(expected, result);
-        verify(vehicleRepository).findAllAdminVehicles("Toyota", "Toyota", FuelType.PETROL,
+        verify(vehicleRepository).findAllAdminVehicles("%toyota%", "toyota", FuelType.PETROL,
                 VehicleStatus.ACTIVE, BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
     }
 
@@ -228,7 +237,7 @@ class VehicleServiceImplTest {
         LocalDateTime end = LocalDateTime.of(2026, 5, 12, 10, 0);
         PageRequest pageable = PageRequest.of(0, 10);
         Page<Vehicle> expected = new PageImpl<>(List.of());
-        when(vehicleRepository.findAvailableVehicles(start, end, "Toyota", "Toyota", FuelType.PETROL,
+        when(vehicleRepository.findAvailableVehicles(start, end, "%toyota%", "toyota", FuelType.PETROL,
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable)).thenReturn(expected);
 
         Page<Vehicle> result = vehicleService.getAvailableVehicles(
@@ -236,7 +245,7 @@ class VehicleServiceImplTest {
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
 
         assertSame(expected, result);
-        verify(vehicleRepository).findAvailableVehicles(start, end, "Toyota", "Toyota", FuelType.PETROL,
+        verify(vehicleRepository).findAvailableVehicles(start, end, "%toyota%", "toyota", FuelType.PETROL,
                 BigDecimal.valueOf(20), BigDecimal.valueOf(100), pageable);
     }
 
@@ -256,7 +265,7 @@ class VehicleServiceImplTest {
         request.setModel("Corolla");
         request.setYear(2024);
         request.setFuelType(FuelType.PETROL);
-        request.setLicensePlate("ABC-123");
+        request.setLicensePlate("ABC-1234");
         request.setDailyPrice(BigDecimal.valueOf(50));
         request.setImageUrls(List.of("front.jpg", "side.jpg"));
         request.setMainImageUrl("front.jpg");
