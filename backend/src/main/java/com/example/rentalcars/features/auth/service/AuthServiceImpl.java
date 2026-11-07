@@ -3,6 +3,7 @@ package com.example.rentalcars.features.auth.service;
 import com.example.rentalcars.core.exception.BusinessException;
 import com.example.rentalcars.features.auth.domain.exception.EmailAlreadyExistsException;
 import com.example.rentalcars.features.auth.domain.exception.InvalidCredentialsException;
+import com.example.rentalcars.features.auth.domain.model.RefreshToken;
 import com.example.rentalcars.features.auth.domain.port.inbound.AuthService;
 import com.example.rentalcars.features.auth.domain.port.outbound.AuthEmailPort;
 import com.example.rentalcars.features.auth.domain.port.outbound.IdentityPort;
@@ -33,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRestMapper userRestMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthEmailPort authEmailPort;
+    private final RefreshTokenService refreshTokenService;
 
     @Override
     public AuthResponse login(LoginRequest request) {
@@ -127,5 +129,25 @@ public class AuthServiceImpl implements AuthService {
         } catch (UserNotFoundException e) {
             log.warn("Password reset requested for non existing email: {}", email);
         }
+    }
+
+    @Override
+    @Transactional
+    public AuthResponse refreshToken(String refreshToken) {
+        RefreshToken tokenEntity = refreshTokenService.findByToken(refreshToken)
+                .orElseThrow(() -> new BusinessException("Invalid refresh token", "INVALID_REFRESH_TOKEN"));
+
+        if (tokenEntity.isExpired()) {
+            throw new BusinessException("Refresh token expired", "REFRESH_TOKEN_EXPIRED");
+        }
+
+        User user = tokenEntity.getUser();
+        var newTokens = identityPort.generateTokens(user);
+
+        return AuthResponse.builder()
+                .accessToken(newTokens.getAccessToken())
+                .refreshToken(newTokens.getRefreshToken())
+                .user(userRestMapper.toResponse(user))
+                .build();
     }
 }

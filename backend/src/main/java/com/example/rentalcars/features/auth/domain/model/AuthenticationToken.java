@@ -11,6 +11,4 @@ public class AuthenticationToken {
     String accessToken;
     @NotBlank
     String refreshToken;
-    String email;
-    String role;
 }
