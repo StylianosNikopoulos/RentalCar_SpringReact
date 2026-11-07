@@ -1,4 +1,4 @@
-package com.example.rentalcars.features.vehicle.service;
+package com.example.rentalcars.features.vehicle;
 
 import com.example.rentalcars.core.exception.BusinessException;
 import com.example.rentalcars.features.vehicle.domain.enums.FuelType;
@@ -9,6 +9,7 @@ import com.example.rentalcars.features.vehicle.domain.model.Vehicle;
 import com.example.rentalcars.features.vehicle.domain.model.VehicleImage;
 import com.example.rentalcars.features.vehicle.domain.port.outbound.VehicleRepository;
 import com.example.rentalcars.features.vehicle.infrastructure.adapter.inbound.rest.dto.VehicleRequest;
+import com.example.rentalcars.features.vehicle.service.VehicleServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +42,7 @@ class VehicleServiceImplTest {
         vehicleService = new VehicleServiceImpl(vehicleRepository);
     }
 
+    // CREATE VEHICLE
     @Test
     void createVehicle_shouldCreateActiveVehicleWithImages() {
         VehicleRequest request = vehicleRequest();
@@ -79,6 +81,7 @@ class VehicleServiceImplTest {
         verify(vehicleRepository, never()).save(any());
     }
 
+    // GET VEHICLE BY ID & PESSIMISTIC LOCKING
     @Test
     void getVehicleById_shouldReturnVehicle() {
         UUID id = UUID.randomUUID();
@@ -114,9 +117,11 @@ class VehicleServiceImplTest {
         assertThrows(VehicleNotFoundException.class, () -> vehicleService.getVehicleByIdWithLock(id));
     }
 
+    // UPDATE VEHICLE
     @Test
     void updateVehicle_shouldUpdateVehicleAndImages() {
         UUID id = UUID.randomUUID();
+
         Vehicle vehicle = Vehicle.builder()
                 .id(id)
                 .brand("Toyota")
@@ -125,6 +130,7 @@ class VehicleServiceImplTest {
                 .images(List.of())
                 .build();
         VehicleRequest request = vehicleRequest();
+
         request.setBrand("Honda");
         request.setModel("Civic");
         request.setLicensePlate("XYZ-7890");
@@ -141,6 +147,7 @@ class VehicleServiceImplTest {
         verify(vehicleRepository).save(vehicle);
     }
 
+    // STATUS MANAGEMENT & BULK OPERATIONS
     @Test
     void markVehicleOutOfService_shouldChangeStatusAndSave() {
         UUID id = UUID.randomUUID();
@@ -198,6 +205,7 @@ class VehicleServiceImplTest {
         verify(vehicleRepository).updateStatusForIds(ids, VehicleStatus.OUT_OF_SERVICE);
     }
 
+    // SEARCH & FILTER QUERIES
     @Test
     void getAllAvailableVehicles_shouldCleanSearchParametersBeforeQuery() {
         PageRequest pageable = PageRequest.of(0, 10);
@@ -259,6 +267,7 @@ class VehicleServiceImplTest {
         verify(vehicleRepository, never()).findAvailableVehicles(any(), any(), any(), any(), any(), any(), any(), any());
     }
 
+    // HELPER FIXTURE METHOD
     private VehicleRequest vehicleRequest() {
         VehicleRequest request = new VehicleRequest();
         request.setBrand("Toyota");
