@@ -29,8 +29,6 @@ public class IdentityAdapter implements IdentityPort {
         return AuthenticationToken.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken.getToken())
-                .email(user.getEmail())
-                .role(user.getRole().name())
                 .build();
     }
 }
