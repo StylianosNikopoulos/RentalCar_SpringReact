@@ -9,9 +9,5 @@
         <createIndex tableName="refresh_tokens" indexName="idx_refresh_tokens_token" unique="true">
             <column name="token"/>
         </createIndex>
-
-        <createIndex tableName="refresh_tokens" indexName="idx_refresh_tokens_user_id">
-            <column name="user_id"/>
-        </createIndex>
     </changeSet>
 </databaseChangeLog>
