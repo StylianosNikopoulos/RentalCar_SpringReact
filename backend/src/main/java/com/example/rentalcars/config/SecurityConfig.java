@@ -2,6 +2,7 @@ package com.example.rentalcars.config;
 
 import com.example.rentalcars.core.exception.CustomAccessDeniedHandler;
 import com.example.rentalcars.features.auth.infrastructure.adapter.security.JwtAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -62,6 +63,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\": \"UNAUTHORIZED\", \"message\": \"Full authentication is required to access this resource\"}");
+                        })
                         .accessDeniedHandler(accessDeniedHandler)
                 )
                 .sessionManagement(session -> session
