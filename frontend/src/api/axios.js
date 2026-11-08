@@ -66,9 +66,9 @@ api.interceptors.response.use(
                 }
 
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_BASE_URL}/auth/refresh`, 
+                    `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/auth/refresh`, 
                     { refreshToken: refreshToken },
-                    { headers: { Authorization: '' } }
+                    { headers: { 'Content-Type': 'application/json' } }
                 );
 
                 if (response.data && response.data.accessToken) {
