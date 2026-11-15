@@ -118,7 +118,8 @@ export const translations = {
       toastLoading: "Authenticating...",
       toastSuccess: "Welcome back!",
       toastError: "Login failed.",
-      securityNote: "Your account and payment details stay protected."
+      securityNote: "Your account and payment details stay protected.",
+      rememberMe: "Remember me"
     },
     nav: {
       toggleNavigation: "Toggle Navigation",
@@ -639,7 +640,8 @@ export const translations = {
       toastLoading: "Γίνεται ταυτοποίηση...",
       toastSuccess: "Καλώς ήρθατε ξανά!",
       toastError: "Η σύνδεση απέτυχε.",
-      securityNote: "Τα στοιχεία του λογαριασμού και των πληρωμών σας παραμένουν προστατευμένα."
+      securityNote: "Τα στοιχεία του λογαριασμού και των πληρωμών σας παραμένουν προστατευμένα.",
+      rememberMe: "Να με θυμάσαι"
     },
     nav: {
       toggleNavigation: "Εναλλαγή πλοήγησης",

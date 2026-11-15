@@ -333,3 +333,35 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 42px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    padding: 4px;
+    color: #6b7280;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.password-toggle-btn:hover:not(:disabled) {
+    color: #2563eb;
+}
+
+.password-toggle-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
