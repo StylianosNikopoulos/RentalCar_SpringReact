@@ -17,6 +17,20 @@ const authService = {
             return response.data;
     },
 
+    loginWithOAuth: async (accessToken, refreshToken) => {
+        localStorage.setItem('user', JSON.stringify({ accessToken, refreshToken }));
+        const response = await api.get('/users/me', {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+        const fullUserData = {
+            accessToken,
+            refreshToken,
+            user: response.data
+        };
+        localStorage.setItem('user', JSON.stringify(fullUserData));
+        return fullUserData;
+    },
+
     forgotPassword: async (email) => {
         const response = await api.post('/auth/forgot-password', { email });
         return response.data;

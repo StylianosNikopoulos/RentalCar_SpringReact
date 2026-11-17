@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import authService from '../services/authService';
 
 export const AuthContext = createContext(null);
@@ -40,6 +40,12 @@ export const AuthProvider = ({ children }) => {
         return userData;
     };
 
+    const loginWithOAuth = async (accessToken, refreshToken) => {
+        const userData = await authService.loginWithOAuth(accessToken, refreshToken);
+        setUser(userData);
+        return userData;
+    };
+
     const logout = () => {
         authService.logout();
         setUser(null);
@@ -47,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, register, loginWithOAuth, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
