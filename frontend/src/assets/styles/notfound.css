@@ -1,28 +1,99 @@
 .notfound-container {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 7rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
-    background-color: var(--theme-page-bg, #050507);
+    min-height: calc(100vh - 140px);
+    box-sizing: border-box;
+    background:
+        radial-gradient(circle at 50% 34%, rgba(240, 90, 40, 0.16), transparent 20rem),
+        radial-gradient(circle at 12% 88%, rgba(255, 255, 255, 0.035), transparent 22rem),
+        linear-gradient(145deg, #0b0e14 0%, #111722 52%, #0a0c11 100%);
     color: var(--theme-text, #ffffff);
+}
+
+:root[data-theme='light'] .notfound-container {
+    background:
+        radial-gradient(circle at 84% 14%, rgba(240, 90, 40, 0.14), transparent 24rem),
+        radial-gradient(circle at 76% 74%, rgba(84, 124, 180, 0.13), transparent 30rem),
+        #edf1f4;
+    color: var(--theme-text);
+}
+
+.notfound-container::before,
+.notfound-container::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+:root[data-theme='light'] .notfound-container::before {
+    border-color: rgba(23, 32, 42, 0.08);
+}
+
+.notfound-container::before {
+    width: 34rem;
+    height: 34rem;
+    top: -18rem;
+    right: -10rem;
+}
+
+.notfound-container::after {
+    width: 24rem;
+    height: 24rem;
+    bottom: -15rem;
+    left: -8rem;
+    border-color: rgba(240, 90, 40, 0.16);
 }
 
 .notfound-code {
-    font-size: 8rem;
+    position: relative;
+    z-index: 1;
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(7rem, 20vw, 13rem);
     font-weight: 900;
-    margin: 0;
-    color: var(--theme-text, #ffffff);
+    letter-spacing: -0.12em;
+    margin: 0 0 0.5rem;
+    padding-right: 0.12em;
+    background: linear-gradient(135deg, #ffffff 20%, #ff9b76 58%, #f05a28 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     line-height: 1;
-    text-shadow: 4px 4px 0px var(--theme-surface-raised, #12141a);
+    text-shadow: 0 20px 50px rgba(240, 90, 40, 0.2);
+}
+
+:root[data-lang='gr'] .notfound-container .notfound-code {
+    font-family: 'Manrope', sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.12em !important;
+}
+
+:root[data-theme='light'] .notfound-code {
+    background: linear-gradient(135deg, #17202a 20%, #d9491a 58%, #f05a28 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 20px 50px rgba(240, 90, 40, 0.14);
 }
 
 .notfound-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 2rem;
     color: var(--theme-text, #ffffff);
+}
+
+:root[data-theme='light'] .notfound-title {
+    color: var(--theme-text) !important;
 }
 
 .notfound-text {
@@ -33,18 +104,38 @@
 }
 
 .notfound-btn {
-    padding: 12px 30px;
-    background-color: var(--primary, #ff4d00);
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.4rem;
+    background: linear-gradient(135deg, #f05a28, #ff8155);
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid var(--primary, #ff4d00);
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    box-shadow: 0 12px 28px rgba(240, 90, 40, 0.24);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+:root[data-theme='light'] .notfound-btn {
+    border-color: rgba(23, 32, 42, 0.12);
+    box-shadow: 0 12px 26px rgba(31, 41, 55, 0.12);
 }
 
 .notfound-btn:hover {
-    background-color: transparent;
-    color: var(--theme-text, #ffffff);
+    color: #ffffff;
+    filter: brightness(1.08);
     transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(240, 90, 40, 0.34);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notfound-btn {
+        transition: none;
+    }
 }

@@ -17,6 +17,10 @@ export const translations = {
       cookieSettings: "Cookie settings",
       privacy: "Privacy & Cookies"
     },
+    notFound: {
+      title: "Page Not Found",
+      backHome: "Back to Home"
+    },
     privacy: {
       eyebrow: "Privacy & Cookies", title: "Privacy & Cookies", titleMain: "Privacy &", titleSub: "Cookies",
       templateNote: "Educational demo policy for code review only. This site is not intended to collect real customer data or serve as production legal advice.",
@@ -538,6 +542,10 @@ export const translations = {
       terms: "Όροι & Προϋποθέσεις",
       cookieSettings: "Ρυθμίσεις cookies",
       privacy: "Απόρρητο και Cookies"
+    },
+    notFound: {
+      title: "Η σελίδα δεν βρέθηκε",
+      backHome: "Επιστροφή στην αρχική"
     },
     privacy: {
       eyebrow: "Απόρρητο και Cookies", title: "Απόρρητο και Cookies", titleMain: "Απόρρητο και", titleSub: "Cookies",
