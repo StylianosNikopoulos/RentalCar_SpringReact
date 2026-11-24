@@ -40,7 +40,7 @@ The project strictly follows the **Hexagonal Architecture** to ensure a clean se
 3.  **Infrastructure Layer:** External adapters such as:
     * **Persistence:** PostgreSQL (via Supabase) using Spring Data JPA.
     * **Caching Layer:** Redis integration (via Upstash) for fast access and cache invalidation.
-    * **Security:** JWT-based stateless authentication and Rate Limiting protection.
+    * **Security:** Google OAuth2 authentication (with automatic user onboarding), JWT access/refresh tokens, and Rate Limiting protection.
     * **Payments:** Stripe API integration for secure checkout.
     * **Storage:** Cloudinary for vehicle image management.
 
@@ -51,6 +51,7 @@ The project strictly follows the **Hexagonal Architecture** to ensure a clean se
 ### Backend
 - **Java 21 & Spring Boot 3**
 - **Spring Security:** Role-Based Access Control (RBAC) with JWT authentication.
+- **Spring Security & OAuth2 Client:** Google OAuth2 social login, Role-Based Access Control (RBAC), and JWT authentication.
 - **Spring Cache & Upstash Redis:**
 - **Liquibase:** For version-controlled database schema migrations.
 - **Hibernate/JPA:** Optimized with **Custom JPQL Queries** and **Production-Grade DB Indexing**.
