@@ -186,7 +186,7 @@ const Home = () => {
                             {vehicles.map((car, index) => (
                                 <article key={car.id} className="home-vehicle-card" data-reveal style={{ transitionDelay: `${index * 100}ms` }} onClick={() => navigate(`/vehicle/${car.id}`)}>
                                     <div className="home-car-image">
-                                        <img src={car.images?.find((image) => image.isMain)?.url || car.images?.[0]?.url || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070'} alt={`${car.brand} ${car.model}`} />
+                                        <img src={car.images?.find((image) => image.isMain)?.url || car.images?.[0]?.url || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070'} alt={`${car.brand} ${car.model}`} loading="lazy" decoding="async" />
                                          <span>{car.category || t.premiumCollection}</span>
                                     </div>
                                     <div className="home-car-body">

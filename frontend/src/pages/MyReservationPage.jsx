@@ -229,6 +229,9 @@ const MyReservationPage = () => {
                             const status = res.status.toUpperCase();
                             const isExpired = calculateGlobalTimeLeft(res.createdAt) <= 0;
                             const currentLocale = lang === 'gr' ? 'el-GR' : 'en-GB';
+                            const formatReservationDate = (date) => date
+                                ? new Date(date).toLocaleDateString(currentLocale, { day: '2-digit', month: 'short', year: 'numeric' })
+                                : 'N/A';
 
                             return (
                                 <div key={res.id} className={`res-card status-border-${res.status.toLowerCase()}`}>
@@ -249,12 +252,12 @@ const MyReservationPage = () => {
                                                 <div className="timeline-dates">
                                                     <span className="date-pill">
                                                         <i className="far fa-calendar-alt"></i>
-                                                        {res.period?.start ? new Date(res.period.start).toLocaleDateString(currentLocale, {day:'2-digit', month:'short', year:'numeric'}) : 'N/A'}
+                                                        {formatReservationDate(res.period?.start)}
                                                     </span>
                                                     <span className="arrow-sep"><i className="fas fa-long-arrow-alt-right"></i></span>
                                                     <span className="date-pill">
                                                         <i className="far fa-calendar-check"></i>
-                                                        {res.period?.end ? new Date(res.period.end).toLocaleDateString(currentLocale, {day:'2-digit', month:'short', year:'numeric'}) : 'N/A'}
+                                                        {formatReservationDate(res.period?.end)}
                                                     </span>
                                                 </div>
                                             </div>

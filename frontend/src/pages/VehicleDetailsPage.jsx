@@ -47,7 +47,7 @@ const VehicleDetailsPage = () => {
     const { data: vehicle, isLoading: vehicleLoading } = useQuery({
         queryKey: ['vehicle', id],
         queryFn: () => vehicleService.getVehicleById(id),
-        enabled: !isActionPending
+        enabled: Boolean(id) && !isActionPending
     });
 
     const { data: bookedDates = [], isLoading: datesLoading } = useQuery({
@@ -66,7 +66,7 @@ const VehicleDetailsPage = () => {
                 return null;
             }).filter(Boolean);
         },
-        enabled: !isActionPending
+        enabled: Boolean(id) && !isActionPending
     });
 
     useEffect(() => {
@@ -196,6 +196,8 @@ const VehicleDetailsPage = () => {
                                 src={allImages[activeImageIndex]?.url}
                                 alt={`${vehicle.brand} ${activeImageIndex + 1}`}
                                 className="swiper-vehicle-img"
+                                decoding="async"
+                                fetchPriority="high"
                             />
                             {allImages.length > 1 && (
                                 <div className="gallery-thumbnails">
@@ -207,7 +209,7 @@ const VehicleDetailsPage = () => {
                                             onClick={() => setActiveImageIndex(index)}
                                             aria-label={`Show image ${index + 1}`}
                                         >
-                                            <img src={img.url} alt="" />
+                                            <img src={img.url} alt="" loading="lazy" decoding="async" />
                                         </button>
                                     ))}
                                 </div>

@@ -159,7 +159,7 @@ const VehicleModal = ({ vehicleToEdit, onClose }) => {
                     <div className="image-grid-upload">
                         {vehicleForm.images.map((img, index) => (
                             <div key={index} className={`image-preview-item ${img.isMain ? 'main-photo' : ''}`}>
-                                <img src={img.url} alt="preview" />
+                                <img src={img.url} alt="preview" loading="lazy" decoding="async" />
                                 <div className="image-controls">
                                     <button type="button" onClick={() => setMainImage(index)} title={t.setMainPhoto}><i className={img.isMain ? "fas fa-star" : "far fa-star"}></i></button>
                                     <button type="button" onClick={() => removeImage(index)} title={t.removePhoto}><i className="fas fa-times"></i></button>

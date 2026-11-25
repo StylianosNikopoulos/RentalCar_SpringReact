@@ -72,7 +72,7 @@ const VehiclesPage = () => {
             return await vehicleService.getAllVehicles(currentPage - 1, itemsPerPage, sortOrder, searchTerm, filters);
         },
         staleTime: 1000 * 60 * 5,
-        keepPreviousData: true
+        placeholderData: (previousData) => previousData
     });
 
     const { data: brandsResponseData = {}, isLoading: isBrandsLoading } = useQuery({
@@ -97,8 +97,7 @@ const VehiclesPage = () => {
 
     const formatDate = (dateString) => {
         if (!dateString) return "";
-        const date = new Date(dateString);
-        return date.toLocaleDateString(lang === 'gr' ? 'el-GR' : 'en-GB', {
+        return new Date(dateString).toLocaleDateString(lang === 'gr' ? 'el-GR' : 'en-GB', {
             day: '2-digit',
             month: 'short',
             year: 'numeric'
@@ -285,6 +284,8 @@ const VehiclesPage = () => {
                                         } 
                                         alt={`${car.brand} ${car.model}`} 
                                         className="vehicle-img" 
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                     <span className="type-tag"><i className="fas fa-check-circle"></i> {t.availableNow}</span>
                                 </div>

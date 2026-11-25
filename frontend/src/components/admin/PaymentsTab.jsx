@@ -83,7 +83,7 @@ const PaymentsTab = () => {
         ].filter(item => item.value > 0);
 
         return { counts, totalRevenue, successRate, chart, totalCount: currentPayments.length };
-    }, [currentPayments]);
+    }, [currentPayments, t.completed, t.paymentAwaiting, t.failed, t.refunded]);
 
     const refundMutation = useMutation({
         mutationFn: (stripePaymentId) => paymentService.refundPayment(stripePaymentId),
