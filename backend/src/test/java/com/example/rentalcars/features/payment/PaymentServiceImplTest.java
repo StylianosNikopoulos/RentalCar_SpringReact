@@ -6,6 +6,7 @@ import com.example.rentalcars.features.payment.domain.exception.InvalidPaymentSt
 import com.example.rentalcars.features.payment.domain.exception.PaymentNotFoundException;
 import com.example.rentalcars.features.payment.domain.exception.StripePaymentException;
 import com.example.rentalcars.features.payment.domain.model.Payment;
+import com.example.rentalcars.features.payment.domain.model.PaymentStatistics;
 import com.example.rentalcars.features.payment.domain.port.outbound.PaymentEmailPort;
 import com.example.rentalcars.features.payment.domain.port.outbound.PaymentRepository;
 import com.example.rentalcars.features.payment.service.PaymentServiceImpl;
@@ -276,6 +277,31 @@ class PaymentServiceImplTest {
 
         Page<Payment> result = paymentService.getAllPaymentsFiltered(PaymentStatus.COMPLETED, null, null, null, pageable);
         assertEquals(1, result.getTotalElements());
+    }
+
+    @Test
+    void getPaymentStatistics_shouldReturnStatisticsFromRepository() {
+        LocalDateTime startDate = LocalDateTime.now().minusDays(7);
+        LocalDateTime endDate = LocalDateTime.now();
+        String email = "john@example.com";
+
+        PaymentStatistics statistics = PaymentStatistics.builder()
+                .totalRevenue(BigDecimal.valueOf(500))
+                .totalRefunded(BigDecimal.valueOf(100))
+                .completedCount(5)
+                .pendingCount(1)
+                .failedCount(1)
+                .refundedCount(1)
+                .totalCount(8)
+                .successRate(63)
+                .build();
+
+        when(paymentRepository.getStatistics(startDate, endDate, email)).thenReturn(statistics);
+
+        PaymentStatistics result = paymentService.getPaymentStatistics(startDate, endDate, email);
+
+        assertSame(statistics, result);
+        verify(paymentRepository).getStatistics(startDate, endDate, email);
     }
 
     @Test

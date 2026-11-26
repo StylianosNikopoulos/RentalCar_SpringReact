@@ -6,6 +6,7 @@ import com.example.rentalcars.features.payment.domain.exception.InvalidPaymentSt
 import com.example.rentalcars.features.payment.domain.exception.PaymentNotFoundException;
 import com.example.rentalcars.features.payment.domain.exception.StripePaymentException;
 import com.example.rentalcars.features.payment.domain.model.Payment;
+import com.example.rentalcars.features.payment.domain.model.PaymentStatistics;
 import com.example.rentalcars.features.payment.domain.port.inbound.PaymentService;
 import com.example.rentalcars.features.payment.domain.port.outbound.PaymentEmailPort;
 import com.example.rentalcars.features.payment.domain.port.outbound.PaymentRepository;
@@ -202,6 +203,11 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Page<Payment> getAllPaymentsFiltered(PaymentStatus status, LocalDateTime startDate, LocalDateTime endDate, String userEmail, Pageable pageable) {
         return paymentRepository.findAllFiltered(status, startDate, endDate, userEmail, pageable);
+    }
+
+    @Override
+    public PaymentStatistics getPaymentStatistics(LocalDateTime startDate, LocalDateTime endDate, String userEmail) {
+        return paymentRepository.getStatistics(startDate, endDate, userEmail);
     }
 
     @Override

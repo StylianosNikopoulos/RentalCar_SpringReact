@@ -59,24 +59,21 @@ const PaymentsTab = () => {
     const currentPayments = paymentResponse.content || [];
     const totalPages = paymentResponse.page?.totalPages || paymentResponse.totalPages || 1;
 
+    const { data: paymentStats = {} } = useQuery({
+        queryKey: ['admin-payments-stats', emailSearch],
+        queryFn: () => paymentService.getPaymentStatistics({ email: emailSearch }),
+        refetchInterval: 10000,
+        staleTime: 0,
+        placeholderData: keepPreviousData
+    });
+
     const statsData = useMemo(() => {
-        const counts = { COMPLETED: 0, PENDING: 0, FAILED: 0, REFUNDED: 0 };
-        let totalRevenue = 0;
-        let totalRefunded = 0;
-
-        currentPayments.forEach((p) => {
-            const status = p.status ? p.status.toUpperCase() : '';
-            if (counts[status] !== undefined) counts[status]++;
-            const val = typeof p.amount === 'object' ? p.amount?.amount : p.amount;
-            if (status === 'COMPLETED') {
-                totalRevenue += Number(val) || 0;
-            } else if (status === 'REFUNDED') {
-                totalRefunded += Number(val) || 0;
-            }
-        });
-
-        const total = currentPayments.length || 1;
-        const successRate = Math.round((counts.COMPLETED / total) * 100);
+        const counts = {
+            COMPLETED: paymentStats.completedCount || 0,
+            PENDING: paymentStats.pendingCount || 0,
+            FAILED: paymentStats.failedCount || 0,
+            REFUNDED: paymentStats.refundedCount || 0,
+        };
 
         const chart = [
             { name: t.completed, value: counts.COMPLETED, color: '#10B981' },
@@ -85,13 +82,21 @@ const PaymentsTab = () => {
             { name: t.refunded, value: counts.REFUNDED, color: '#6B7280' },
         ].filter(item => item.value > 0);
 
-        return { counts, totalRevenue, totalRefunded, successRate, chart, totalCount: currentPayments.length };
-    }, [currentPayments, t.completed, t.paymentAwaiting, t.failed, t.refunded]);
+        return {
+            counts,
+            totalRevenue: Number(paymentStats.totalRevenue) || 0,
+            totalRefunded: Number(paymentStats.totalRefunded) || 0,
+            successRate: paymentStats.successRate || 0,
+            chart,
+            totalCount: paymentStats.totalCount || 0
+        };
+    }, [paymentStats, t.completed, t.paymentAwaiting, t.failed, t.refunded]);
 
     const refundMutation = useMutation({
         mutationFn: (stripePaymentId) => paymentService.refundPayment(stripePaymentId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['admin-payments'] });
+            queryClient.invalidateQueries({ queryKey: ['admin-payments-stats'] });
             toast.success(t.toastRefundSuccess);
         },
         onError: (error) => {

@@ -34,6 +34,16 @@ const paymentService = {
         return response.data;
     },
 
+    getPaymentStatistics: async (filters = {}) => {
+        const params = new URLSearchParams();
+        if (filters.email) params.append('email', filters.email);
+        if (filters.startDate) params.append('startDate', filters.startDate);
+        if (filters.endDate) params.append('endDate', filters.endDate);
+
+        const response = await api.get(`/admin/payments/stats?${params.toString()}`);
+        return response.data;
+    },
+
     refundPayment: async (stripePaymentId) => {
         const response = await api.post(`/admin/payments/${stripePaymentId}/refund`);
         return response.data;
