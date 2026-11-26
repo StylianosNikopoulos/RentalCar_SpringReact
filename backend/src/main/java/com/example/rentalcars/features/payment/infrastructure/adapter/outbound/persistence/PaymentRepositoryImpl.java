@@ -2,6 +2,7 @@ package com.example.rentalcars.features.payment.infrastructure.adapter.outbound.
 
 import com.example.rentalcars.features.payment.domain.enums.PaymentStatus;
 import com.example.rentalcars.features.payment.domain.model.Payment;
+import com.example.rentalcars.features.payment.domain.model.PaymentStatistics;
 import com.example.rentalcars.features.payment.domain.port.outbound.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -43,6 +44,13 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
         return jpaRepository.findAllFilteredNative(statusStr, startDate, endDate, emailFilter, pageable)
                 .map(mapper::toDomain);
+    }
+
+    @Override
+    public PaymentStatistics getStatistics(LocalDateTime startDate, LocalDateTime endDate, String userEmail) {
+        String emailFilter = (userEmail != null && !userEmail.isBlank()) ? userEmail.trim() : null;
+
+        return jpaRepository.getStatistics(startDate, endDate, emailFilter);
     }
 
     @Override
