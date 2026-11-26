@@ -52,16 +52,18 @@ public interface PaymentJpaRepository extends JpaRepository<PaymentJpaEntity, UU
 
     @Query(value = """
             SELECT
-                COALESCE(SUM(p.amount) FILTER (WHERE p.status = 'COMPLETED'), 0) AS totalRevenue,
-                COALESCE(SUM(p.amount) FILTER (WHERE p.status = 'REFUNDED'), 0) AS totalRefunded,
+                CAST(COALESCE(SUM(p.amount) FILTER (WHERE p.status = 'COMPLETED'), 0) AS NUMERIC) AS totalRevenue,
+                CAST(COALESCE(SUM(p.amount) FILTER (WHERE p.status = 'REFUNDED'), 0) AS NUMERIC) AS totalRefunded,
                 COUNT(*) FILTER (WHERE p.status = 'COMPLETED') AS completedCount,
                 COUNT(*) FILTER (WHERE p.status = 'PENDING') AS pendingCount,
                 COUNT(*) FILTER (WHERE p.status = 'FAILED') AS failedCount,
                 COUNT(*) FILTER (WHERE p.status = 'REFUNDED') AS refundedCount,
                 COUNT(*) AS totalCount,
-                CASE WHEN COUNT(*) = 0 THEN 0
-                     ELSE ROUND(COUNT(*) FILTER (WHERE p.status = 'COMPLETED') * 100.0 / COUNT(*))
-                END AS successRate
+                CAST(
+                    CASE WHEN COUNT(*) = 0 THEN 0
+                         ELSE ROUND(COUNT(*) FILTER (WHERE p.status = 'COMPLETED') * 100.0 / COUNT(*))
+                    END AS INTEGER
+                ) AS successRate
             FROM payments p
             LEFT JOIN reservations r ON p.reservation_id = r.id
             LEFT JOIN users u ON r.user_id = u.id

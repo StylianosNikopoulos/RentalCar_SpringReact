@@ -51,8 +51,9 @@ public class AdminPaymentController {
                                                                           @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
                                                                           @RequestParam(required = false) String email) {
 
-        PaymentStatisticsResponse response = paymentService.getPaymentStatistics(startDate, endDate, email)
-                .map(paymentRestMapper::toStatisticsResponse);
+        PaymentStatisticsResponse response = paymentRestMapper.toStatisticsResponse(
+                paymentService.getPaymentStatistics(startDate, endDate, email)
+        );
 
         return ResponseEntity.ok(response);
     }
