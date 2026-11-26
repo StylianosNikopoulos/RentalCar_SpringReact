@@ -62,13 +62,16 @@ const PaymentsTab = () => {
     const statsData = useMemo(() => {
         const counts = { COMPLETED: 0, PENDING: 0, FAILED: 0, REFUNDED: 0 };
         let totalRevenue = 0;
+        let totalRefunded = 0;
 
         currentPayments.forEach((p) => {
             const status = p.status ? p.status.toUpperCase() : '';
             if (counts[status] !== undefined) counts[status]++;
+            const val = typeof p.amount === 'object' ? p.amount?.amount : p.amount;
             if (status === 'COMPLETED') {
-                const val = typeof p.amount === 'object' ? p.amount?.amount : p.amount;
                 totalRevenue += Number(val) || 0;
+            } else if (status === 'REFUNDED') {
+                totalRefunded += Number(val) || 0;
             }
         });
 
@@ -82,7 +85,7 @@ const PaymentsTab = () => {
             { name: t.refunded, value: counts.REFUNDED, color: '#6B7280' },
         ].filter(item => item.value > 0);
 
-        return { counts, totalRevenue, successRate, chart, totalCount: currentPayments.length };
+        return { counts, totalRevenue, totalRefunded, successRate, chart, totalCount: currentPayments.length };
     }, [currentPayments, t.completed, t.paymentAwaiting, t.failed, t.refunded]);
 
     const refundMutation = useMutation({
@@ -188,6 +191,34 @@ const PaymentsTab = () => {
                             <div className={`mini-metric-pill pending ${bgThemeClass}`}>
                                 <span className={`label ${textThemeClass}`}>{t.paymentAwaiting}</span>
                                     <strong className="val-pending">{statsData.counts.PENDING} {t.transactions}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`payment-kpi-card ${themeClass}`}>
+                    <div className="financial-card-content">
+                        <div className="financial-header">
+                            <div>
+                                <span className={`kpi-title ${textThemeClass}`}>{t.refunded}</span>
+                                <h2 className={`kpi-value-main ${textThemeClass}`} style={{ color: '#6B7280' }}>
+                                    €{statsData.totalRefunded.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                                </h2>
+                            </div>
+                            <div className="wallet-icon-badge" style={{ background: 'rgba(107, 114, 128, 0.1)', color: '#6B7280' }}>
+                                <i className="fas fa-undo"></i>
+                            </div>
+                        </div>
+
+                        <div className="mini-metrics-grid">
+                            <div className={`mini-metric-pill pending ${bgThemeClass}`}>
+                                <span className={`label ${textThemeClass}`}>{t.refunded}</span>
+                                <strong style={{ color: '#6B7280' }}>{statsData.counts.REFUNDED} {t.transactions}</strong>
+                            </div>
+
+                            <div className={`mini-metric-pill success ${bgThemeClass}`}>
+                                <span className={`label ${textThemeClass}`}>{t.completed}</span>
+                                <strong className="val-success">{statsData.counts.COMPLETED} {t.transactions}</strong>
                             </div>
                         </div>
                     </div>
